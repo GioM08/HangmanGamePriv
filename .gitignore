@@ -1,5 +1,15 @@
-"Back + Front/" 
-".vs/" 
-"bin/" 
-"obj/" 
-"*.user" 
+Back + Front/
+.vs/
+**/.vs/
+bin/
+**/bin/
+obj/
+**/obj/
+*.user
+*.suo
+*.wsuo
+*.vsidx
+*.exe
+*.pdb
+*.cache
+*.baml
