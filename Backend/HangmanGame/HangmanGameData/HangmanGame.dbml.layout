@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="HangmanGame">
+  <DataContextMoniker Name="/HangmanGameDataContext" />
+  <nestedChildShapes>
+    <classShape Id="423311b5-49a0-4931-9052-1d99c1e8b93b" absoluteBounds="2.5, 2.625, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/HangmanGameDataContext/Users" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9c4efdb1-b560-4359-a90f-36b847716c6b" absoluteBounds="2.515, 3.085, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
