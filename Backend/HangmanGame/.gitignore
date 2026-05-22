@@ -1,0 +1,35 @@
+# Visual Studio
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+
+# NuGet
+packages/
+*.nupkg
+
+# Logs
+*.log
+
+# SQL Server local files
+*.mdf
+*.ldf
+
+# Local database credentials
+HangmanGameServices/ConnectionStrings.config
+
+# Rider / JetBrains
+.idea/
+
+# Windows
+Thumbs.db
+Desktop.ini
