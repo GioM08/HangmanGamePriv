@@ -84,15 +84,41 @@ namespace HangmanGameData.Repositories
                 if (game == null)
                     return new GameStateDto { Message = "Partida no encontrada o no activa.", IsOver = true };
 
-                string letter = guessLetterDto.Letter.ToUpper();
-                var alreadyUsed = db.GameMoves.Any(m => m.GameId == guessLetterDto.GameId && m.Letter == letter);
+                if (string.IsNullOrWhiteSpace(guessLetterDto.Letter))
+                {
+                    return new GameStateDto
+                    {
+                        Message = "Debe ingresar una letra.",
+                        IsOver = false
+                    };
+                }
+
+                string normalizedLetter = guessLetterDto.Letter.Trim().ToUpper();
+
+                if (normalizedLetter.Length != 1)
+                {
+                    return new GameStateDto
+                    {
+                        Message = "Solo se permite ingresar una letra.",
+                        IsOver = false
+                    };
+                }
+
+                char letter = normalizedLetter[0];
+
+                var alreadyUsed = db.GameMoves.Any(m =>
+                    m.GameId == guessLetterDto.GameId &&
+                    m.Letter == letter);
+
                 if (alreadyUsed)
-                    return BuildGameState(db, game, letter, null, "Letra ya utilizada.");
+                {
+                    return BuildGameState(db, game, letter.ToString(), null, "Letra ya utilizada.");
+                }
 
                 var word = db.Words.FirstOrDefault(w => w.WordId == game.WordId);
                 if (word == null) return null;
 
-                bool isCorrect = word.Text.ToUpper().Contains(letter);
+                bool isCorrect = word.Text.ToUpper().Contains(letter.ToString());
 
                 var move = new GameMoves
                 {
@@ -105,7 +131,7 @@ namespace HangmanGameData.Repositories
                 db.GameMoves.InsertOnSubmit(move);
                 db.SubmitChanges();
 
-                var state = BuildGameState(db, game, letter, isCorrect, null);
+                var state = BuildGameState(db, game, letter.ToString(), isCorrect, null);
 
                 if (state.IsOver)
                 {
@@ -253,7 +279,10 @@ namespace HangmanGameData.Repositories
             string wordText = word?.Text?.ToUpper() ?? string.Empty;
 
             var moves = db.GameMoves.Where(m => m.GameId == game.GameId).ToList();
-            var usedLetters = moves.Select(m => m.Letter.ToUpper()).Distinct().ToList();
+            var usedLetters = moves
+    .Select(m => char.ToUpper(m.Letter).ToString())
+    .Distinct()
+    .ToList();
 
             int incorrectCount = moves.Count(m => !m.IsCorrect);
 

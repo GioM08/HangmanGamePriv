@@ -66,6 +66,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="FriendsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GameListWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -109,6 +113,9 @@
     <Compile Include="EditProfileWindow.xaml.cs">
       <DependentUpon>EditProfileWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FriendsWindow.xaml.cs">
+      <DependentUpon>FriendsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="GameListWindow.xaml.cs">
       <DependentUpon>GameListWindow.xaml</DependentUpon>
@@ -185,10 +192,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\HangmanIcon.png"/>
+    <Resource Include="Resources\HangmanIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

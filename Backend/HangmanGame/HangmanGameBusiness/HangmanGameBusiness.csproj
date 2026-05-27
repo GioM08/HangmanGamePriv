@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="Categories\CategoryBusiness.cs" />
     <Compile Include="Categories\ICategoryBusiness.cs" />
+    <Compile Include="Friends\FriendBusiness.cs" />
+    <Compile Include="Friends\IFriendBusiness.cs" />
     <Compile Include="Games\GameBusiness.cs" />
     <Compile Include="Games\IGameBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -60,5 +62,6 @@
       <Name>HangmanGameEntities</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

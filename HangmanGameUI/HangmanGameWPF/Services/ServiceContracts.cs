@@ -151,6 +151,75 @@ namespace HangmanGameWPF.Services
         [DataMember] public int PointsDeducted { get; set; }
     }
 
+    [DataContract(Namespace = "http://schemas.datacontract.org/2004/07/HangmanGameEntities.Dtos")]
+    public class SendFriendRequestDto
+    {
+        [DataMember] public int SenderUserId { get; set; }
+        [DataMember] public int ReceiverUserId { get; set; }
+    }
+
+    [DataContract(Namespace = "http://schemas.datacontract.org/2004/07/HangmanGameEntities.Dtos")]
+    public class RespondFriendRequestDto
+    {
+        [DataMember] public int FriendRequestId { get; set; }
+        [DataMember] public int CurrentUserId { get; set; }
+    }
+
+    [DataContract(Namespace = "http://schemas.datacontract.org/2004/07/HangmanGameEntities.Dtos")]
+    public class RemoveFriendDto
+    {
+        [DataMember] public int CurrentUserId { get; set; }
+        [DataMember] public int FriendUserId { get; set; }
+    }
+
+    [DataContract(Namespace = "http://schemas.datacontract.org/2004/07/HangmanGameEntities.Dtos")]
+    public class FriendRequestDto
+    {
+        [DataMember] public int FriendRequestId { get; set; }
+
+        [DataMember] public int SenderUserId { get; set; }
+        [DataMember] public string SenderFullName { get; set; }
+        [DataMember] public string SenderEmail { get; set; }
+
+        [DataMember] public int ReceiverUserId { get; set; }
+        [DataMember] public string ReceiverFullName { get; set; }
+        [DataMember] public string ReceiverEmail { get; set; }
+
+        [DataMember] public int Status { get; set; }
+        [DataMember] public DateTime CreatedAt { get; set; }
+    }
+
+    [DataContract(Namespace = "http://schemas.datacontract.org/2004/07/HangmanGameEntities.Dtos")]
+    public class FriendDto
+    {
+        [DataMember] public int UserId { get; set; }
+        [DataMember] public string FullName { get; set; }
+        [DataMember] public string Email { get; set; }
+        [DataMember] public int GlobalScore { get; set; }
+        [DataMember] public DateTime FriendsSince { get; set; }
+    }
+
+    [DataContract(Namespace = "http://schemas.datacontract.org/2004/07/HangmanGameEntities.Dtos")]
+    public class FriendOperationResultDto
+    {
+        [DataMember] public bool Success { get; set; }
+        [DataMember] public string Message { get; set; }
+
+        [DataMember] public FriendRequestDto FriendRequest { get; set; }
+        [DataMember] public List<FriendRequestDto> FriendRequests { get; set; }
+        [DataMember] public List<FriendDto> Friends { get; set; }
+    }
+
+    [DataContract(Namespace = "http://schemas.datacontract.org/2004/07/HangmanGameEntities.Dtos")]
+    public class SendFriendRequestByEmailDto
+    {
+        [DataMember]
+        public int SenderUserId { get; set; }
+
+        [DataMember]
+        public string ReceiverEmail { get; set; }
+    }
+
     // ── Service contracts ─────────────────────────────────────────────────────
 
     [ServiceContract]
@@ -187,5 +256,28 @@ namespace HangmanGameWPF.Services
         [OperationContract] GameOperationResultDto AbandonGame(int gameId, int userId);
         [OperationContract] GameOperationResultDto GetUserScore(int userId);
         [OperationContract(IsOneWay = true)] void RegisterForGame(int gameId, int userId);
+    }
+
+    [ServiceContract]
+    public interface IFriendService
+    {
+        [OperationContract] FriendOperationResultDto SendFriendRequest(SendFriendRequestDto requestDto);
+
+        [OperationContract] FriendOperationResultDto GetPendingFriendRequests(int userId);
+
+        [OperationContract] FriendOperationResultDto GetSentFriendRequests(int userId);
+
+        [OperationContract] FriendOperationResultDto AcceptFriendRequest(RespondFriendRequestDto requestDto);
+
+        [OperationContract] FriendOperationResultDto RejectFriendRequest(RespondFriendRequestDto requestDto);
+
+        [OperationContract] FriendOperationResultDto CancelFriendRequest(RespondFriendRequestDto requestDto);
+
+        [OperationContract] FriendOperationResultDto RemoveFriend(RemoveFriendDto requestDto);
+
+        [OperationContract] FriendOperationResultDto GetFriends(int userId);
+
+        [OperationContract]
+        FriendOperationResultDto SendFriendRequestByEmail(SendFriendRequestByEmailDto requestDto);
     }
 }

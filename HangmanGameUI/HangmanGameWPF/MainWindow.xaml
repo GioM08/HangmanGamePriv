@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="HANGMAN GAME"
-        Height="520" Width="700"
+        Height="620" Width="700"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         WindowStyle="None"
@@ -43,8 +43,8 @@
                     <Border Background="#007A1F" Height="1" Margin="0,10,0,0"/>
                 </StackPanel>
 
-                <!-- 2x2 Menu grid -->
-                <UniformGrid Grid.Row="2" Rows="2" Columns="2" Margin="28,18,28,18">
+                <!-- 3x2 Menu grid -->
+                <UniformGrid Grid.Row="2" Rows="3" Columns="2" Margin="28,18,28,18">
 
                     <!-- Lista de Partidas -->
                     <Button Style="{StaticResource MenuButton}" Margin="8" Click="BtnGameList_Click">
@@ -91,6 +91,21 @@
                         </StackPanel>
                     </Button>
 
+                    <!-- Amigos -->
+                    <Button Style="{StaticResource MenuButton}" Margin="8" Click="BtnFriends_Click">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,16,0,16">
+                            <TextBlock Text="[ ++ ]"
+                                       FontFamily="Courier New" FontSize="24"
+                                       Foreground="#00FF41" HorizontalAlignment="Center"/>
+                            <TextBlock Text="AMIGOS"
+                                       FontFamily="Courier New" FontSize="14" FontWeight="Bold"
+                                       Foreground="#00FF41" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                            <TextBlock Text="Solicitudes y scores"
+                                       FontFamily="Courier New" FontSize="10"
+                                       Foreground="#00AA30" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                        </StackPanel>
+                    </Button>
+
                     <!-- Cerrar Sesión -->
                     <Button Style="{StaticResource MenuButton}" Margin="8" Click="BtnLogout_Click">
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,16,0,16">
@@ -105,6 +120,27 @@
                                        Foreground="#AA3333" HorizontalAlignment="Center" Margin="0,4,0,0"/>
                         </StackPanel>
                     </Button>
+
+                    <!-- Espacio libre para que el grid quede simétrico -->
+                    <Border Margin="8"
+                            BorderBrush="#003F16"
+                            BorderThickness="1"
+                            Background="#050505">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock Text="[ -- ]"
+                                       FontFamily="Courier New"
+                                       FontSize="24"
+                                       Foreground="#003F16"
+                                       HorizontalAlignment="Center"/>
+                            <TextBlock Text="PROXIMAMENTE"
+                                       FontFamily="Courier New"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="#003F16"
+                                       HorizontalAlignment="Center"
+                                       Margin="0,8,0,0"/>
+                        </StackPanel>
+                    </Border>
 
                 </UniformGrid>
 
@@ -123,7 +159,9 @@
                               Viewbox="0,0,1,4" ViewboxUnits="Absolute">
                     <DrawingBrush.Drawing>
                         <GeometryDrawing Brush="#18000000">
-                            <GeometryDrawing.Geometry><RectangleGeometry Rect="0,0,1,2"/></GeometryDrawing.Geometry>
+                            <GeometryDrawing.Geometry>
+                                <RectangleGeometry Rect="0,0,1,2"/>
+                            </GeometryDrawing.Geometry>
                         </GeometryDrawing>
                     </DrawingBrush.Drawing>
                 </DrawingBrush>
