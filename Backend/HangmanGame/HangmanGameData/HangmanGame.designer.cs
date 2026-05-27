@@ -33,10 +33,25 @@ namespace HangmanGameData
     partial void InsertUsers(Users instance);
     partial void UpdateUsers(Users instance);
     partial void DeleteUsers(Users instance);
+    partial void InsertWords(Words instance);
+    partial void UpdateWords(Words instance);
+    partial void DeleteWords(Words instance);
+    partial void InsertGames(Games instance);
+    partial void UpdateGames(Games instance);
+    partial void DeleteGames(Games instance);
+    partial void InsertGameMoves(GameMoves instance);
+    partial void UpdateGameMoves(GameMoves instance);
+    partial void DeleteGameMoves(GameMoves instance);
+    partial void InsertCategories(Categories instance);
+    partial void UpdateCategories(Categories instance);
+    partial void DeleteCategories(Categories instance);
+    partial void InsertFriendRequests(FriendRequests instance);
+    partial void UpdateFriendRequests(FriendRequests instance);
+    partial void DeleteFriendRequests(FriendRequests instance);
     #endregion
 		
 		public HangmanGameDataContext() : 
-				base(global::HangmanGameData.Properties.Settings.Default.HangmanGameDBConnectionString, mappingSource)
+				base(global::HangmanGameData.Properties.Settings.Default.HangmanGameDBConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -72,6 +87,46 @@ namespace HangmanGameData
 				return this.GetTable<Users>();
 			}
 		}
+		
+		public System.Data.Linq.Table<Words> Words
+		{
+			get
+			{
+				return this.GetTable<Words>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Games> Games
+		{
+			get
+			{
+				return this.GetTable<Games>();
+			}
+		}
+		
+		public System.Data.Linq.Table<GameMoves> GameMoves
+		{
+			get
+			{
+				return this.GetTable<GameMoves>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Categories> Categories
+		{
+			get
+			{
+				return this.GetTable<Categories>();
+			}
+		}
+		
+		public System.Data.Linq.Table<FriendRequests> FriendRequests
+		{
+			get
+			{
+				return this.GetTable<FriendRequests>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
@@ -99,6 +154,20 @@ namespace HangmanGameData
 		private System.Nullable<System.DateTime> _UpdatedAt;
 		
 		private bool _IsActive;
+		
+		private EntitySet<Games> _Games;
+		
+		private EntitySet<Games> _Games1;
+		
+		private EntitySet<Games> _Games2;
+		
+		private EntitySet<Games> _Games3;
+		
+		private EntitySet<GameMoves> _GameMoves;
+		
+		private EntitySet<FriendRequests> _FriendRequests;
+		
+		private EntitySet<FriendRequests> _FriendRequests1;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -128,6 +197,13 @@ namespace HangmanGameData
 		
 		public Users()
 		{
+			this._Games = new EntitySet<Games>(new Action<Games>(this.attach_Games), new Action<Games>(this.detach_Games));
+			this._Games1 = new EntitySet<Games>(new Action<Games>(this.attach_Games1), new Action<Games>(this.detach_Games1));
+			this._Games2 = new EntitySet<Games>(new Action<Games>(this.attach_Games2), new Action<Games>(this.detach_Games2));
+			this._Games3 = new EntitySet<Games>(new Action<Games>(this.attach_Games3), new Action<Games>(this.detach_Games3));
+			this._GameMoves = new EntitySet<GameMoves>(new Action<GameMoves>(this.attach_GameMoves), new Action<GameMoves>(this.detach_GameMoves));
+			this._FriendRequests = new EntitySet<FriendRequests>(new Action<FriendRequests>(this.attach_FriendRequests), new Action<FriendRequests>(this.detach_FriendRequests));
+			this._FriendRequests1 = new EntitySet<FriendRequests>(new Action<FriendRequests>(this.attach_FriendRequests1), new Action<FriendRequests>(this.detach_FriendRequests1));
 			OnCreated();
 		}
 		
@@ -327,6 +403,1681 @@ namespace HangmanGameData
 					this._IsActive = value;
 					this.SendPropertyChanged("IsActive");
 					this.OnIsActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Games", Storage="_Games", ThisKey="UserId", OtherKey="AbandonedByUserId")]
+		public EntitySet<Games> Games
+		{
+			get
+			{
+				return this._Games;
+			}
+			set
+			{
+				this._Games.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Games1", Storage="_Games1", ThisKey="UserId", OtherKey="CreatorId")]
+		public EntitySet<Games> Games1
+		{
+			get
+			{
+				return this._Games1;
+			}
+			set
+			{
+				this._Games1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Games2", Storage="_Games2", ThisKey="UserId", OtherKey="RetadorId")]
+		public EntitySet<Games> Games2
+		{
+			get
+			{
+				return this._Games2;
+			}
+			set
+			{
+				this._Games2.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Games3", Storage="_Games3", ThisKey="UserId", OtherKey="WinnerId")]
+		public EntitySet<Games> Games3
+		{
+			get
+			{
+				return this._Games3;
+			}
+			set
+			{
+				this._Games3.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_GameMoves", Storage="_GameMoves", ThisKey="UserId", OtherKey="UserId")]
+		public EntitySet<GameMoves> GameMoves
+		{
+			get
+			{
+				return this._GameMoves;
+			}
+			set
+			{
+				this._GameMoves.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_FriendRequests", Storage="_FriendRequests", ThisKey="UserId", OtherKey="ReceiverUserId")]
+		public EntitySet<FriendRequests> FriendRequests
+		{
+			get
+			{
+				return this._FriendRequests;
+			}
+			set
+			{
+				this._FriendRequests.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_FriendRequests1", Storage="_FriendRequests1", ThisKey="UserId", OtherKey="SenderUserId")]
+		public EntitySet<FriendRequests> FriendRequests1
+		{
+			get
+			{
+				return this._FriendRequests1;
+			}
+			set
+			{
+				this._FriendRequests1.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Games(Games entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users = this;
+		}
+		
+		private void detach_Games(Games entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users = null;
+		}
+		
+		private void attach_Games1(Games entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users1 = this;
+		}
+		
+		private void detach_Games1(Games entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users1 = null;
+		}
+		
+		private void attach_Games2(Games entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users2 = this;
+		}
+		
+		private void detach_Games2(Games entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users2 = null;
+		}
+		
+		private void attach_Games3(Games entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users3 = this;
+		}
+		
+		private void detach_Games3(Games entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users3 = null;
+		}
+		
+		private void attach_GameMoves(GameMoves entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users = this;
+		}
+		
+		private void detach_GameMoves(GameMoves entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users = null;
+		}
+		
+		private void attach_FriendRequests(FriendRequests entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users = this;
+		}
+		
+		private void detach_FriendRequests(FriendRequests entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users = null;
+		}
+		
+		private void attach_FriendRequests1(FriendRequests entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users1 = this;
+		}
+		
+		private void detach_FriendRequests1(FriendRequests entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users1 = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Words")]
+	public partial class Words : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _WordId;
+		
+		private int _CategoryId;
+		
+		private string _Text;
+		
+		private string _Hint;
+		
+		private string _LanguageCode;
+		
+		private int _Difficulty;
+		
+		private EntitySet<Games> _Games;
+		
+		private EntityRef<Categories> _Categories;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnWordIdChanging(int value);
+    partial void OnWordIdChanged();
+    partial void OnCategoryIdChanging(int value);
+    partial void OnCategoryIdChanged();
+    partial void OnTextChanging(string value);
+    partial void OnTextChanged();
+    partial void OnHintChanging(string value);
+    partial void OnHintChanged();
+    partial void OnLanguageCodeChanging(string value);
+    partial void OnLanguageCodeChanged();
+    partial void OnDifficultyChanging(int value);
+    partial void OnDifficultyChanged();
+    #endregion
+		
+		public Words()
+		{
+			this._Games = new EntitySet<Games>(new Action<Games>(this.attach_Games), new Action<Games>(this.detach_Games));
+			this._Categories = default(EntityRef<Categories>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WordId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int WordId
+		{
+			get
+			{
+				return this._WordId;
+			}
+			set
+			{
+				if ((this._WordId != value))
+				{
+					this.OnWordIdChanging(value);
+					this.SendPropertyChanging();
+					this._WordId = value;
+					this.SendPropertyChanged("WordId");
+					this.OnWordIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryId", DbType="Int NOT NULL")]
+		public int CategoryId
+		{
+			get
+			{
+				return this._CategoryId;
+			}
+			set
+			{
+				if ((this._CategoryId != value))
+				{
+					if (this._Categories.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCategoryIdChanging(value);
+					this.SendPropertyChanging();
+					this._CategoryId = value;
+					this.SendPropertyChanged("CategoryId");
+					this.OnCategoryIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Text", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string Text
+		{
+			get
+			{
+				return this._Text;
+			}
+			set
+			{
+				if ((this._Text != value))
+				{
+					this.OnTextChanging(value);
+					this.SendPropertyChanging();
+					this._Text = value;
+					this.SendPropertyChanged("Text");
+					this.OnTextChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Hint", DbType="NVarChar(300)")]
+		public string Hint
+		{
+			get
+			{
+				return this._Hint;
+			}
+			set
+			{
+				if ((this._Hint != value))
+				{
+					this.OnHintChanging(value);
+					this.SendPropertyChanging();
+					this._Hint = value;
+					this.SendPropertyChanged("Hint");
+					this.OnHintChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LanguageCode", DbType="NVarChar(5) NOT NULL", CanBeNull=false)]
+		public string LanguageCode
+		{
+			get
+			{
+				return this._LanguageCode;
+			}
+			set
+			{
+				if ((this._LanguageCode != value))
+				{
+					this.OnLanguageCodeChanging(value);
+					this.SendPropertyChanging();
+					this._LanguageCode = value;
+					this.SendPropertyChanged("LanguageCode");
+					this.OnLanguageCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Difficulty", DbType="Int NOT NULL")]
+		public int Difficulty
+		{
+			get
+			{
+				return this._Difficulty;
+			}
+			set
+			{
+				if ((this._Difficulty != value))
+				{
+					this.OnDifficultyChanging(value);
+					this.SendPropertyChanging();
+					this._Difficulty = value;
+					this.SendPropertyChanged("Difficulty");
+					this.OnDifficultyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Words_Games", Storage="_Games", ThisKey="WordId", OtherKey="WordId")]
+		public EntitySet<Games> Games
+		{
+			get
+			{
+				return this._Games;
+			}
+			set
+			{
+				this._Games.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Categories_Words", Storage="_Categories", ThisKey="CategoryId", OtherKey="CategoryId", IsForeignKey=true)]
+		public Categories Categories
+		{
+			get
+			{
+				return this._Categories.Entity;
+			}
+			set
+			{
+				Categories previousValue = this._Categories.Entity;
+				if (((previousValue != value) 
+							|| (this._Categories.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Categories.Entity = null;
+						previousValue.Words.Remove(this);
+					}
+					this._Categories.Entity = value;
+					if ((value != null))
+					{
+						value.Words.Add(this);
+						this._CategoryId = value.CategoryId;
+					}
+					else
+					{
+						this._CategoryId = default(int);
+					}
+					this.SendPropertyChanged("Categories");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Games(Games entity)
+		{
+			this.SendPropertyChanging();
+			entity.Words = this;
+		}
+		
+		private void detach_Games(Games entity)
+		{
+			this.SendPropertyChanging();
+			entity.Words = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Games")]
+	public partial class Games : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _GameId;
+		
+		private int _CreatorId;
+		
+		private System.Nullable<int> _RetadorId;
+		
+		private int _WordId;
+		
+		private int _Status;
+		
+		private string _Description;
+		
+		private System.DateTime _CreatedAt;
+		
+		private System.Nullable<System.DateTime> _StartedAt;
+		
+		private System.Nullable<System.DateTime> _FinishedAt;
+		
+		private System.Nullable<int> _WinnerId;
+		
+		private System.Nullable<int> _AbandonedByUserId;
+		
+		private EntitySet<GameMoves> _GameMoves;
+		
+		private EntityRef<Users> _Users;
+		
+		private EntityRef<Users> _Users1;
+		
+		private EntityRef<Users> _Users2;
+		
+		private EntityRef<Users> _Users3;
+		
+		private EntityRef<Words> _Words;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnGameIdChanging(int value);
+    partial void OnGameIdChanged();
+    partial void OnCreatorIdChanging(int value);
+    partial void OnCreatorIdChanged();
+    partial void OnRetadorIdChanging(System.Nullable<int> value);
+    partial void OnRetadorIdChanged();
+    partial void OnWordIdChanging(int value);
+    partial void OnWordIdChanged();
+    partial void OnStatusChanging(int value);
+    partial void OnStatusChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    partial void OnCreatedAtChanging(System.DateTime value);
+    partial void OnCreatedAtChanged();
+    partial void OnStartedAtChanging(System.Nullable<System.DateTime> value);
+    partial void OnStartedAtChanged();
+    partial void OnFinishedAtChanging(System.Nullable<System.DateTime> value);
+    partial void OnFinishedAtChanged();
+    partial void OnWinnerIdChanging(System.Nullable<int> value);
+    partial void OnWinnerIdChanged();
+    partial void OnAbandonedByUserIdChanging(System.Nullable<int> value);
+    partial void OnAbandonedByUserIdChanged();
+    #endregion
+		
+		public Games()
+		{
+			this._GameMoves = new EntitySet<GameMoves>(new Action<GameMoves>(this.attach_GameMoves), new Action<GameMoves>(this.detach_GameMoves));
+			this._Users = default(EntityRef<Users>);
+			this._Users1 = default(EntityRef<Users>);
+			this._Users2 = default(EntityRef<Users>);
+			this._Users3 = default(EntityRef<Users>);
+			this._Words = default(EntityRef<Words>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GameId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int GameId
+		{
+			get
+			{
+				return this._GameId;
+			}
+			set
+			{
+				if ((this._GameId != value))
+				{
+					this.OnGameIdChanging(value);
+					this.SendPropertyChanging();
+					this._GameId = value;
+					this.SendPropertyChanged("GameId");
+					this.OnGameIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatorId", DbType="Int NOT NULL")]
+		public int CreatorId
+		{
+			get
+			{
+				return this._CreatorId;
+			}
+			set
+			{
+				if ((this._CreatorId != value))
+				{
+					if (this._Users1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCreatorIdChanging(value);
+					this.SendPropertyChanging();
+					this._CreatorId = value;
+					this.SendPropertyChanged("CreatorId");
+					this.OnCreatorIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RetadorId", DbType="Int")]
+		public System.Nullable<int> RetadorId
+		{
+			get
+			{
+				return this._RetadorId;
+			}
+			set
+			{
+				if ((this._RetadorId != value))
+				{
+					if (this._Users2.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRetadorIdChanging(value);
+					this.SendPropertyChanging();
+					this._RetadorId = value;
+					this.SendPropertyChanged("RetadorId");
+					this.OnRetadorIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WordId", DbType="Int NOT NULL")]
+		public int WordId
+		{
+			get
+			{
+				return this._WordId;
+			}
+			set
+			{
+				if ((this._WordId != value))
+				{
+					if (this._Words.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnWordIdChanging(value);
+					this.SendPropertyChanging();
+					this._WordId = value;
+					this.SendPropertyChanged("WordId");
+					this.OnWordIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Int NOT NULL")]
+		public int Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(500)")]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this.OnDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedAt", DbType="DateTime NOT NULL")]
+		public System.DateTime CreatedAt
+		{
+			get
+			{
+				return this._CreatedAt;
+			}
+			set
+			{
+				if ((this._CreatedAt != value))
+				{
+					this.OnCreatedAtChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedAt = value;
+					this.SendPropertyChanged("CreatedAt");
+					this.OnCreatedAtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StartedAt", DbType="DateTime")]
+		public System.Nullable<System.DateTime> StartedAt
+		{
+			get
+			{
+				return this._StartedAt;
+			}
+			set
+			{
+				if ((this._StartedAt != value))
+				{
+					this.OnStartedAtChanging(value);
+					this.SendPropertyChanging();
+					this._StartedAt = value;
+					this.SendPropertyChanged("StartedAt");
+					this.OnStartedAtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FinishedAt", DbType="DateTime")]
+		public System.Nullable<System.DateTime> FinishedAt
+		{
+			get
+			{
+				return this._FinishedAt;
+			}
+			set
+			{
+				if ((this._FinishedAt != value))
+				{
+					this.OnFinishedAtChanging(value);
+					this.SendPropertyChanging();
+					this._FinishedAt = value;
+					this.SendPropertyChanged("FinishedAt");
+					this.OnFinishedAtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WinnerId", DbType="Int")]
+		public System.Nullable<int> WinnerId
+		{
+			get
+			{
+				return this._WinnerId;
+			}
+			set
+			{
+				if ((this._WinnerId != value))
+				{
+					if (this._Users3.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnWinnerIdChanging(value);
+					this.SendPropertyChanging();
+					this._WinnerId = value;
+					this.SendPropertyChanged("WinnerId");
+					this.OnWinnerIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbandonedByUserId", DbType="Int")]
+		public System.Nullable<int> AbandonedByUserId
+		{
+			get
+			{
+				return this._AbandonedByUserId;
+			}
+			set
+			{
+				if ((this._AbandonedByUserId != value))
+				{
+					if (this._Users.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnAbandonedByUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._AbandonedByUserId = value;
+					this.SendPropertyChanged("AbandonedByUserId");
+					this.OnAbandonedByUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Games_GameMoves", Storage="_GameMoves", ThisKey="GameId", OtherKey="GameId")]
+		public EntitySet<GameMoves> GameMoves
+		{
+			get
+			{
+				return this._GameMoves;
+			}
+			set
+			{
+				this._GameMoves.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Games", Storage="_Users", ThisKey="AbandonedByUserId", OtherKey="UserId", IsForeignKey=true)]
+		public Users Users
+		{
+			get
+			{
+				return this._Users.Entity;
+			}
+			set
+			{
+				Users previousValue = this._Users.Entity;
+				if (((previousValue != value) 
+							|| (this._Users.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Users.Entity = null;
+						previousValue.Games.Remove(this);
+					}
+					this._Users.Entity = value;
+					if ((value != null))
+					{
+						value.Games.Add(this);
+						this._AbandonedByUserId = value.UserId;
+					}
+					else
+					{
+						this._AbandonedByUserId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Users");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Games1", Storage="_Users1", ThisKey="CreatorId", OtherKey="UserId", IsForeignKey=true)]
+		public Users Users1
+		{
+			get
+			{
+				return this._Users1.Entity;
+			}
+			set
+			{
+				Users previousValue = this._Users1.Entity;
+				if (((previousValue != value) 
+							|| (this._Users1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Users1.Entity = null;
+						previousValue.Games1.Remove(this);
+					}
+					this._Users1.Entity = value;
+					if ((value != null))
+					{
+						value.Games1.Add(this);
+						this._CreatorId = value.UserId;
+					}
+					else
+					{
+						this._CreatorId = default(int);
+					}
+					this.SendPropertyChanged("Users1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Games2", Storage="_Users2", ThisKey="RetadorId", OtherKey="UserId", IsForeignKey=true)]
+		public Users Users2
+		{
+			get
+			{
+				return this._Users2.Entity;
+			}
+			set
+			{
+				Users previousValue = this._Users2.Entity;
+				if (((previousValue != value) 
+							|| (this._Users2.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Users2.Entity = null;
+						previousValue.Games2.Remove(this);
+					}
+					this._Users2.Entity = value;
+					if ((value != null))
+					{
+						value.Games2.Add(this);
+						this._RetadorId = value.UserId;
+					}
+					else
+					{
+						this._RetadorId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Users2");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Games3", Storage="_Users3", ThisKey="WinnerId", OtherKey="UserId", IsForeignKey=true)]
+		public Users Users3
+		{
+			get
+			{
+				return this._Users3.Entity;
+			}
+			set
+			{
+				Users previousValue = this._Users3.Entity;
+				if (((previousValue != value) 
+							|| (this._Users3.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Users3.Entity = null;
+						previousValue.Games3.Remove(this);
+					}
+					this._Users3.Entity = value;
+					if ((value != null))
+					{
+						value.Games3.Add(this);
+						this._WinnerId = value.UserId;
+					}
+					else
+					{
+						this._WinnerId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Users3");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Words_Games", Storage="_Words", ThisKey="WordId", OtherKey="WordId", IsForeignKey=true)]
+		public Words Words
+		{
+			get
+			{
+				return this._Words.Entity;
+			}
+			set
+			{
+				Words previousValue = this._Words.Entity;
+				if (((previousValue != value) 
+							|| (this._Words.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Words.Entity = null;
+						previousValue.Games.Remove(this);
+					}
+					this._Words.Entity = value;
+					if ((value != null))
+					{
+						value.Games.Add(this);
+						this._WordId = value.WordId;
+					}
+					else
+					{
+						this._WordId = default(int);
+					}
+					this.SendPropertyChanged("Words");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_GameMoves(GameMoves entity)
+		{
+			this.SendPropertyChanging();
+			entity.Games = this;
+		}
+		
+		private void detach_GameMoves(GameMoves entity)
+		{
+			this.SendPropertyChanging();
+			entity.Games = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GameMoves")]
+	public partial class GameMoves : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _MoveId;
+		
+		private int _GameId;
+		
+		private int _UserId;
+		
+		private char _Letter;
+		
+		private bool _IsCorrect;
+		
+		private System.DateTime _MoveDate;
+		
+		private EntityRef<Games> _Games;
+		
+		private EntityRef<Users> _Users;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnMoveIdChanging(int value);
+    partial void OnMoveIdChanged();
+    partial void OnGameIdChanging(int value);
+    partial void OnGameIdChanged();
+    partial void OnUserIdChanging(int value);
+    partial void OnUserIdChanged();
+    partial void OnLetterChanging(char value);
+    partial void OnLetterChanged();
+    partial void OnIsCorrectChanging(bool value);
+    partial void OnIsCorrectChanged();
+    partial void OnMoveDateChanging(System.DateTime value);
+    partial void OnMoveDateChanged();
+    #endregion
+		
+		public GameMoves()
+		{
+			this._Games = default(EntityRef<Games>);
+			this._Users = default(EntityRef<Users>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MoveId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int MoveId
+		{
+			get
+			{
+				return this._MoveId;
+			}
+			set
+			{
+				if ((this._MoveId != value))
+				{
+					this.OnMoveIdChanging(value);
+					this.SendPropertyChanging();
+					this._MoveId = value;
+					this.SendPropertyChanged("MoveId");
+					this.OnMoveIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GameId", DbType="Int NOT NULL")]
+		public int GameId
+		{
+			get
+			{
+				return this._GameId;
+			}
+			set
+			{
+				if ((this._GameId != value))
+				{
+					if (this._Games.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnGameIdChanging(value);
+					this.SendPropertyChanging();
+					this._GameId = value;
+					this.SendPropertyChanged("GameId");
+					this.OnGameIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="Int NOT NULL")]
+		public int UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					if (this._Users.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Letter", DbType="NChar(1) NOT NULL")]
+		public char Letter
+		{
+			get
+			{
+				return this._Letter;
+			}
+			set
+			{
+				if ((this._Letter != value))
+				{
+					this.OnLetterChanging(value);
+					this.SendPropertyChanging();
+					this._Letter = value;
+					this.SendPropertyChanged("Letter");
+					this.OnLetterChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsCorrect", DbType="Bit NOT NULL")]
+		public bool IsCorrect
+		{
+			get
+			{
+				return this._IsCorrect;
+			}
+			set
+			{
+				if ((this._IsCorrect != value))
+				{
+					this.OnIsCorrectChanging(value);
+					this.SendPropertyChanging();
+					this._IsCorrect = value;
+					this.SendPropertyChanged("IsCorrect");
+					this.OnIsCorrectChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MoveDate", DbType="DateTime NOT NULL")]
+		public System.DateTime MoveDate
+		{
+			get
+			{
+				return this._MoveDate;
+			}
+			set
+			{
+				if ((this._MoveDate != value))
+				{
+					this.OnMoveDateChanging(value);
+					this.SendPropertyChanging();
+					this._MoveDate = value;
+					this.SendPropertyChanged("MoveDate");
+					this.OnMoveDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Games_GameMoves", Storage="_Games", ThisKey="GameId", OtherKey="GameId", IsForeignKey=true)]
+		public Games Games
+		{
+			get
+			{
+				return this._Games.Entity;
+			}
+			set
+			{
+				Games previousValue = this._Games.Entity;
+				if (((previousValue != value) 
+							|| (this._Games.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Games.Entity = null;
+						previousValue.GameMoves.Remove(this);
+					}
+					this._Games.Entity = value;
+					if ((value != null))
+					{
+						value.GameMoves.Add(this);
+						this._GameId = value.GameId;
+					}
+					else
+					{
+						this._GameId = default(int);
+					}
+					this.SendPropertyChanged("Games");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_GameMoves", Storage="_Users", ThisKey="UserId", OtherKey="UserId", IsForeignKey=true)]
+		public Users Users
+		{
+			get
+			{
+				return this._Users.Entity;
+			}
+			set
+			{
+				Users previousValue = this._Users.Entity;
+				if (((previousValue != value) 
+							|| (this._Users.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Users.Entity = null;
+						previousValue.GameMoves.Remove(this);
+					}
+					this._Users.Entity = value;
+					if ((value != null))
+					{
+						value.GameMoves.Add(this);
+						this._UserId = value.UserId;
+					}
+					else
+					{
+						this._UserId = default(int);
+					}
+					this.SendPropertyChanged("Users");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Categories")]
+	public partial class Categories : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _CategoryId;
+		
+		private string _Name;
+		
+		private string _LanguageCode;
+		
+		private EntitySet<Words> _Words;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCategoryIdChanging(int value);
+    partial void OnCategoryIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnLanguageCodeChanging(string value);
+    partial void OnLanguageCodeChanged();
+    #endregion
+		
+		public Categories()
+		{
+			this._Words = new EntitySet<Words>(new Action<Words>(this.attach_Words), new Action<Words>(this.detach_Words));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int CategoryId
+		{
+			get
+			{
+				return this._CategoryId;
+			}
+			set
+			{
+				if ((this._CategoryId != value))
+				{
+					this.OnCategoryIdChanging(value);
+					this.SendPropertyChanging();
+					this._CategoryId = value;
+					this.SendPropertyChanged("CategoryId");
+					this.OnCategoryIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LanguageCode", DbType="NVarChar(5) NOT NULL", CanBeNull=false)]
+		public string LanguageCode
+		{
+			get
+			{
+				return this._LanguageCode;
+			}
+			set
+			{
+				if ((this._LanguageCode != value))
+				{
+					this.OnLanguageCodeChanging(value);
+					this.SendPropertyChanging();
+					this._LanguageCode = value;
+					this.SendPropertyChanged("LanguageCode");
+					this.OnLanguageCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Categories_Words", Storage="_Words", ThisKey="CategoryId", OtherKey="CategoryId")]
+		public EntitySet<Words> Words
+		{
+			get
+			{
+				return this._Words;
+			}
+			set
+			{
+				this._Words.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Words(Words entity)
+		{
+			this.SendPropertyChanging();
+			entity.Categories = this;
+		}
+		
+		private void detach_Words(Words entity)
+		{
+			this.SendPropertyChanging();
+			entity.Categories = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.FriendRequests")]
+	public partial class FriendRequests : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _FriendRequestId;
+		
+		private int _SenderUserId;
+		
+		private int _ReceiverUserId;
+		
+		private int _Status;
+		
+		private System.DateTime _CreatedAt;
+		
+		private System.Nullable<System.DateTime> _UpdatedAt;
+		
+		private int _UserAId;
+		
+		private int _UserBId;
+		
+		private EntityRef<Users> _Users;
+		
+		private EntityRef<Users> _Users1;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnFriendRequestIdChanging(int value);
+    partial void OnFriendRequestIdChanged();
+    partial void OnSenderUserIdChanging(int value);
+    partial void OnSenderUserIdChanged();
+    partial void OnReceiverUserIdChanging(int value);
+    partial void OnReceiverUserIdChanged();
+    partial void OnStatusChanging(int value);
+    partial void OnStatusChanged();
+    partial void OnCreatedAtChanging(System.DateTime value);
+    partial void OnCreatedAtChanged();
+    partial void OnUpdatedAtChanging(System.Nullable<System.DateTime> value);
+    partial void OnUpdatedAtChanged();
+    partial void OnUserAIdChanging(int value);
+    partial void OnUserAIdChanged();
+    partial void OnUserBIdChanging(int value);
+    partial void OnUserBIdChanged();
+    #endregion
+		
+		public FriendRequests()
+		{
+			this._Users = default(EntityRef<Users>);
+			this._Users1 = default(EntityRef<Users>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FriendRequestId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int FriendRequestId
+		{
+			get
+			{
+				return this._FriendRequestId;
+			}
+			set
+			{
+				if ((this._FriendRequestId != value))
+				{
+					this.OnFriendRequestIdChanging(value);
+					this.SendPropertyChanging();
+					this._FriendRequestId = value;
+					this.SendPropertyChanged("FriendRequestId");
+					this.OnFriendRequestIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SenderUserId", DbType="Int NOT NULL")]
+		public int SenderUserId
+		{
+			get
+			{
+				return this._SenderUserId;
+			}
+			set
+			{
+				if ((this._SenderUserId != value))
+				{
+					if (this._Users1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSenderUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._SenderUserId = value;
+					this.SendPropertyChanged("SenderUserId");
+					this.OnSenderUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReceiverUserId", DbType="Int NOT NULL")]
+		public int ReceiverUserId
+		{
+			get
+			{
+				return this._ReceiverUserId;
+			}
+			set
+			{
+				if ((this._ReceiverUserId != value))
+				{
+					if (this._Users.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnReceiverUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._ReceiverUserId = value;
+					this.SendPropertyChanged("ReceiverUserId");
+					this.OnReceiverUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Int NOT NULL")]
+		public int Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedAt", DbType="DateTime NOT NULL")]
+		public System.DateTime CreatedAt
+		{
+			get
+			{
+				return this._CreatedAt;
+			}
+			set
+			{
+				if ((this._CreatedAt != value))
+				{
+					this.OnCreatedAtChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedAt = value;
+					this.SendPropertyChanged("CreatedAt");
+					this.OnCreatedAtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdatedAt", DbType="DateTime")]
+		public System.Nullable<System.DateTime> UpdatedAt
+		{
+			get
+			{
+				return this._UpdatedAt;
+			}
+			set
+			{
+				if ((this._UpdatedAt != value))
+				{
+					this.OnUpdatedAtChanging(value);
+					this.SendPropertyChanging();
+					this._UpdatedAt = value;
+					this.SendPropertyChanged("UpdatedAt");
+					this.OnUpdatedAtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserAId", AutoSync=AutoSync.Always, DbType="Int NOT NULL", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public int UserAId
+		{
+			get
+			{
+				return this._UserAId;
+			}
+			set
+			{
+				if ((this._UserAId != value))
+				{
+					this.OnUserAIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserAId = value;
+					this.SendPropertyChanged("UserAId");
+					this.OnUserAIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserBId", AutoSync=AutoSync.Always, DbType="Int NOT NULL", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public int UserBId
+		{
+			get
+			{
+				return this._UserBId;
+			}
+			set
+			{
+				if ((this._UserBId != value))
+				{
+					this.OnUserBIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserBId = value;
+					this.SendPropertyChanged("UserBId");
+					this.OnUserBIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_FriendRequests", Storage="_Users", ThisKey="ReceiverUserId", OtherKey="UserId", IsForeignKey=true)]
+		public Users Users
+		{
+			get
+			{
+				return this._Users.Entity;
+			}
+			set
+			{
+				Users previousValue = this._Users.Entity;
+				if (((previousValue != value) 
+							|| (this._Users.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Users.Entity = null;
+						previousValue.FriendRequests.Remove(this);
+					}
+					this._Users.Entity = value;
+					if ((value != null))
+					{
+						value.FriendRequests.Add(this);
+						this._ReceiverUserId = value.UserId;
+					}
+					else
+					{
+						this._ReceiverUserId = default(int);
+					}
+					this.SendPropertyChanged("Users");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_FriendRequests1", Storage="_Users1", ThisKey="SenderUserId", OtherKey="UserId", IsForeignKey=true)]
+		public Users Users1
+		{
+			get
+			{
+				return this._Users1.Entity;
+			}
+			set
+			{
+				Users previousValue = this._Users1.Entity;
+				if (((previousValue != value) 
+							|| (this._Users1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Users1.Entity = null;
+						previousValue.FriendRequests1.Remove(this);
+					}
+					this._Users1.Entity = value;
+					if ((value != null))
+					{
+						value.FriendRequests1.Add(this);
+						this._SenderUserId = value.UserId;
+					}
+					else
+					{
+						this._SenderUserId = default(int);
+					}
+					this.SendPropertyChanged("Users1");
 				}
 			}
 		}

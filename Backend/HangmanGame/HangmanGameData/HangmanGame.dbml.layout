@@ -1,12 +1,112 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="HangmanGame">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.375, 13.5" name="HangmanGame">
   <DataContextMoniker Name="/HangmanGameDataContext" />
   <nestedChildShapes>
-    <classShape Id="423311b5-49a0-4931-9052-1d99c1e8b93b" absoluteBounds="2.5, 2.625, 2, 2.7324039713541666">
+    <classShape Id="423311b5-49a0-4931-9052-1d99c1e8b93b" absoluteBounds="4.75, 1, 2, 2.7324039713541666">
       <DataClassMoniker Name="/HangmanGameDataContext/Users" />
       <nestedChildShapes>
-        <elementListCompartment Id="9c4efdb1-b560-4359-a90f-36b847716c6b" absoluteBounds="2.515, 3.085, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="9c4efdb1-b560-4359-a90f-36b847716c6b" absoluteBounds="4.7650000000000006, 1.46, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="bda44024-926c-43b4-9f19-ed25e46d309c" absoluteBounds="1, 11.25, 2, 1.9631982421875">
+      <DataClassMoniker Name="/HangmanGameDataContext/Words" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3e7f5347-ce51-4b4c-a867-5a84cb158b81" absoluteBounds="1.0149999999999997, 11.71, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e1efc1c9-731d-4715-9141-0eeeec510dcc" absoluteBounds="0.875, 7.625, 2, 2.9247054036458331">
+      <DataClassMoniker Name="/HangmanGameDataContext/Games" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9b479624-e116-4ef7-b1ad-685422a69ea4" absoluteBounds="0.89000000000000012, 8.085, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.75 : 2.36620198567708); (1.70312375 : 2.36620198567708); (1.70312375 : 7.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/HangmanGameDataContext/Users/Users_Games" />
+      <nodes>
+        <classShapeMoniker Id="423311b5-49a0-4931-9052-1d99c1e8b93b" />
+        <classShapeMoniker Id="e1efc1c9-731d-4715-9141-0eeeec510dcc" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.75 : 3.08055547851562); (2.148438125 : 3.08055547851562); (2.148438125 : 7.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/HangmanGameDataContext/Users/Users_Games1" />
+      <nodes>
+        <classShapeMoniker Id="423311b5-49a0-4931-9052-1d99c1e8b93b" />
+        <classShapeMoniker Id="e1efc1c9-731d-4715-9141-0eeeec510dcc" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.75 : 1.65184849283854); (1.257809375 : 1.65184849283854); (1.257809375 : 7.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/HangmanGameDataContext/Users/Users_Games2" />
+      <nodes>
+        <classShapeMoniker Id="423311b5-49a0-4931-9052-1d99c1e8b93b" />
+        <classShapeMoniker Id="e1efc1c9-731d-4715-9141-0eeeec510dcc" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.75 : 3.4377322249349); (2.3710953125 : 3.4377322249349); (2.3710953125 : 7.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/HangmanGameDataContext/Users/Users_Games3" />
+      <nodes>
+        <classShapeMoniker Id="423311b5-49a0-4931-9052-1d99c1e8b93b" />
+        <classShapeMoniker Id="e1efc1c9-731d-4715-9141-0eeeec510dcc" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.9375 : 11.25); (1.9375 : 10.5497054036458)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/HangmanGameDataContext/Words/Words_Games" />
+      <nodes>
+        <classShapeMoniker Id="bda44024-926c-43b4-9f19-ed25e46d309c" />
+        <classShapeMoniker Id="e1efc1c9-731d-4715-9141-0eeeec510dcc" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="8cc0b66c-9c01-4ec6-a12e-9237de710057" absoluteBounds="4.75, 8.25, 2, 1.9631982421875">
+      <DataClassMoniker Name="/HangmanGameDataContext/GameMoves" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e8b84bc0-aa9c-4801-a4d0-f0bca50bdd29" absoluteBounds="4.765, 8.71, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.875 : 9.23159912109375); (4.75 : 9.23159912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/HangmanGameDataContext/Games/Games_GameMoves" />
+      <nodes>
+        <classShapeMoniker Id="e1efc1c9-731d-4715-9141-0eeeec510dcc" />
+        <classShapeMoniker Id="8cc0b66c-9c01-4ec6-a12e-9237de710057" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.75 : 3.73240397135417); (5.75 : 8.25)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/HangmanGameDataContext/Users/Users_GameMoves" />
+      <nodes>
+        <classShapeMoniker Id="423311b5-49a0-4931-9052-1d99c1e8b93b" />
+        <classShapeMoniker Id="8cc0b66c-9c01-4ec6-a12e-9237de710057" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="f4bac429-55df-4e76-9d2f-c6dde6df2f82" absoluteBounds="4.375, 11.5, 2, 1.3862939453125">
+      <DataClassMoniker Name="/HangmanGameDataContext/Categories" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b35fcfdb-60c1-4134-b68c-39f62584999e" absoluteBounds="4.39, 11.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.375 : 12.1931469726562); (3 : 12.1931469726562)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/HangmanGameDataContext/Categories/Categories_Words" />
+      <nodes>
+        <classShapeMoniker Id="f4bac429-55df-4e76-9d2f-c6dde6df2f82" />
+        <classShapeMoniker Id="bda44024-926c-43b4-9f19-ed25e46d309c" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="6f935fbe-dc66-4385-8dde-71c1f85ee988" absoluteBounds="9.125, 1.5, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/HangmanGameDataContext/FriendRequests" />
+      <nestedChildShapes>
+        <elementListCompartment Id="43445479-2502-4cef-9f30-a618ffa459ac" absoluteBounds="9.14, 1.96, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6.75 : 2.61620198567708); (9.125 : 2.61620198567708)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/HangmanGameDataContext/Users/Users_FriendRequests" />
+      <nodes>
+        <classShapeMoniker Id="423311b5-49a0-4931-9052-1d99c1e8b93b" />
+        <classShapeMoniker Id="6f935fbe-dc66-4385-8dde-71c1f85ee988" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(6.75 : 1.99560099283854); (9.125 : 1.99560099283854)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/HangmanGameDataContext/Users/Users_FriendRequests1" />
+      <nodes>
+        <classShapeMoniker Id="423311b5-49a0-4931-9052-1d99c1e8b93b" />
+        <classShapeMoniker Id="6f935fbe-dc66-4385-8dde-71c1f85ee988" />
+      </nodes>
+    </associationConnector>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

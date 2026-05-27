@@ -4,56 +4,57 @@ namespace HangmanGameWPF.Services
 {
     internal static class ServiceClientFactory
     {
-        private const string BaseUrl = "http://localhost:62627/Services/";
-
         public static IUserService CreateUserClient()
         {
-            var binding = new BasicHttpBinding
-            {
-                MaxReceivedMessageSize = 2147483647,
-                ReaderQuotas = { MaxStringContentLength = 2147483647 }
-            };
-            var endpoint = new EndpointAddress(BaseUrl + "UserService.svc");
-            return ChannelFactory<IUserService>.CreateChannel(binding, endpoint);
+            return new ChannelFactory<IUserService>("BasicHttpBinding_IUserService")
+                .CreateChannel();
         }
 
         public static ICategoryService CreateCategoryClient()
         {
-            var binding = new BasicHttpBinding
-            {
-                MaxReceivedMessageSize = 2147483647,
-                ReaderQuotas = { MaxStringContentLength = 2147483647 }
-            };
-            var endpoint = new EndpointAddress(BaseUrl + "CategoryService.svc");
-            return ChannelFactory<ICategoryService>.CreateChannel(binding, endpoint);
+            return new ChannelFactory<ICategoryService>("BasicHttpBinding_ICategoryService")
+                .CreateChannel();
+        }
+
+        public static IFriendService CreateFriendClient()
+        {
+            return new ChannelFactory<IFriendService>("BasicHttpBinding_IFriendService")
+                .CreateChannel();
         }
 
         public static IGameService CreateGameClient(IGameCallback callbackInstance)
         {
-            var binding = new WSDualHttpBinding
-            {
-                MaxReceivedMessageSize = 2147483647,
-                Security = { Mode = WSDualHttpSecurityMode.None }
-            };
-            var endpoint = new EndpointAddress(BaseUrl + "GameService.svc");
             var context = new InstanceContext(callbackInstance);
-            return new DuplexChannelFactory<IGameService>(context, binding, endpoint).CreateChannel();
+
+            return new DuplexChannelFactory<IGameService>(
+                context,
+                "WsDualHttpBinding_IGameService"
+            ).CreateChannel();
         }
 
         public static void CloseChannel(object channel)
         {
-            var comm = channel as ICommunicationObject;
-            if (comm == null) return;
+            var communicationObject = channel as ICommunicationObject;
+
+            if (communicationObject == null)
+            {
+                return;
+            }
+
             try
             {
-                if (comm.State == CommunicationState.Opened)
-                    comm.Close();
+                if (communicationObject.State == CommunicationState.Opened)
+                {
+                    communicationObject.Close();
+                }
                 else
-                    comm.Abort();
+                {
+                    communicationObject.Abort();
+                }
             }
             catch
             {
-                comm.Abort();
+                communicationObject.Abort();
             }
         }
     }

@@ -53,11 +53,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="GameEntities.cs" />
-    <Compile Include="HangmanGameDataContext.Games.cs" />
     <Compile Include="Repositories\CategoryRepository.cs" />
+    <Compile Include="Repositories\FriendRepository.cs" />
     <Compile Include="Repositories\GameRepository.cs" />
     <Compile Include="Repositories\Interfaces\ICategoryRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IFriendRepository.cs" />
     <Compile Include="Repositories\Interfaces\IGameRepository.cs" />
     <Compile Include="Repositories\Interfaces\IUserRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
