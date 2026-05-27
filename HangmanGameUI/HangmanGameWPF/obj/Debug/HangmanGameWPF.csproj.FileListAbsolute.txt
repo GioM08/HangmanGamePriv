@@ -68,3 +68,5 @@ C:\Users\wilma\source\repos\HangmanGamePriv\HangmanGameUI\HangmanGameWPF\obj\Deb
 C:\Users\wilma\source\repos\HangmanGamePriv\HangmanGameUI\HangmanGameWPF\obj\Debug\HangmanGameWPF.csproj.CoreCompileInputs.cache
 C:\Users\wilma\source\repos\HangmanGamePriv\HangmanGameUI\HangmanGameWPF\obj\Debug\HangmanGameWPF.exe
 C:\Users\wilma\source\repos\HangmanGamePriv\HangmanGameUI\HangmanGameWPF\obj\Debug\HangmanGameWPF.pdb
+C:\Users\wilma\source\repos\HangmanGamePriv\HangmanGameUI\HangmanGameWPF\obj\Debug\LeaderboardWindow.baml
+C:\Users\wilma\source\repos\HangmanGamePriv\HangmanGameUI\HangmanGameWPF\obj\Debug\LeaderboardWindow.g.cs

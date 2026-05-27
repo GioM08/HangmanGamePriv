@@ -65,6 +65,7 @@
     <Content Include="Services\CategoryService.svc" />
     <Content Include="Services\FriendService.svc" />
     <Content Include="Services\GameService.svc" />
+    <Content Include="Services\LeaderboardService.svc" />
     <Content Include="Services\UserService.svc" />
     <Content Include="SQL\CreateFriendTables.sql" />
     <Content Include="Web.config" />
@@ -88,7 +89,11 @@
     <Compile Include="Services\IFriendService.cs" />
     <Compile Include="Services\IGameCallback.cs" />
     <Compile Include="Services\IGameService.cs" />
+    <Compile Include="Services\ILeaderboardService.cs" />
     <Compile Include="Services\IUserService.cs" />
+    <Compile Include="Services\LeaderboardService.svc.cs">
+      <DependentUpon>LeaderboardService.svc</DependentUpon>
+    </Compile>
     <Compile Include="Services\UserService.svc.cs">
       <DependentUpon>UserService.svc</DependentUpon>
     </Compile>
