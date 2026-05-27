@@ -1,17 +1,20 @@
 # Visual Studio
 .vs/
+**/.vs/
+
+# Build outputs
 bin/
 obj/
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+
+# User/local files
 *.user
 *.suo
 *.userosscache
 *.sln.docstates
-
-# Build results
-[Dd]ebug/
-[Rr]elease/
-x64/
-x86/
 
 # NuGet
 packages/
@@ -25,7 +28,8 @@ packages/
 *.ldf
 
 # Local database credentials
-HangmanGameServices/ConnectionStrings.config
+ConnectionStrings.config
+**/ConnectionStrings.config
 
 # Rider / JetBrains
 .idea/

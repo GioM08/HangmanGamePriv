@@ -39,6 +39,9 @@ namespace HangmanGameWPF
         private void BtnFriends_Click(object sender, RoutedEventArgs e)
             => new FriendsWindow { Owner = this }.ShowDialog();
 
+        private void BtnLeaderboard_Click(object sender, RoutedEventArgs e)
+            => new LeaderboardWindow { Owner = this }.ShowDialog();
+
         private void BtnLogout_Click(object sender, RoutedEventArgs e)
         {
             SessionManager.Logout();

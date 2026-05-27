@@ -22,6 +22,12 @@ namespace HangmanGameWPF.Services
                 .CreateChannel();
         }
 
+        public static ILeaderboardService CreateLeaderboardClient()
+        {
+            return new ChannelFactory<ILeaderboardService>("BasicHttpBinding_ILeaderboardService")
+                .CreateChannel();
+        }
+
         public static IGameService CreateGameClient(IGameCallback callbackInstance)
         {
             var context = new InstanceContext(callbackInstance);

@@ -220,6 +220,38 @@ namespace HangmanGameWPF.Services
         public string ReceiverEmail { get; set; }
     }
 
+    [DataContract(Namespace = "http://schemas.datacontract.org/2004/07/HangmanGameEntities.Dtos")]
+    public class LeaderboardPlayerDto
+    {
+        [DataMember]
+        public int Position { get; set; }
+
+        [DataMember]
+        public int UserId { get; set; }
+
+        [DataMember]
+        public string FullName { get; set; }
+
+        [DataMember]
+        public int GlobalScore { get; set; }
+    }
+
+    [DataContract(Namespace = "http://schemas.datacontract.org/2004/07/HangmanGameEntities.Dtos")]
+    public class LeaderboardOperationResultDto
+    {
+        [DataMember]
+        public bool Success { get; set; }
+
+        [DataMember]
+        public string Message { get; set; }
+
+        [DataMember]
+        public List<LeaderboardPlayerDto> TopPlayers { get; set; }
+
+        [DataMember]
+        public LeaderboardPlayerDto CurrentPlayerRank { get; set; }
+    }
+
     // ── Service contracts ─────────────────────────────────────────────────────
 
     [ServiceContract]
@@ -279,5 +311,12 @@ namespace HangmanGameWPF.Services
 
         [OperationContract]
         FriendOperationResultDto SendFriendRequestByEmail(SendFriendRequestByEmailDto requestDto);
+    }
+
+    [ServiceContract]
+    public interface ILeaderboardService
+    {
+        [OperationContract]
+        LeaderboardOperationResultDto GetTopScoreLeaderboard(int currentUserId);
     }
 }

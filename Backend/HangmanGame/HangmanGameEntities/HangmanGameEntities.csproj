@@ -51,6 +51,8 @@
     <Compile Include="Dtos\GameOperationResultDto.cs" />
     <Compile Include="Dtos\GameStateDto.cs" />
     <Compile Include="Dtos\GuessLetterDto.cs" />
+    <Compile Include="Dtos\LeaderboardOperationResultDto.cs" />
+    <Compile Include="Dtos\LeaderboardPlayerDto.cs" />
     <Compile Include="Dtos\LoginDto.cs" />
     <Compile Include="Dtos\OperationResultDto.cs" />
     <Compile Include="Dtos\RegisterUserDto.cs" />

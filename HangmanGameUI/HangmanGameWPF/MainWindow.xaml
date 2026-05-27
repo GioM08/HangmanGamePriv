@@ -121,26 +121,20 @@
                         </StackPanel>
                     </Button>
 
-                    <!-- Espacio libre para que el grid quede simétrico -->
-                    <Border Margin="8"
-                            BorderBrush="#003F16"
-                            BorderThickness="1"
-                            Background="#050505">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="[ -- ]"
-                                       FontFamily="Courier New"
-                                       FontSize="24"
-                                       Foreground="#003F16"
-                                       HorizontalAlignment="Center"/>
-                            <TextBlock Text="PROXIMAMENTE"
-                                       FontFamily="Courier New"
-                                       FontSize="14"
-                                       FontWeight="Bold"
-                                       Foreground="#003F16"
-                                       HorizontalAlignment="Center"
-                                       Margin="0,8,0,0"/>
+                    <!-- Leaderboard -->
+                    <Button Style="{StaticResource MenuButton}" Margin="8" Click="BtnLeaderboard_Click">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,16,0,16">
+                            <TextBlock Text="[ TOP ]"
+                                       FontFamily="Courier New" FontSize="24"
+                                       Foreground="#00FF41" HorizontalAlignment="Center"/>
+                            <TextBlock Text="LEADERBOARD"
+                                       FontFamily="Courier New" FontSize="14" FontWeight="Bold"
+                                       Foreground="#00FF41" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                            <TextBlock Text="Top 10 por score"
+                                       FontFamily="Courier New" FontSize="10"
+                                       Foreground="#00AA30" HorizontalAlignment="Center" Margin="0,4,0,0"/>
                         </StackPanel>
-                    </Border>
+                    </Button>
 
                 </UniformGrid>
 
