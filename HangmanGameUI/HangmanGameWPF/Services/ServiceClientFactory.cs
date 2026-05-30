@@ -6,42 +6,56 @@ namespace HangmanGameWPF.Services
     {
         public static IUserService CreateUserClient()
         {
-            return new ChannelFactory<IUserService>("BasicHttpBinding_IUserService")
-                .CreateChannel();
+            var factory = new ChannelFactory<IUserService>("BasicHttpBinding_IUserService");
+            AddLanguageHeader(factory);
+            return factory.CreateChannel();
         }
 
         public static ICategoryService CreateCategoryClient()
         {
-            return new ChannelFactory<ICategoryService>("BasicHttpBinding_ICategoryService")
-                .CreateChannel();
+            var factory = new ChannelFactory<ICategoryService>("BasicHttpBinding_ICategoryService");
+            AddLanguageHeader(factory);
+            return factory.CreateChannel();
         }
 
         public static IFriendService CreateFriendClient()
         {
-            return new ChannelFactory<IFriendService>("BasicHttpBinding_IFriendService")
-                .CreateChannel();
+            var factory = new ChannelFactory<IFriendService>("BasicHttpBinding_IFriendService");
+            AddLanguageHeader(factory);
+            return factory.CreateChannel();
         }
 
         public static ILeaderboardService CreateLeaderboardClient()
         {
-            return new ChannelFactory<ILeaderboardService>("BasicHttpBinding_ILeaderboardService")
-                .CreateChannel();
+            var factory = new ChannelFactory<ILeaderboardService>("BasicHttpBinding_ILeaderboardService");
+            AddLanguageHeader(factory);
+            return factory.CreateChannel();
         }
 
         public static IAccountRecoveryService CreateAccountRecoveryClient()
         {
-            return new ChannelFactory<IAccountRecoveryService>("BasicHttpBinding_IAccountRecoveryService")
-                .CreateChannel();
+            var factory = new ChannelFactory<IAccountRecoveryService>("BasicHttpBinding_IAccountRecoveryService");
+            AddLanguageHeader(factory);
+            return factory.CreateChannel();
         }
 
         public static IGameService CreateGameClient(IGameCallback callbackInstance)
         {
             var context = new InstanceContext(callbackInstance);
 
-            return new DuplexChannelFactory<IGameService>(
+            var factory = new DuplexChannelFactory<IGameService>(
                 context,
                 "WsDualHttpBinding_IGameService"
-            ).CreateChannel();
+            );
+
+            AddLanguageHeader(factory);
+
+            return factory.CreateChannel();
+        }
+
+        private static void AddLanguageHeader<TContract>(ChannelFactory<TContract> factory)
+        {
+            factory.Endpoint.EndpointBehaviors.Add(new LanguageEndpointBehavior());
         }
 
         public static void CloseChannel(object channel)

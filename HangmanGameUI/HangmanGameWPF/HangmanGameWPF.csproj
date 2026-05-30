@@ -152,6 +152,9 @@
       <DependentUpon>LeaderboardWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Localization\ClientLanguageContext.cs" />
+    <Compile Include="Localization\ClientLocalizer.cs" />
+    <Compile Include="Localization\LocExtension.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -186,7 +189,13 @@
     <Compile Include="Services\GameCallbackHandlers.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Services\LanguageEndpointBehavior.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Services\ServiceClientFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\ServiceCallContext.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Services\ServiceContracts.cs">
@@ -216,6 +225,13 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClientMessages.resx" />
+    <EmbeddedResource Include="Resources\ClientMessages.en-US.resx">
+      <DependentUpon>ClientMessages.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClientMessages.es-MX.resx">
+      <DependentUpon>ClientMessages.resx</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
