@@ -5,7 +5,9 @@ using System.Diagnostics;
 using System.ServiceModel;
 using System.Threading;
 using HangmanGameBusiness.Games;
+using HangmanGameBusiness.Localization;
 using HangmanGameEntities.Dtos;
+using HangmanGameServices.Localization;
 
 namespace HangmanGameServices.Services
 {
@@ -25,11 +27,13 @@ namespace HangmanGameServices.Services
 
         public GameOperationResultDto CreateGame(CreateGameDto createGameDto)
         {
+            SetLanguage();
             return _gameBusiness.CreateGame(createGameDto);
         }
 
         public GameOperationResultDto JoinGame(int gameId, int retadorId)
         {
+            SetLanguage();
             var result = _gameBusiness.JoinGame(gameId, retadorId);
             if (result.Success && result.Game != null)
             {
@@ -42,16 +46,19 @@ namespace HangmanGameServices.Services
 
         public GameOperationResultDto GetAvailableGames()
         {
+            SetLanguage();
             return _gameBusiness.GetAvailableGames();
         }
 
         public GameOperationResultDto GetGameState(int gameId)
         {
+            SetLanguage();
             return _gameBusiness.GetGameState(gameId);
         }
 
         public GameOperationResultDto GuessLetter(GuessLetterDto guessLetterDto)
         {
+            SetLanguage();
             var result = _gameBusiness.GuessLetter(guessLetterDto);
             if (result.Success && result.GameState != null)
             {
@@ -68,6 +75,7 @@ namespace HangmanGameServices.Services
 
         public GameOperationResultDto AbandonGame(int gameId, int userId)
         {
+            SetLanguage();
             var result = _gameBusiness.AbandonGame(gameId, userId);
             if (result.Success)
             {
@@ -83,11 +91,13 @@ namespace HangmanGameServices.Services
 
         public GameOperationResultDto GetUserScore(int userId)
         {
+            SetLanguage();
             return _gameBusiness.GetUserScore(userId);
         }
 
         public void RegisterForGame(int gameId, int userId)
         {
+            SetLanguage();
             try
             {
                 _callback = OperationContext.Current.GetCallbackChannel<IGameCallback>();
@@ -127,6 +137,11 @@ namespace HangmanGameServices.Services
                 }
                 foreach (var d in dead) subscribers.Remove(d);
             }
+        }
+
+        private static void SetLanguage()
+        {
+            LanguageContext.SetLanguage(RequestLanguageReader.GetLanguageCode());
         }
     }
 }

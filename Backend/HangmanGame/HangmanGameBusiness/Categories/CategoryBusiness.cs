@@ -1,4 +1,5 @@
 using System;
+using HangmanGameBusiness.Localization;
 using HangmanGameData.Repositories;
 using HangmanGameEntities.Dtos;
 
@@ -26,11 +27,17 @@ namespace HangmanGameBusiness.Categories
                     languageCode = "ES";
 
                 var categories = _categoryRepository.GetAllCategories(languageCode);
-                return new GameOperationResultDto { Success = true, Categories = categories };
+                return new GameOperationResultDto
+                {
+                    Success = true,
+                    MessageKey = MessageKeys.CategoriesRetrievedSuccessfully,
+                    Message = MessageLocalizer.Get(MessageKeys.CategoriesRetrievedSuccessfully),
+                    Categories = categories
+                };
             }
             catch (Exception)
             {
-                return new GameOperationResultDto { Success = false, Message = "Error al obtener categorias." };
+                return Fail(MessageKeys.UnexpectedError);
             }
         }
 
@@ -39,18 +46,34 @@ namespace HangmanGameBusiness.Categories
             try
             {
                 if (categoryId <= 0)
-                    return new GameOperationResultDto { Success = false, Message = "Categoria invalida." };
+                    return Fail(MessageKeys.CategoryInvalid);
 
                 if (string.IsNullOrWhiteSpace(languageCode))
                     languageCode = "ES";
 
                 var words = _categoryRepository.GetWordsByCategory(categoryId, languageCode);
-                return new GameOperationResultDto { Success = true, Words = words };
+                return new GameOperationResultDto
+                {
+                    Success = true,
+                    MessageKey = MessageKeys.WordsRetrievedSuccessfully,
+                    Message = MessageLocalizer.Get(MessageKeys.WordsRetrievedSuccessfully),
+                    Words = words
+                };
             }
             catch (Exception)
             {
-                return new GameOperationResultDto { Success = false, Message = "Error al obtener palabras." };
+                return Fail(MessageKeys.UnexpectedError);
             }
+        }
+
+        private static GameOperationResultDto Fail(string messageKey)
+        {
+            return new GameOperationResultDto
+            {
+                Success = false,
+                MessageKey = messageKey,
+                Message = MessageLocalizer.Get(messageKey)
+            };
         }
     }
 }

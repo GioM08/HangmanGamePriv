@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using HangmanGameWPF.Localization;
 using HangmanGameWPF.Services;
 
 namespace HangmanGameWPF
@@ -17,6 +18,7 @@ namespace HangmanGameWPF
         private readonly GameDto _gameInfo;
         private IGameService _gameChannel;
         private readonly ChatClient _chatClient;
+        private GameStateDto _lastGameState;
 
         // Hangman ASCII stages (0–6 incorrect attempts)
         private static readonly string[] HangmanStages =
@@ -45,13 +47,48 @@ namespace HangmanGameWPF
             _gameInfo  = game;
             _chatClient = new ChatClient();
 
-            TxtPlayer.Text      = SessionManager.FullName ?? "Jugador";
-            TxtRole.Text        = isCreator ? "ROL: CREADOR (espera retador)" : "ROL: RETADOR (adivina la palabra)";
+            SelectCurrentLanguage();
+            TxtPlayer.Text      = SessionManager.FullName ?? ClientLocalizer.Get("PLAYER_FALLBACK");
+            TxtRole.Text        = isCreator
+                ? ClientLocalizer.Get("GAME_ROLE_CREATOR")
+                : ClientLocalizer.Get("GAME_ROLE_CHALLENGER");
             TxtCategory.Text    = game.Category ?? string.Empty;
             TxtDescription.Text = game.Description ?? string.Empty;
 
             Loaded  += OnLoaded;
             Closing += OnWindowClosing;
+        }
+
+        private void SelectCurrentLanguage()
+        {
+            foreach (ComboBoxItem item in CmbLanguage.Items)
+            {
+                if ((item.Tag as string) == ClientLanguageContext.CurrentLanguage)
+                {
+                    CmbLanguage.SelectedItem = item;
+                    return;
+                }
+            }
+        }
+
+        private void CmbLanguage_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxItem selectedItem = CmbLanguage.SelectedItem as ComboBoxItem;
+
+            if (selectedItem == null)
+            {
+                return;
+            }
+
+            ClientLanguageContext.SetLanguage(selectedItem.Tag as string);
+            TxtRole.Text = _isCreator
+                ? ClientLocalizer.Get("GAME_ROLE_CREATOR")
+                : ClientLocalizer.Get("GAME_ROLE_CHALLENGER");
+
+            if (_lastGameState != null)
+            {
+                UpdateLocalizedStateTexts(_lastGameState);
+            }
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
@@ -65,25 +102,35 @@ namespace HangmanGameWPF
             try
             {
                 _gameChannel = ServiceClientFactory.CreateGameClient(this);
-                _gameChannel.RegisterForGame(_gameId, SessionManager.UserId);
 
-                var result = _gameChannel.GetGameState(_gameId);
+                GameOperationResultDto result;
+
+                using (ServiceCallContext.CreateScope(_gameChannel))
+                {
+                    _gameChannel.RegisterForGame(_gameId, SessionManager.UserId);
+                }
+
+                using (ServiceCallContext.CreateScope(_gameChannel))
+                {
+                    result = _gameChannel.GetGameState(_gameId);
+                }
+
                 if (result.Success && result.GameState != null)
                     UpdateGameUI(result.GameState);
                 else if (_isCreator)
-                    TxtMessage.Text = "> Partida creada. Esperando que un retador se una...";
+                    TxtMessage.Text = ClientLocalizer.Get("GAME_CREATED_WAITING");
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"[GameWindow] Connect error: {ex.Message}");
-                AppendChat("SISTEMA", "No se pudo conectar al servidor del juego.");
+                AppendChat(ClientLocalizer.Get("GAME_SYSTEM"), ClientLocalizer.Get("ERROR_CONNECTION"));
             }
         }
 
         private void ConnectToChat()
         {
             _chatClient.MessageReceived += OnChatMessageReceived;
-            _chatClient.Connect(_gameId, SessionManager.UserId, SessionManager.FullName ?? "Jugador");
+            _chatClient.Connect(_gameId, SessionManager.UserId, SessionManager.FullName ?? ClientLocalizer.Get("PLAYER_FALLBACK"));
         }
 
         private void OnWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -104,8 +151,10 @@ namespace HangmanGameWPF
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                AppendChat("SISTEMA", $"{game.RetadorName} se unio a la partida!");
-                TxtMessage.Text = $"> {game.RetadorName} se unio. El juego comienza!";
+                AppendChat(
+                    ClientLocalizer.Get("GAME_SYSTEM"),
+                    string.Format(ClientLocalizer.Get("GAME_PLAYER_JOINED_CHAT"), game.RetadorName));
+                TxtMessage.Text = "> " + string.Format(ClientLocalizer.Get("GAME_PLAYER_JOINED"), game.RetadorName);
             }));
         }
 
@@ -118,9 +167,9 @@ namespace HangmanGameWPF
 
         private void UpdateGameUI(GameStateDto state)
         {
+            _lastGameState = state;
             TxtRevealedWord.Text = state.RevealedWord ?? string.Empty;
-            TxtWordLength.Text = $"Letras: {(state.RevealedWord?.Replace(" ", "").Length ?? 0)}";
-            TxtLives.Text = $"VIDAS: {6 - state.IncorrectAttempts} / 6";
+            UpdateLocalizedStateTexts(state);
 
             int stageIdx = Math.Min(state.IncorrectAttempts, 6);
             TxtHangman.Text = HangmanStages[stageIdx];
@@ -146,6 +195,13 @@ namespace HangmanGameWPF
         }
 
         private bool _gameEnded;
+
+        private void UpdateLocalizedStateTexts(GameStateDto state)
+        {
+            int wordLength = state.RevealedWord?.Replace(" ", "").Length ?? 0;
+            TxtWordLength.Text = string.Format(ClientLocalizer.Get("GAME_LENGTH"), wordLength);
+            TxtLives.Text = string.Format(ClientLocalizer.Get("GAME_LIVES"), 6 - state.IncorrectAttempts);
+        }
 
         // Un solo método que aplica el estado visual completo del teclado
         private void ApplyKeyboardState(GameStateDto state)
@@ -198,7 +254,9 @@ namespace HangmanGameWPF
         {
             if (!IsLoaded || !IsVisible) return;
 
-            string title  = state.WinnerId == SessionManager.UserId ? "GANASTE!" : "PERDISTE";
+            string title = state.WinnerId == SessionManager.UserId
+                ? ClientLocalizer.Get("GAME_WIN_TITLE")
+                : ClientLocalizer.Get("GAME_LOSE_TITLE");
             string msg    = state.Message ?? string.Empty;
             int    points = state.WinnerId == SessionManager.UserId ? 10 : 0;
 
@@ -243,19 +301,24 @@ namespace HangmanGameWPF
             {
                 try
                 {
-                    var result = _gameChannel.GuessLetter(new GuessLetterDto
+                    GameOperationResultDto result;
+
+                    using (ServiceCallContext.CreateScope(_gameChannel))
                     {
-                        GameId = _gameId,
-                        UserId = SessionManager.UserId,
-                        Letter = letter
-                    });
+                        result = _gameChannel.GuessLetter(new GuessLetterDto
+                        {
+                            GameId = _gameId,
+                            UserId = SessionManager.UserId,
+                            Letter = letter
+                        });
+                    }
 
                     Dispatcher.BeginInvoke(new Action(() =>
                     {
                         if (result != null && result.Success && result.GameState != null)
                             UpdateGameUI(result.GameState);
                         else if (result != null)
-                            TxtMessage.Text = result.Message ?? "Error al procesar.";
+                            TxtMessage.Text = result.Message ?? ClientLocalizer.Get("ERROR_PROCESSING");
                     }));
                 }
                 catch (Exception ex)
@@ -280,7 +343,7 @@ namespace HangmanGameWPF
                 }
                 else if (msg.StartsWith("SYSTEM:"))
                 {
-                    AppendChat("SISTEMA", msg.Substring(7));
+                    AppendChat(ClientLocalizer.Get("GAME_SYSTEM"), msg.Substring(7));
                 }
                 else
                 {
@@ -307,7 +370,7 @@ namespace HangmanGameWPF
             string text = TxtChatInput.Text.Trim();
             if (string.IsNullOrEmpty(text)) return;
 
-            _chatClient.SendMessage(SessionManager.UserId, SessionManager.FullName ?? "Jugador",
+            _chatClient.SendMessage(SessionManager.UserId, SessionManager.FullName ?? ClientLocalizer.Get("PLAYER_FALLBACK"),
                 _gameId, text);
             AppendChat("YO", text);
             TxtChatInput.Clear();
@@ -321,8 +384,10 @@ namespace HangmanGameWPF
         {
             if (!_gameEnded)
             {
-                var r = MessageBox.Show("¿Cerrar la ventana? Esto contara como abandono.",
-                    "ATENCIÓN", MessageBoxButton.YesNo);
+                var r = MessageBox.Show(
+                    ClientLocalizer.Get("GAME_WINDOW_CLOSE_CONFIRM"),
+                    ClientLocalizer.Get("ATTENTION_TITLE"),
+                    MessageBoxButton.YesNo);
                 if (r != MessageBoxResult.Yes) return;
             }
             Close();
@@ -334,15 +399,21 @@ namespace HangmanGameWPF
         private void BtnSurrender_Click(object sender, RoutedEventArgs e)
         {
             var result = MessageBox.Show(
-                "¿Seguro que deseas rendirte?\nPerderas 3 puntos.",
-                "RENDIRSE",
+                ClientLocalizer.Get("GAME_SURRENDER_CONFIRM"),
+                ClientLocalizer.Get("GAME_SURRENDER_TITLE"),
                 MessageBoxButton.YesNo);
 
             if (result != MessageBoxResult.Yes) return;
 
             try
             {
-                _gameChannel?.AbandonGame(_gameId, SessionManager.UserId);
+                if (_gameChannel != null)
+                {
+                    using (ServiceCallContext.CreateScope(_gameChannel))
+                    {
+                        _gameChannel.AbandonGame(_gameId, SessionManager.UserId);
+                    }
+                }
             }
             catch (Exception ex)
             {
