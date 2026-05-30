@@ -7,6 +7,7 @@ namespace HangmanGameEntities.Dtos
     public class GameOperationResultDto
     {
         [DataMember] public bool Success { get; set; }
+        [DataMember] public string MessageKey { get; set; }
         [DataMember] public string Message { get; set; }
         [DataMember] public GameDto Game { get; set; }
         [DataMember] public GameStateDto GameState { get; set; }

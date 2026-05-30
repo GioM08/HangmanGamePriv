@@ -9,6 +9,9 @@ namespace HangmanGameEntities.Dtos
         public bool Success { get; set; }
 
         [DataMember]
+        public string MessageKey { get; set; }
+
+        [DataMember]
         public string Message { get; set; }
 
         [DataMember]
