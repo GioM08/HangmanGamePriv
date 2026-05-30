@@ -26,5 +26,8 @@ namespace HangmanGameEntities.Dtos
 
         [DataMember]
         public DateTime CreatedAt { get; set; }
+
+        [DataMember]
+        public bool IsEmailVerified { get; set; }
     }
 }

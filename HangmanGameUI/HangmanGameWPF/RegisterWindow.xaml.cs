@@ -56,9 +56,11 @@ namespace HangmanGameWPF
                 return;
             }
 
+            IUserService client = null;
+
             try
             {
-                var client = ServiceClientFactory.CreateUserClient();
+                client = ServiceClientFactory.CreateUserClient();
                 var result = client.RegisterUser(new RegisterUserDto
                 {
                     FullName = fullName,
@@ -67,22 +69,14 @@ namespace HangmanGameWPF
                     Email = email,
                     Password = pass
                 });
-                ServiceClientFactory.CloseChannel(client);
 
-                if (result.Success)
+                if (result != null && result.Success)
                 {
-                    TxtMessage.Foreground = new SolidColorBrush(Color.FromRgb(0x00, 0xFF, 0x41));
-                    TxtMessage.Text = "> Cuenta creada! Ya puede iniciar sesion.";
-                    TxtFullName.IsEnabled = false;
-                    DpBirthDate.IsEnabled = false;
-                    TxtPhone.IsEnabled = false;
-                    TxtEmail.IsEnabled = false;
-                    PbPassword.IsEnabled = false;
-                    PbConfirm.IsEnabled = false;
+                    ShowRegistrationCompleted();
                 }
                 else
                 {
-                    TxtMessage.Text = $"! {result.Message}";
+                    TxtMessage.Text = string.Format("! {0}", result == null ? "Sin respuesta del servidor." : result.Message);
                 }
             }
             catch (Exception ex)
@@ -90,6 +84,22 @@ namespace HangmanGameWPF
                 Debug.WriteLine($"[Register] Error: {ex.Message}");
                 TxtMessage.Text = "! Error al conectar con el servidor.";
             }
+            finally
+            {
+                ServiceClientFactory.CloseChannel(client);
+            }
+        }
+
+        private void ShowRegistrationCompleted()
+        {
+            TxtMessage.Foreground = new SolidColorBrush(Color.FromRgb(0x00, 0xFF, 0x41));
+            TxtMessage.Text = "> Cuenta creada! Ya puede iniciar sesion. Verifique su correo desde PERFIL para habilitar recuperacion.";
+            TxtFullName.IsEnabled = false;
+            DpBirthDate.IsEnabled = false;
+            TxtPhone.IsEnabled = false;
+            TxtEmail.IsEnabled = false;
+            PbPassword.IsEnabled = false;
+            PbConfirm.IsEnabled = false;
         }
     }
 }
