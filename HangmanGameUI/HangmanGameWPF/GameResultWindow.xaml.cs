@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Media;
+using HangmanGameWPF.Localization;
 
 namespace HangmanGameWPF
 {
@@ -12,7 +13,7 @@ namespace HangmanGameWPF
             TxtResultMsg.Text = message;
             TxtPoints.Text = points.ToString();
 
-            if (title.Contains("GANASTE"))
+            if (title == ClientLocalizer.Get("GAME_WIN_TITLE"))
                 TxtTitle.Foreground = new SolidColorBrush(Color.FromRgb(0x00, 0xFF, 0x41));
             else
                 TxtTitle.Foreground = new SolidColorBrush(Color.FromRgb(0xFF, 0x44, 0x44));
