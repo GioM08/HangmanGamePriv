@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using HangmanGameWPF.Localization;
 using HangmanGameWPF.Services;
 
 namespace HangmanGameWPF
@@ -24,7 +25,7 @@ namespace HangmanGameWPF
             try
             {
                 var client = ServiceClientFactory.CreateCategoryClient();
-                var result = client.GetAllCategories("ES");
+                var result = client.GetAllCategories(ClientLanguageContext.CurrentLanguage);
                 ServiceClientFactory.CloseChannel(client);
 
                 if (result.Success && result.Categories != null)
@@ -39,7 +40,7 @@ namespace HangmanGameWPF
             catch (Exception ex)
             {
                 Debug.WriteLine($"[CreateGame] Load categories error: {ex.Message}");
-                TxtError.Text = "! Error al cargar categorias del servidor.";
+                TxtError.Text = ClientLocalizer.Get("ERROR_LOAD_CATEGORIES");
             }
         }
 
@@ -54,7 +55,7 @@ namespace HangmanGameWPF
             try
             {
                 var client = ServiceClientFactory.CreateCategoryClient();
-                var result = client.GetWordsByCategory(categoryId, "ES");
+                var result = client.GetWordsByCategory(categoryId, ClientLanguageContext.CurrentLanguage);
                 ServiceClientFactory.CloseChannel(client);
 
                 if (result.Success && result.Words != null)
@@ -75,7 +76,7 @@ namespace HangmanGameWPF
         private void UpdateHint()
         {
             if (CbWord.SelectedItem is WordDto word && !string.IsNullOrEmpty(word.Hint))
-                TxtHint.Text = $"> Pista: {word.Hint}";
+                TxtHint.Text = string.Format(ClientLocalizer.Get("HINT_FORMAT"), word.Hint);
             else
                 TxtHint.Text = string.Empty;
         }
@@ -90,7 +91,7 @@ namespace HangmanGameWPF
 
             if (CbWord.SelectedItem == null)
             {
-                TxtError.Text = "! Seleccione una categoria y una palabra.";
+                TxtError.Text = ClientLocalizer.Get("ERROR_SELECT_CATEGORY_WORD");
                 return;
             }
 
@@ -123,7 +124,7 @@ namespace HangmanGameWPF
             catch (Exception ex)
             {
                 Debug.WriteLine($"[CreateGame] Create error: {ex.Message}");
-                TxtError.Text = "! Error al crear la partida.";
+                TxtError.Text = ClientLocalizer.Get("ERROR_CREATE_GAME");
             }
         }
     }
