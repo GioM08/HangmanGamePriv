@@ -1,8 +1,10 @@
 using System;
 using System.Diagnostics;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
+using HangmanGameWPF.Localization;
 using HangmanGameWPF.Services;
 
 namespace HangmanGameWPF
@@ -24,7 +26,32 @@ namespace HangmanGameWPF
             };
             _blinkTimer.Start();
 
+            SelectCurrentLanguage();
             TxtEmail.Focus();
+        }
+
+        private void SelectCurrentLanguage()
+        {
+            foreach (ComboBoxItem item in CmbLanguage.Items)
+            {
+                if ((item.Tag as string) == ClientLanguageContext.CurrentLanguage)
+                {
+                    CmbLanguage.SelectedItem = item;
+                    return;
+                }
+            }
+        }
+
+        private void CmbLanguage_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxItem selectedItem = CmbLanguage.SelectedItem as ComboBoxItem;
+
+            if (selectedItem == null)
+            {
+                return;
+            }
+
+            ClientLanguageContext.SetLanguage(selectedItem.Tag as string);
         }
 
         private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -50,7 +77,7 @@ namespace HangmanGameWPF
 
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(pass))
             {
-                TxtError.Text = "! ERROR: Complete todos los campos.";
+                TxtError.Text = ClientLocalizer.Get("ERROR_COMPLETE_FIELDS");
                 return;
             }
 
@@ -59,7 +86,12 @@ namespace HangmanGameWPF
             try
             {
                 client = ServiceClientFactory.CreateUserClient();
-                var result = client.Login(new LoginDto { Email = email, Password = pass });
+                OperationResultDto result;
+
+                using (ServiceCallContext.CreateScope(client))
+                {
+                    result = client.Login(new LoginDto { Email = email, Password = pass });
+                }
 
                 if (result != null && result.Success && result.User != null)
                 {
@@ -75,7 +107,7 @@ namespace HangmanGameWPF
                 }
                 else
                 {
-                    TxtError.Text = $"! ERROR: {result?.Message ?? "Sin respuesta del servidor"}";
+                    TxtError.Text = $"! ERROR: {result?.Message ?? ClientLocalizer.Get("ERROR_SERVER_EMPTY")}";
                     PbPassword.Clear();
                     PbPassword.Focus();
                 }
@@ -86,7 +118,7 @@ namespace HangmanGameWPF
                 MessageBox.Show(
                     $"Tipo: {ex.GetType().Name}\n\nMensaje: {ex.Message}\n\nInner: {ex.InnerException?.Message}",
                     "ERROR EXCEPCION");
-                TxtError.Text = "! ERROR: No se pudo conectar al servidor.";
+                TxtError.Text = ClientLocalizer.Get("ERROR_CONNECTION");
             }
             finally
             {

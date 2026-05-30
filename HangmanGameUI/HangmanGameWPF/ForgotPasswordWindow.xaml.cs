@@ -1,6 +1,7 @@
 using System;
 using System.Windows;
 using System.Windows.Input;
+using HangmanGameWPF.Localization;
 using HangmanGameWPF.Services;
 
 namespace HangmanGameWPF
@@ -28,7 +29,7 @@ namespace HangmanGameWPF
 
             if (string.IsNullOrWhiteSpace(email))
             {
-                TxtStatus.Text = "! ERROR: Ingrese su correo.";
+                TxtStatus.Text = ClientLocalizer.Get("ERROR_EMAIL_REQUIRED");
                 return;
             }
 
@@ -43,7 +44,7 @@ namespace HangmanGameWPF
                     Email = email
                 });
 
-                TxtStatus.Text = result == null ? "Sin respuesta del servidor." : result.Message;
+                TxtStatus.Text = result == null ? ClientLocalizer.Get("ERROR_SERVER_EMPTY") : result.Message;
 
                 if (result != null && result.Success)
                 {
@@ -58,7 +59,7 @@ namespace HangmanGameWPF
             }
             catch (Exception ex)
             {
-                TxtStatus.Text = "Error enviando codigo: " + ex.Message;
+                TxtStatus.Text = string.Format(ClientLocalizer.Get("ERROR_REQUEST_PASSWORD_RESET"), ex.Message);
             }
             finally
             {

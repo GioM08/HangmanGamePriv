@@ -1,5 +1,7 @@
 using HangmanGameBusiness.Leaderboards;
+using HangmanGameBusiness.Localization;
 using HangmanGameEntities.Dtos;
+using HangmanGameServices.Localization;
 
 namespace HangmanGameServices.Services
 {
@@ -14,7 +16,13 @@ namespace HangmanGameServices.Services
 
         public LeaderboardOperationResultDto GetTopScoreLeaderboard(int currentUserId)
         {
+            SetLanguage();
             return leaderboardBusiness.GetTopScoreLeaderboard(currentUserId);
+        }
+
+        private static void SetLanguage()
+        {
+            LanguageContext.SetLanguage(RequestLanguageReader.GetLanguageCode());
         }
     }
 }

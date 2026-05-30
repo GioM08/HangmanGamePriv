@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
+using HangmanGameWPF.Localization;
 using HangmanGameWPF.Services;
 
 namespace HangmanGameWPF
@@ -52,12 +53,12 @@ namespace HangmanGameWPF
                 else
                 {
                     LstFriends.ItemsSource = null;
-                    SetStatus(result?.Message ?? "No se pudieron cargar los amigos.");
+                    SetStatus(result?.Message ?? ClientLocalizer.Get("ERROR_FRIEND_LOAD"));
                 }
             }
             catch (Exception ex)
             {
-                SetStatus("Error cargando amigos: " + ex.Message);
+                SetStatus(string.Format(ClientLocalizer.Get("ERROR_FRIEND_LOAD_EXCEPTION"), ex.Message));
             }
             finally
             {
@@ -86,7 +87,7 @@ namespace HangmanGameWPF
             }
             catch (Exception ex)
             {
-                SetStatus("Error cargando solicitudes recibidas: " + ex.Message);
+                SetStatus(string.Format(ClientLocalizer.Get("ERROR_LOAD_PENDING_REQUESTS"), ex.Message));
             }
             finally
             {
@@ -115,7 +116,7 @@ namespace HangmanGameWPF
             }
             catch (Exception ex)
             {
-                SetStatus("Error cargando solicitudes enviadas: " + ex.Message);
+                SetStatus(string.Format(ClientLocalizer.Get("ERROR_LOAD_SENT_REQUESTS"), ex.Message));
             }
             finally
             {
@@ -134,13 +135,13 @@ namespace HangmanGameWPF
 
             if (selectedFriend == null)
             {
-                SetStatus("Seleccione un amigo para eliminar.");
+                SetStatus(ClientLocalizer.Get("ERROR_SELECT_FRIEND"));
                 return;
             }
 
             MessageBoxResult confirmation = MessageBox.Show(
-                $"¿Deseas eliminar a {selectedFriend.FullName} de tus amigos?",
-                "Confirmar eliminación",
+                string.Format(ClientLocalizer.Get("REMOVE_FRIEND_CONFIRM"), selectedFriend.FullName),
+                ClientLocalizer.Get("REMOVE_FRIEND_TITLE"),
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Warning
             );
@@ -164,7 +165,7 @@ namespace HangmanGameWPF
 
                 FriendOperationResultDto result = client.RemoveFriend(requestDto);
 
-                SetStatus(result?.Message ?? "Sin respuesta del servidor.");
+                SetStatus(result?.Message ?? ClientLocalizer.Get("ERROR_SERVER_EMPTY"));
 
                 if (result != null && result.Success)
                 {
@@ -173,7 +174,7 @@ namespace HangmanGameWPF
             }
             catch (Exception ex)
             {
-                SetStatus("Error eliminando amigo: " + ex.Message);
+                SetStatus(string.Format(ClientLocalizer.Get("ERROR_REMOVE_FRIEND"), ex.Message));
             }
             finally
             {
@@ -187,7 +188,7 @@ namespace HangmanGameWPF
 
             if (string.IsNullOrWhiteSpace(receiverEmail))
             {
-                SetStatus("Debe ingresar el correo del amigo.");
+                SetStatus(ClientLocalizer.Get("ERROR_FRIEND_EMAIL_REQUIRED"));
                 return;
             }
 
@@ -205,7 +206,7 @@ namespace HangmanGameWPF
 
                 FriendOperationResultDto result = client.SendFriendRequestByEmail(requestDto);
 
-                SetStatus(result?.Message ?? "Sin respuesta del servidor.");
+                SetStatus(result?.Message ?? ClientLocalizer.Get("ERROR_SERVER_EMPTY"));
 
                 if (result != null && result.Success)
                 {
@@ -215,7 +216,7 @@ namespace HangmanGameWPF
             }
             catch (Exception ex)
             {
-                SetStatus("Error enviando solicitud: " + ex.Message);
+                SetStatus(string.Format(ClientLocalizer.Get("ERROR_SEND_FRIEND_REQUEST"), ex.Message));
             }
             finally
             {
@@ -229,7 +230,7 @@ namespace HangmanGameWPF
 
             if (selectedRequest == null)
             {
-                SetStatus("Seleccione una solicitud recibida.");
+                SetStatus(ClientLocalizer.Get("ERROR_SELECT_PENDING_REQUEST"));
                 return;
             }
 
@@ -246,7 +247,7 @@ namespace HangmanGameWPF
 
             if (selectedRequest == null)
             {
-                SetStatus("Seleccione una solicitud recibida.");
+                SetStatus(ClientLocalizer.Get("ERROR_SELECT_PENDING_REQUEST"));
                 return;
             }
 
@@ -263,7 +264,7 @@ namespace HangmanGameWPF
 
             if (selectedRequest == null)
             {
-                SetStatus("Seleccione una solicitud enviada.");
+                SetStatus(ClientLocalizer.Get("ERROR_SELECT_SENT_REQUEST"));
                 return;
             }
 
@@ -303,7 +304,7 @@ namespace HangmanGameWPF
                     result = client.RejectFriendRequest(requestDto);
                 }
 
-                SetStatus(result?.Message ?? "Sin respuesta del servidor.");
+                SetStatus(result?.Message ?? ClientLocalizer.Get("ERROR_SERVER_EMPTY"));
 
                 if (result != null && result.Success)
                 {
@@ -312,7 +313,7 @@ namespace HangmanGameWPF
             }
             catch (Exception ex)
             {
-                SetStatus("Error procesando solicitud: " + ex.Message);
+                SetStatus(string.Format(ClientLocalizer.Get("ERROR_PROCESSING_REQUEST"), ex.Message));
             }
             finally
             {

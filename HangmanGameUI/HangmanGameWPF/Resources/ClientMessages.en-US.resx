@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ATTENTION_TITLE" xml:space="preserve">
+    <value>ATTENTION</value>
+  </data>
+  <data name="CHAT_HEADER" xml:space="preserve">
+    <value>&gt; CHAT</value>
+  </data>
+  <data name="DESCRIPTION_LABEL" xml:space="preserve">
+    <value>DESCRIPTION:</value>
+  </data>
+  <data name="EMAIL_LABEL" xml:space="preserve">
+    <value>EMAIL:</value>
+  </data>
+  <data name="ERROR_COMPLETE_FIELDS" xml:space="preserve">
+    <value>! ERROR: Complete all fields.</value>
+  </data>
+  <data name="ERROR_CONNECTION" xml:space="preserve">
+    <value>! ERROR: Could not connect to the server.</value>
+  </data>
+  <data name="ERROR_BIRTH_DATE_INVALID" xml:space="preserve">
+    <value>! Enter a valid birth date.</value>
+  </data>
+  <data name="ERROR_CODE_REQUIRED" xml:space="preserve">
+    <value>! ERROR: Enter the code.</value>
+  </data>
+  <data name="ERROR_CONFIRM_PASSWORD_REQUIRED" xml:space="preserve">
+    <value>! ERROR: Confirm the new password.</value>
+  </data>
+  <data name="ERROR_CREATE_GAME" xml:space="preserve">
+    <value>! Error creating game.</value>
+  </data>
+  <data name="ERROR_EMAIL_INVALID" xml:space="preserve">
+    <value>! Enter a valid email address.</value>
+  </data>
+  <data name="ERROR_EMAIL_REQUIRED" xml:space="preserve">
+    <value>! ERROR: Enter your email.</value>
+  </data>
+  <data name="ERROR_FULL_NAME_LENGTH" xml:space="preserve">
+    <value>! Name must be at least 3 characters.</value>
+  </data>
+  <data name="ERROR_FULL_NAME_REQUIRED" xml:space="preserve">
+    <value>! Full name is required.</value>
+  </data>
+  <data name="ERROR_FRIEND_EMAIL_REQUIRED" xml:space="preserve">
+    <value>Enter your friend's email.</value>
+  </data>
+  <data name="ERROR_FRIEND_LOAD" xml:space="preserve">
+    <value>Could not load friends.</value>
+  </data>
+  <data name="ERROR_FRIEND_LOAD_EXCEPTION" xml:space="preserve">
+    <value>Error loading friends: {0}</value>
+  </data>
+  <data name="ERROR_JOIN_GAME" xml:space="preserve">
+    <value>Error joining game.</value>
+  </data>
+  <data name="ERROR_JOIN_GAME_FALLBACK" xml:space="preserve">
+    <value>Could not join the game.</value>
+  </data>
+  <data name="ERROR_LOAD_CATEGORIES" xml:space="preserve">
+    <value>! Error loading categories from server.</value>
+  </data>
+  <data name="ERROR_LOAD_PENDING_REQUESTS" xml:space="preserve">
+    <value>Error loading received requests: {0}</value>
+  </data>
+  <data name="ERROR_LOAD_SENT_REQUESTS" xml:space="preserve">
+    <value>Error loading sent requests: {0}</value>
+  </data>
+  <data name="ERROR_NEW_PASSWORD_REQUIRED" xml:space="preserve">
+    <value>! ERROR: Enter the new password.</value>
+  </data>
+  <data name="ERROR_PASSWORD_LENGTH" xml:space="preserve">
+    <value>! Password must be at least 8 characters.</value>
+  </data>
+  <data name="ERROR_PASSWORD_MISMATCH" xml:space="preserve">
+    <value>! Passwords do not match.</value>
+  </data>
+  <data name="ERROR_PASSWORD_REQUIRED" xml:space="preserve">
+    <value>! Enter a password.</value>
+  </data>
+  <data name="ERROR_PHONE_REQUIRED" xml:space="preserve">
+    <value>! Phone cannot be empty.</value>
+  </data>
+  <data name="ERROR_PROCESSING_REQUEST" xml:space="preserve">
+    <value>Error processing request: {0}</value>
+  </data>
+  <data name="ERROR_REMOVE_FRIEND" xml:space="preserve">
+    <value>Error removing friend: {0}</value>
+  </data>
+  <data name="ERROR_REQUEST_PASSWORD_RESET" xml:space="preserve">
+    <value>Error sending code: {0}</value>
+  </data>
+  <data name="ERROR_RESEND_CODE" xml:space="preserve">
+    <value>Error resending code: {0}</value>
+  </data>
+  <data name="ERROR_RESET_PASSWORD" xml:space="preserve">
+    <value>Error changing password: {0}</value>
+  </data>
+  <data name="ERROR_SELECT_CATEGORY_WORD" xml:space="preserve">
+    <value>! Select a category and a word.</value>
+  </data>
+  <data name="ERROR_SELECT_FRIEND" xml:space="preserve">
+    <value>Select a friend to remove.</value>
+  </data>
+  <data name="ERROR_SELECT_PENDING_REQUEST" xml:space="preserve">
+    <value>Select a received request.</value>
+  </data>
+  <data name="ERROR_SELECT_SENT_REQUEST" xml:space="preserve">
+    <value>Select a sent request.</value>
+  </data>
+  <data name="ERROR_SEND_CODE_PREFIX" xml:space="preserve">
+    <value>Could not send the code: {0}</value>
+  </data>
+  <data name="ERROR_SEND_FRIEND_REQUEST" xml:space="preserve">
+    <value>Error sending request: {0}</value>
+  </data>
+  <data name="ERROR_VERIFY_EMAIL" xml:space="preserve">
+    <value>Error verifying email: {0}</value>
+  </data>
+  <data name="ERROR_PROCESSING" xml:space="preserve">
+    <value>Error processing request.</value>
+  </data>
+  <data name="ERROR_SERVER_EMPTY" xml:space="preserve">
+    <value>No response from server</value>
+  </data>
+  <data name="FOOTER_CLICK_LETTER" xml:space="preserve">
+    <value>(C) 2024 HANGMAN CORP  |  CLICK A LETTER TO PLAY</value>
+  </data>
+  <data name="FOOTER_RIGHTS" xml:space="preserve">
+    <value>(C) 2024 HANGMAN CORP  |  ALL RIGHTS RESERVED  |  BUILD 1.0.0</value>
+  </data>
+  <data name="FORGOT_PASSWORD_BUTTON" xml:space="preserve">
+    <value>[ FORGOT PASSWORD ]</value>
+  </data>
+  <data name="GAME_AVAILABLE" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  <data name="GAME_CATEGORY_LABEL" xml:space="preserve">
+    <value>CATEGORY:</value>
+  </data>
+  <data name="GAME_CORRECT" xml:space="preserve">
+    <value>Correct</value>
+  </data>
+  <data name="GAME_CREATED_WAITING" xml:space="preserve">
+    <value>&gt; Game created. Waiting for a challenger to join...</value>
+  </data>
+  <data name="GAME_GUESS_WORD" xml:space="preserve">
+    <value>&gt; GUESS THE WORD:</value>
+  </data>
+  <data name="GAME_INCORRECT" xml:space="preserve">
+    <value>Incorrect</value>
+  </data>
+  <data name="GAME_KEYBOARD" xml:space="preserve">
+    <value>KEYBOARD:</value>
+  </data>
+  <data name="GAME_LENGTH" xml:space="preserve">
+    <value>Letters: {0}</value>
+  </data>
+  <data name="GAME_LIVES" xml:space="preserve">
+    <value>LIVES: {0} / 6</value>
+  </data>
+  <data name="GAME_LOSE_TITLE" xml:space="preserve">
+    <value>YOU LOST</value>
+  </data>
+  <data name="GAME_PLAYER_JOINED" xml:space="preserve">
+    <value>{0} joined. The game begins!</value>
+  </data>
+  <data name="GAME_PLAYER_JOINED_CHAT" xml:space="preserve">
+    <value>{0} joined the game!</value>
+  </data>
+  <data name="GAME_PLAYER_LABEL" xml:space="preserve">
+    <value>PLAYER:</value>
+  </data>
+  <data name="GAME_ROLE_CHALLENGER" xml:space="preserve">
+    <value>ROLE: CHALLENGER (guess the word)</value>
+  </data>
+  <data name="GAME_ROLE_CREATOR" xml:space="preserve">
+    <value>ROLE: CREATOR (waiting for challenger)</value>
+  </data>
+  <data name="GAME_SEND" xml:space="preserve">
+    <value>[ SEND ]</value>
+  </data>
+  <data name="GAME_SURRENDER" xml:space="preserve">
+    <value>[ SURRENDER ]</value>
+  </data>
+  <data name="GAME_SURRENDER_CONFIRM" xml:space="preserve">
+    <value>Are you sure you want to surrender?
+You will lose 3 points.</value>
+  </data>
+  <data name="GAME_SURRENDER_TITLE" xml:space="preserve">
+    <value>SURRENDER</value>
+  </data>
+  <data name="GAME_SYSTEM" xml:space="preserve">
+    <value>SYSTEM</value>
+  </data>
+  <data name="GAME_TITLE_BAR" xml:space="preserve">
+    <value>[ HANGMAN TERMINAL  v1.0 ]  --  GAME IN PROGRESS</value>
+  </data>
+  <data name="GAME_WINDOW_CLOSE_CONFIRM" xml:space="preserve">
+    <value>Close the window? This will count as leaving the game.</value>
+  </data>
+  <data name="GAME_WIN_TITLE" xml:space="preserve">
+    <value>YOU WON!</value>
+  </data>
+  <data name="GAME_WRONG_LETTERS" xml:space="preserve">
+    <value>WRONG LETTERS:</value>
+  </data>
+  <data name="HINT_FORMAT" xml:space="preserve">
+    <value>&gt; Hint: {0}</value>
+  </data>
+  <data name="LANGUAGE_LABEL" xml:space="preserve">
+    <value>LANGUAGE:</value>
+  </data>
+  <data name="LEADERBOARD_LOAD_ERROR" xml:space="preserve">
+    <value>Error loading leaderboard: {0}</value>
+  </data>
+  <data name="LEADERBOARD_NOT_FOUND" xml:space="preserve">
+    <value>Your position was not found in the ranking.</value>
+  </data>
+  <data name="LEADERBOARD_PLAYER_FORMAT" xml:space="preserve">
+    <value>#{0}  {1}  |  Score: {2}</value>
+  </data>
+  <data name="LEADERBOARD_NO_RESPONSE" xml:space="preserve">
+    <value>No response was received from the server.</value>
+  </data>
+  <data name="LOGIN_BUTTON" xml:space="preserve">
+    <value>[ ENTER SYSTEM ]</value>
+  </data>
+  <data name="LOGIN_NO_ACCOUNT" xml:space="preserve">
+    <value>No account?  </value>
+  </data>
+  <data name="LOGIN_TITLE" xml:space="preserve">
+    <value>&gt; LOGIN</value>
+  </data>
+  <data name="LOGIN_TITLE_BAR" xml:space="preserve">
+    <value>[ HANGMAN TERMINAL  v1.0 ]  --  AUTHENTICATION SYSTEM</value>
+  </data>
+  <data name="LOGIN_WAITING" xml:space="preserve">
+    <value>[ WAITING FOR PLAYER... ]</value>
+  </data>
+  <data name="MAIN_TITLE_BAR" xml:space="preserve">
+    <value>[ HANGMAN GAME  v1.0 ]  --  PLAYER: {0}</value>
+  </data>
+  <data name="MAIN_WELCOME" xml:space="preserve">
+    <value>&gt; WELCOME, {0}!</value>
+  </data>
+  <data name="PASSWORD_LABEL" xml:space="preserve">
+    <value>PASSWORD:</value>
+  </data>
+  <data name="PASSWORD_RESET_SENT_TO" xml:space="preserve">
+    <value>Code sent to: {0}</value>
+  </data>
+  <data name="PASSWORD_UPDATED" xml:space="preserve">
+    <value>Password updated successfully.</value>
+  </data>
+  <data name="PLAYER_FALLBACK" xml:space="preserve">
+    <value>PLAYER</value>
+  </data>
+  <data name="PROFILE_SAVE_SUCCESS" xml:space="preserve">
+    <value>&gt; Changes saved successfully.</value>
+  </data>
+  <data name="PROGRESS_LABEL" xml:space="preserve">
+    <value>PROGRESS  [ {0}% ]</value>
+  </data>
+  <data name="RECOVERY_TITLE" xml:space="preserve">
+    <value>Recovery</value>
+  </data>
+  <data name="REGISTER_BUTTON" xml:space="preserve">
+    <value>[ REGISTER ]</value>
+  </data>
+  <data name="REGISTER_SUCCESS" xml:space="preserve">
+    <value>&gt; Account created! You can now log in. Verify your email from PROFILE to enable recovery.</value>
+  </data>
+  <data name="REMOVE_FRIEND_CONFIRM" xml:space="preserve">
+    <value>Remove {0} from your friends?</value>
+  </data>
+  <data name="REMOVE_FRIEND_TITLE" xml:space="preserve">
+    <value>Confirm removal</value>
+  </data>
+  <data name="SCORE_LOST" xml:space="preserve">
+    <value>LOST</value>
+  </data>
+  <data name="SCORE_PENALIZED" xml:space="preserve">
+    <value>PENALIZED</value>
+  </data>
+  <data name="SCORE_WON" xml:space="preserve">
+    <value>WON</value>
+  </data>
+  <data name="VERIFICATION_TITLE" xml:space="preserve">
+    <value>Verification</value>
+  </data>
+  <data name="VERIFY_BUTTON" xml:space="preserve">
+    <value>[ VERIFY ]</value>
+  </data>
+  <data name="VERIFIED_BUTTON" xml:space="preserve">
+    <value>[ VERIFIED ]</value>
+  </data>
+  <data name="EMAIL_VERIFIED" xml:space="preserve">
+    <value>Email verified successfully.</value>
+  </data>
+  <data name="EMAIL_VERIFIED_STATUS" xml:space="preserve">
+    <value>VERIFIED - RECOVERY ENABLED</value>
+  </data>
+  <data name="EMAIL_PENDING_STATUS" xml:space="preserve">
+    <value>PENDING - RECOVERY BLOCKED</value>
+  </data>
+  <data name="EMAIL_VERIFICATION_SENT_TO" xml:space="preserve">
+    <value>A 6-digit code was sent to: {0}</value>
+  </data>
+  <data name="AUTH_MODULE_FOOTER" xml:space="preserve">
+    <value>HANGMAN GAME AUTH MODULE</value>
+  </data>
+  <data name="MAIN_MENU_GAME_LIST" xml:space="preserve">
+    <value>GAME LIST</value>
+  </data>
+  <data name="FULL_NAME_LABEL" xml:space="preserve">
+    <value>FULL NAME:</value>
+  </data>
+  <data name="VERIFY_EMAIL_TITLE" xml:space="preserve">
+    <value>&amp;gt; VERIFY EMAIL</value>
+  </data>
+  <data name="REMOVE_BUTTON" xml:space="preserve">
+    <value>[ REMOVE ]</value>
+  </data>
+  <data name="REFRESH_BUTTON" xml:space="preserve">
+    <value>[ REFRESH ]</value>
+  </data>
+  <data name="SEND_CODE_BUTTON" xml:space="preserve">
+    <value>[ SEND CODE ]</value>
+  </data>
+  <data name="GRID_RESULT" xml:space="preserve">
+    <value>  RESULT</value>
+  </data>
+  <data name="EDIT_PROFILE_BUTTON" xml:space="preserve">
+    <value>[ EDIT PROFILE ]</value>
+  </data>
+  <data name="LEADERBOARD_SUBTITLE" xml:space="preserve">
+    <value>Global player ranking ordered by score</value>
+  </data>
+  <data name="PROFILE_TITLE" xml:space="preserve">
+    <value>&amp;gt; PROFILE</value>
+  </data>
+  <data name="MAIN_MENU_SCORE_DESC" xml:space="preserve">
+    <value>Game history</value>
+  </data>
+  <data name="FOOTER_CREATE_GAME" xml:space="preserve">
+    <value>(C) 2024 HANGMAN CORP  |  CREATE NEW GAME</value>
+  </data>
+  <data name="SCORE_WON_STAT" xml:space="preserve">
+    <value>WON</value>
+  </data>
+  <data name="MAIN_MENU_PROFILE" xml:space="preserve">
+    <value>PROFILE</value>
+  </data>
+  <data name="REGISTERED_PLAYER_LABEL" xml:space="preserve">
+    <value>REGISTERED PLAYER</value>
+  </data>
+  <data name="FRIENDS_TITLE" xml:space="preserve">
+    <value>&amp;gt; FRIENDS MODULE</value>
+  </data>
+  <data name="BACK_TO_MENU_BUTTON" xml:space="preserve">
+    <value>[ &amp;lt;&amp;lt; BACK TO MENU ]</value>
+  </data>
+  <data name="NEW_GAME_BUTTON" xml:space="preserve">
+    <value>[ + NEW GAME ]</value>
+  </data>
+  <data name="REGISTER_TITLE" xml:space="preserve">
+    <value>&amp;gt; CREATE ACCOUNT</value>
+  </data>
+  <data name="RESET_TITLE_BAR" xml:space="preserve">
+    <value>[ RESET PASSWORD ]</value>
+  </data>
+  <data name="SCORE_TOTAL" xml:space="preserve">
+    <value>TOTAL</value>
+  </data>
+  <data name="SCORE_VICTORIES" xml:space="preserve">
+    <value>victories</value>
+  </data>
+  <data name="SCORE_GLOBAL" xml:space="preserve">
+    <value>global</value>
+  </data>
+  <data name="LEADERBOARD_POS" xml:space="preserve">
+    <value>POS</value>
+  </data>
+  <data name="GRID_CREATOR" xml:space="preserve">
+    <value>  CREATOR</value>
+  </data>
+  <data name="GRID_DATE" xml:space="preserve">
+    <value>  DATE</value>
+  </data>
+  <data name="FRIEND_EMAIL_LABEL" xml:space="preserve">
+    <value>FRIEND EMAIL:</value>
+  </data>
+  <data name="SCORE_TITLE_BAR" xml:space="preserve">
+    <value>[ HANGMAN TERMINAL  v1.0 ]  --  SCORE HISTORY</value>
+  </data>
+  <data name="GRID_EMAIL" xml:space="preserve">
+    <value>  EMAIL</value>
+  </data>
+  <data name="WORD_LABEL" xml:space="preserve">
+    <value>WORD:</value>
+  </data>
+  <data name="EMAIL_READONLY_LABEL" xml:space="preserve">
+    <value>EMAIL  (not editable):</value>
+  </data>
+  <data name="BACK_BUTTON" xml:space="preserve">
+    <value>[ &amp;lt;&amp;lt; BACK ]</value>
+  </data>
+  <data name="FRIENDS_TITLE_BAR" xml:space="preserve">
+    <value>[ FRIENDS TERMINAL ]  --  SOCIAL MODULE</value>
+  </data>
+  <data name="PROGRESS_INITIAL_LABEL" xml:space="preserve">
+    <value>PROGRESS  [ 0% ]</value>
+  </data>
+  <data name="GAMES_WON_LABEL" xml:space="preserve">
+    <value>GAMES WON</value>
+  </data>
+  <data name="CHANGE_PASSWORD_BUTTON" xml:space="preserve">
+    <value>[ CHANGE PASSWORD ]</value>
+  </data>
+  <data name="SCORE_TITLE" xml:space="preserve">
+    <value>&amp;gt; VIEW SCORE  /  GAME HISTORY</value>
+  </data>
+  <data name="GAMELIST_TITLE_BAR" xml:space="preserve">
+    <value>[ HANGMAN TERMINAL  v1.0 ]  --  GAME LIST</value>
+  </data>
+  <data name="GRID_WORD" xml:space="preserve">
+    <value>  WORD</value>
+  </data>
+  <data name="VERIFICATION_LABEL" xml:space="preserve">
+    <value>VERIFICATION</value>
+  </data>
+  <data name="MAIN_MENU_FRIENDS_DESC" xml:space="preserve">
+    <value>Requests and scores</value>
+  </data>
+  <data name="MY_FRIENDS_TITLE" xml:space="preserve">
+    <value>[ MY FRIENDS ]</value>
+  </data>
+  <data name="FORGOT_INSTRUCTIONS" xml:space="preserve">
+    <value>Enter your email. If it exists, a recovery code will be sent.</value>
+  </data>
+  <data name="READY_LABEL" xml:space="preserve">
+    <value>READY.</value>
+  </data>
+  <data name="FOOTER_PROFILE" xml:space="preserve">
+    <value>(C) 2024 HANGMAN CORP  |  USER PROFILE</value>
+  </data>
+  <data name="MAIN_MENU_PROFILE_DESC" xml:space="preserve">
+    <value>View and edit data</value>
+  </data>
+  <data name="LOADING_LABEL" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="SCORE_DEFEATS" xml:space="preserve">
+    <value>defeats</value>
+  </data>
+  <data name="CREATE_GAME_BUTTON" xml:space="preserve">
+    <value>[ CREATE GAME ]</value>
+  </data>
+  <data name="MAIN_MENU_LEADERBOARD_DESC" xml:space="preserve">
+    <value>Top 10 by score</value>
+  </data>
+  <data name="EMAIL_TITLE_LABEL" xml:space="preserve">
+    <value>EMAIL</value>
+  </data>
+  <data name="FOOTER_EMAIL_READONLY" xml:space="preserve">
+    <value>(C) 2024 HANGMAN CORP  |  EMAIL CANNOT BE MODIFIED</value>
+  </data>
+  <data name="LEADERBOARD_SCORE" xml:space="preserve">
+    <value>SCORE</value>
+  </data>
+  <data name="POINTS_EARNED_LABEL" xml:space="preserve">
+    <value>POINTS EARNED: </value>
+  </data>
+  <data name="EDIT_PROFILE_TITLE_BAR" xml:space="preserve">
+    <value>[ HANGMAN TERMINAL  v1.0 ]  --  EDIT PROFILE</value>
+  </data>
+  <data name="FOOTER_REGISTER" xml:space="preserve">
+    <value>(C) 2024 HANGMAN CORP  |  USER REGISTRATION</value>
+  </data>
+  <data name="CONFIRM_PASSWORD_LABEL" xml:space="preserve">
+    <value>CONFIRM PASSWORD:</value>
+  </data>
+  <data name="MAIN_MENU_LOGOUT" xml:space="preserve">
+    <value>LOG OUT</value>
+  </data>
+  <data name="BIRTH_DATE_LABEL" xml:space="preserve">
+    <value>BIRTH DATE:</value>
+  </data>
+  <data name="CREATE_GAME_TITLE_BAR" xml:space="preserve">
+    <value>[ HANGMAN TERMINAL  v1.0 ]  --  NEW GAME</value>
+  </data>
+  <data name="LEADERBOARD_HEADER" xml:space="preserve">
+    <value>&amp;gt; TOP 10 GLOBAL SCORE</value>
+  </data>
+  <data name="REJECT_BUTTON" xml:space="preserve">
+    <value>[ REJECT ]</value>
+  </data>
+  <data name="PROFILE_TITLE_BAR" xml:space="preserve">
+    <value>[ HANGMAN TERMINAL  v1.0 ]  --  USER PROFILE</value>
+  </data>
+  <data name="GRID_LETTERS" xml:space="preserve">
+    <value>  LETTERS</value>
+  </data>
+  <data name="FOOTER_SELECT_GAME" xml:space="preserve">
+    <value>(C) 2024 HANGMAN CORP  |  SELECT A GAME TO PLAY</value>
+  </data>
+  <data name="GRID_RIVAL" xml:space="preserve">
+    <value>  RIVAL</value>
+  </data>
+  <data name="CREATE_ACCOUNT_BUTTON" xml:space="preserve">
+    <value>[ CREATE ACCOUNT ]</value>
+  </data>
+  <data name="GRID_CATEGORY" xml:space="preserve">
+    <value>  CATEGORY</value>
+  </data>
+  <data name="CREATE_GAME_TITLE" xml:space="preserve">
+    <value>&amp;gt; GENERATE NEW GAME</value>
+  </data>
+  <data name="RESEND_CODE_BUTTON" xml:space="preserve">
+    <value>[ RESEND CODE ]</value>
+  </data>
+  <data name="VERIFY_EMAIL_INFO" xml:space="preserve">
+    <value>A 6-digit code was sent to your email.</value>
+  </data>
+  <data name="FOOTER_SCORE" xml:space="preserve">
+    <value>(C) 2024 HANGMAN CORP  |  SCORE HISTORY</value>
+  </data>
+  <data name="GAMES_PLAYED_LABEL" xml:space="preserve">
+    <value>GAMES PLAYED</value>
+  </data>
+  <data name="SEND_REQUEST_TITLE" xml:space="preserve">
+    <value>[ SEND REQUEST ]</value>
+  </data>
+  <data name="MAIN_MENU_SCORE" xml:space="preserve">
+    <value>VIEW SCORE</value>
+  </data>
+  <data name="FORGOT_TITLE_BAR" xml:space="preserve">
+    <value>[ PASSWORD RECOVERY ]</value>
+  </data>
+  <data name="LEADERBOARD_PLAYER" xml:space="preserve">
+    <value>PLAYER</value>
+  </data>
+  <data name="SENT_REQUESTS_TITLE" xml:space="preserve">
+    <value>[ SENT REQUESTS ]</value>
+  </data>
+  <data name="FOOTER_RIGHTS_SHORT" xml:space="preserve">
+    <value>(C) 2024 HANGMAN CORP  |  ALL RIGHTS RESERVED</value>
+  </data>
+  <data name="SCORE_GAMES" xml:space="preserve">
+    <value>games</value>
+  </data>
+  <data name="GAMELIST_TITLE" xml:space="preserve">
+    <value>&amp;gt; AVAILABLE GAMES</value>
+  </data>
+  <data name="FOOTER_GAME_OVER" xml:space="preserve">
+    <value>(C) 2024 HANGMAN CORP  |  GAME OVER</value>
+  </data>
+  <data name="DESCRIPTION_OPTIONAL_LABEL" xml:space="preserve">
+    <value>DESCRIPTION (optional):</value>
+  </data>
+  <data name="MAIN_MENU_LOGOUT_DESC" xml:space="preserve">
+    <value>Return to start</value>
+  </data>
+  <data name="GRID_POINTS" xml:space="preserve">
+    <value>  POINTS</value>
+  </data>
+  <data name="CANCEL_BUTTON" xml:space="preserve">
+    <value>[ CANCEL ]</value>
+  </data>
+  <data name="VERIFY_EMAIL_TITLE_BAR" xml:space="preserve">
+    <value>[ EMAIL VERIFICATION ]</value>
+  </data>
+  <data name="GRID_DESCRIPTION" xml:space="preserve">
+    <value>  DESCRIPTION</value>
+  </data>
+  <data name="GAME_RESULT_TITLE_BAR" xml:space="preserve">
+    <value>[ HANGMAN TERMINAL  v1.0 ]  --  GAME RESULT</value>
+  </data>
+  <data name="NEW_PASSWORD_LABEL" xml:space="preserve">
+    <value>NEW PASSWORD:</value>
+  </data>
+  <data name="MAIN_MENU_FRIENDS" xml:space="preserve">
+    <value>FRIENDS</value>
+  </data>
+  <data name="FRIENDS_SUBTITLE" xml:space="preserve">
+    <value>Send requests, accept friends, and check scores</value>
+  </data>
+  <data name="PHONE_LABEL" xml:space="preserve">
+    <value>PHONE:</value>
+  </data>
+  <data name="RECEIVED_REQUESTS_TITLE" xml:space="preserve">
+    <value>[ RECEIVED REQUESTS ]</value>
+  </data>
+  <data name="RESET_TITLE" xml:space="preserve">
+    <value>&amp;gt; NEW PASSWORD</value>
+  </data>
+  <data name="FORGOT_TITLE" xml:space="preserve">
+    <value>&amp;gt; RECOVER PASSWORD</value>
+  </data>
+  <data name="MAIN_MENU_GAME_LIST_DESC" xml:space="preserve">
+    <value>View and join games</value>
+  </data>
+  <data name="CONTINUE_BUTTON" xml:space="preserve">
+    <value>[ CONTINUE ]</value>
+  </data>
+  <data name="CANCEL_REQUEST_BUTTON" xml:space="preserve">
+    <value>[ CANCEL REQUEST ]</value>
+  </data>
+  <data name="SCORE_LOST_STAT" xml:space="preserve">
+    <value>LOST</value>
+  </data>
+  <data name="PLAY_SELECTED_BUTTON" xml:space="preserve">
+    <value>[ PLAY SELECTED &gt;&gt; ]</value>
+  </data>
+  <data name="SCORE_POINTS_STAT" xml:space="preserve">
+    <value>POINTS</value>
+  </data>
+  <data name="REGISTER_TITLE_BAR" xml:space="preserve">
+    <value>[ HANGMAN TERMINAL  v1.0 ]  --  NEW USER</value>
+  </data>
+  <data name="LEADERBOARD_TITLE_BAR" xml:space="preserve">
+    <value>[ LEADERBOARD TERMINAL ]  --  GLOBAL SCORE RANKING</value>
+  </data>
+  <data name="LEADERBOARD_CURRENT_PLAYER" xml:space="preserve">
+    <value>[ YOUR GLOBAL POSITION ]</value>
+  </data>
+  <data name="CODE_LABEL" xml:space="preserve">
+    <value>CODE:</value>
+  </data>
+  <data name="SAVE_CHANGES_BUTTON" xml:space="preserve">
+    <value>[ SAVE CHANGES ]</value>
+  </data>
+  <data name="EDIT_PROFILE_TITLE" xml:space="preserve">
+    <value>&amp;gt; EDIT INFORMATION</value>
+  </data>
+  <data name="ACCEPT_BUTTON" xml:space="preserve">
+    <value>[ ACCEPT ]</value>
+  </data>
+</root>

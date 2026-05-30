@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
+using HangmanGameWPF.Localization;
 using HangmanGameWPF.Services;
 
 namespace HangmanGameWPF
@@ -36,17 +37,17 @@ namespace HangmanGameWPF
 
                     if (score.WonGames != null)
                         foreach (var g in score.WonGames)
-                            entries.Add(new ScoreEntry(g.Word, g.OpponentName, "GANADO",
+                            entries.Add(new ScoreEntry(g.Word, g.OpponentName, ClientLocalizer.Get("SCORE_WON"),
                                 g.PointsEarned, g.GameDate.ToString("dd/MM/yy")));
 
                     if (score.LostGames != null)
                         foreach (var g in score.LostGames)
-                            entries.Add(new ScoreEntry(g.Word, g.OpponentName, "PERDIDO",
+                            entries.Add(new ScoreEntry(g.Word, g.OpponentName, ClientLocalizer.Get("SCORE_LOST"),
                                 g.PointsEarned, g.GameDate.ToString("dd/MM/yy")));
 
                     if (score.Penalties != null)
                         foreach (var p in score.Penalties)
-                            entries.Add(new ScoreEntry(p.Word, p.Reason, "PENALIZADO",
+                            entries.Add(new ScoreEntry(p.Word, p.Reason, ClientLocalizer.Get("SCORE_PENALIZED"),
                                 -p.PointsDeducted, p.PenaltyDate.ToString("dd/MM/yy")));
 
                     ScoreGrid.ItemsSource = entries;

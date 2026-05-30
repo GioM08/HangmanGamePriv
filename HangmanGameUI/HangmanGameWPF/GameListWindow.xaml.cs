@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
+using HangmanGameWPF.Localization;
 using HangmanGameWPF.Services;
 
 namespace HangmanGameWPF
@@ -102,14 +103,14 @@ namespace HangmanGameWPF
                     }
                     else
                     {
-                        MessageBox.Show(result.Message ?? "No se pudo unir a la partida.", "ERROR",
+                        MessageBox.Show(result.Message ?? ClientLocalizer.Get("ERROR_JOIN_GAME_FALLBACK"), "ERROR",
                             MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
                 catch (Exception ex)
                 {
                     Debug.WriteLine($"[GameList] Join error: {ex.Message}");
-                    MessageBox.Show("Error al unirse a la partida.", "ERROR", MessageBoxButton.OK);
+                    MessageBox.Show(ClientLocalizer.Get("ERROR_JOIN_GAME"), "ERROR", MessageBoxButton.OK);
                 }
             }
         }

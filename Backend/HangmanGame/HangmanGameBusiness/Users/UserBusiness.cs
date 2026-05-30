@@ -1,7 +1,8 @@
-﻿using System;
+using System;
+using HangmanGameBusiness.Localization;
+using HangmanGameBusiness.Security;
 using HangmanGameData.Repositories;
 using HangmanGameEntities.Dtos;
-using HangmanGameBusiness.Security;
 
 namespace HangmanGameBusiness.Users
 {
@@ -21,143 +22,94 @@ namespace HangmanGameBusiness.Users
 
         public OperationResultDto RegisterUser(RegisterUserDto registerUserDto)
         {
-            if (registerUserDto == null)
+            try
             {
-                return new OperationResultDto
+                if (registerUserDto == null)
                 {
-                    Success = false,
-                    Message = "User data is required."
-                };
-            }
+                    return Fail(MessageKeys.UserDataRequired);
+                }
 
-            if (string.IsNullOrWhiteSpace(registerUserDto.FullName))
-            {
-                return new OperationResultDto
+                if (string.IsNullOrWhiteSpace(registerUserDto.FullName))
                 {
-                    Success
-                    
-                    
-                    = false,
-                    Message = "Full name is required."
-                };
-            }
+                    return Fail(MessageKeys.FullNameRequired);
+                }
 
-            if (registerUserDto.BirthDate >= DateTime.Today)
-            {
-                return new OperationResultDto
+                if (registerUserDto.BirthDate >= DateTime.Today)
                 {
-                    Success = false,
-                    Message = "Birth date is not valid."
-                };
-            }
+                    return Fail(MessageKeys.BirthDateInvalid);
+                }
 
-            if (string.IsNullOrWhiteSpace(registerUserDto.PhoneNumber))
-            {
-                return new OperationResultDto
+                if (string.IsNullOrWhiteSpace(registerUserDto.PhoneNumber))
                 {
-                    Success = false,
-                    Message = "Phone number is required."
-                };
-            }
+                    return Fail(MessageKeys.PhoneNumberRequired);
+                }
 
-            if (string.IsNullOrWhiteSpace(registerUserDto.Email))
-            {
-                return new OperationResultDto
+                if (string.IsNullOrWhiteSpace(registerUserDto.Email))
                 {
-                    Success = false,
-                    Message = "Email is required."
-                };
-            }
+                    return Fail(MessageKeys.EmailRequired);
+                }
 
-            if (string.IsNullOrWhiteSpace(registerUserDto.Password))
-            {
-                return new OperationResultDto
+                if (string.IsNullOrWhiteSpace(registerUserDto.Password))
                 {
-                    Success = false,
-                    Message = "Password is required."
-                };
-            }
+                    return Fail(MessageKeys.PasswordRequired);
+                }
 
-            if (userRepository.EmailExists(registerUserDto.Email))
-            {
-                return new OperationResultDto
+                if (userRepository.EmailExists(registerUserDto.Email))
                 {
-                    Success = false,
-                    Message = "Email already exists."
-                };
+                    return Fail(MessageKeys.EmailAlreadyExists);
+                }
+
+                string passwordHash = PasswordHasher.HashPassword(registerUserDto.Password);
+                UserDto createdUser = userRepository.CreateUser(registerUserDto, passwordHash);
+
+                return Success(MessageKeys.UserRegisteredSuccessfully, createdUser);
             }
-
-            string passwordHash = PasswordHasher.HashPassword(registerUserDto.Password);
-
-            UserDto createdUser = userRepository.CreateUser(registerUserDto, passwordHash);
-
-            return new OperationResultDto
+            catch (Exception)
             {
-                Success = true,
-                Message = "User registered successfully.",
-                User = createdUser
-            };
+                return Fail(MessageKeys.UnexpectedError);
+            }
         }
 
         public OperationResultDto Login(LoginDto loginDto)
         {
-            if (loginDto == null)
+            try
             {
-                return new OperationResultDto
+                if (loginDto == null)
                 {
-                    Success = false,
-                    Message = "Login data is required."
-                };
-            }
+                    return Fail(MessageKeys.LoginDataRequired);
+                }
 
-            if (string.IsNullOrWhiteSpace(loginDto.Email))
-            {
-                return new OperationResultDto
+                if (string.IsNullOrWhiteSpace(loginDto.Email))
                 {
-                    Success = false,
-                    Message = "Email is required."
-                };
-            }
+                    return Fail(MessageKeys.EmailRequired);
+                }
 
-            if (string.IsNullOrWhiteSpace(loginDto.Password))
-            {
-                return new OperationResultDto
+                if (string.IsNullOrWhiteSpace(loginDto.Password))
                 {
-                    Success = false,
-                    Message = "Password is required."
-                };
-            }
+                    return Fail(MessageKeys.PasswordRequired);
+                }
 
-            UserDto user = userRepository.GetActiveUserByEmail(loginDto.Email);
+                UserDto user = userRepository.GetActiveUserByEmail(loginDto.Email);
 
-            if (user == null)
-            {
-                return new OperationResultDto
+                if (user == null)
                 {
-                    Success = false,
-                    Message = "User not found."
-                };
-            }
+                    return Fail(MessageKeys.UserNotFound);
+                }
 
-            string storedPassword = userRepository.GetPasswordHashByEmail(loginDto.Email);
+                string storedPassword = userRepository.GetPasswordHashByEmail(loginDto.Email);
+                bool passwordIsValid = PasswordHasher.VerifyPassword(loginDto.Password, storedPassword);
 
-            bool passwordIsValid = PasswordHasher.VerifyPassword(loginDto.Password, storedPassword);
-
-            if (!passwordIsValid)
-            {
-                return new OperationResultDto
+                if (!passwordIsValid)
                 {
-                    Success = false,
-                    Message = "Invalid password."
-                };
-            }
+                    return Fail(MessageKeys.InvalidPassword);
+                }
 
-            return new OperationResultDto
+                return Success(MessageKeys.LoginSuccessful, user);
+            }
+            catch (Exception)
             {
-                Success = true,
-                Message = "Login successful.",
-                User = user
-            };
+                return Fail(MessageKeys.UnexpectedError);
+            }
         }
 
         public OperationResultDto GetUserProfile(int userId)
@@ -166,38 +118,21 @@ namespace HangmanGameBusiness.Users
             {
                 if (userId <= 0)
                 {
-                    return new OperationResultDto
-                    {
-                        Success = false,
-                        Message = "User id is not valid."
-                    };
+                    return Fail(MessageKeys.UserIdInvalid);
                 }
 
                 UserDto user = userRepository.GetUserById(userId);
 
                 if (user == null)
                 {
-                    return new OperationResultDto
-                    {
-                        Success = false,
-                        Message = "User not found."
-                    };
+                    return Fail(MessageKeys.UserNotFound);
                 }
 
-                return new OperationResultDto
-                {
-                    Success = true,
-                    Message = "User profile retrieved successfully.",
-                    User = user
-                };
+                return Success(MessageKeys.UserProfileRetrievedSuccessfully, user);
             }
             catch (Exception)
             {
-                return new OperationResultDto
-                {
-                    Success = false,
-                    Message = "An unexpected error occurred while getting the user profile."
-                };
+                return Fail(MessageKeys.UnexpectedError);
             }
         }
 
@@ -207,75 +142,63 @@ namespace HangmanGameBusiness.Users
             {
                 if (updateUserProfileDto == null)
                 {
-                    return new OperationResultDto
-                    {
-                        Success = false,
-                        Message = "User profile data is required."
-                    };
+                    return Fail(MessageKeys.UserProfileDataRequired);
                 }
 
                 if (updateUserProfileDto.UserId <= 0)
                 {
-                    return new OperationResultDto
-                    {
-                        Success = false,
-                        Message = "User id is not valid."
-                    };
+                    return Fail(MessageKeys.UserIdInvalid);
                 }
 
                 if (string.IsNullOrWhiteSpace(updateUserProfileDto.FullName))
                 {
-                    return new OperationResultDto
-                    {
-                        Success = false,
-                        Message = "Full name is required."
-                    };
+                    return Fail(MessageKeys.FullNameRequired);
                 }
 
                 if (updateUserProfileDto.BirthDate >= DateTime.Today)
                 {
-                    return new OperationResultDto
-                    {
-                        Success = false,
-                        Message = "Birth date is not valid."
-                    };
+                    return Fail(MessageKeys.BirthDateInvalid);
                 }
 
                 if (string.IsNullOrWhiteSpace(updateUserProfileDto.PhoneNumber))
                 {
-                    return new OperationResultDto
-                    {
-                        Success = false,
-                        Message = "Phone number is required."
-                    };
+                    return Fail(MessageKeys.PhoneNumberRequired);
                 }
 
                 UserDto updatedUser = userRepository.UpdateUserProfile(updateUserProfileDto);
 
                 if (updatedUser == null)
                 {
-                    return new OperationResultDto
-                    {
-                        Success = false,
-                        Message = "User not found."
-                    };
+                    return Fail(MessageKeys.UserNotFound);
                 }
 
-                return new OperationResultDto
-                {
-                    Success = true,
-                    Message = "User profile updated successfully.",
-                    User = updatedUser
-                };
+                return Success(MessageKeys.UserProfileUpdatedSuccessfully, updatedUser);
             }
             catch (Exception)
             {
-                return new OperationResultDto
-                {
-                    Success = false,
-                    Message = "An unexpected error occurred while updating the user profile."
-                };
+                return Fail(MessageKeys.UnexpectedError);
             }
+        }
+
+        private OperationResultDto Success(string messageKey, UserDto user = null)
+        {
+            return new OperationResultDto
+            {
+                Success = true,
+                MessageKey = messageKey,
+                Message = MessageLocalizer.Get(messageKey),
+                User = user
+            };
+        }
+
+        private OperationResultDto Fail(string messageKey)
+        {
+            return new OperationResultDto
+            {
+                Success = false,
+                MessageKey = messageKey,
+                Message = MessageLocalizer.Get(messageKey)
+            };
         }
     }
 }

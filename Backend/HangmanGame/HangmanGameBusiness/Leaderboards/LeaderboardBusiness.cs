@@ -1,4 +1,5 @@
 using System;
+using HangmanGameBusiness.Localization;
 using HangmanGameData.Repositories;
 using HangmanGameData.Repositories.Interfaces;
 using HangmanGameEntities.Dtos;
@@ -30,34 +31,36 @@ namespace HangmanGameBusiness.Leaderboards
             {
                 if (currentUserId <= 0)
                 {
-                    return Fail("Current user id is not valid.");
+                    return Fail(MessageKeys.CurrentUserIdInvalid);
                 }
 
                 if (!leaderboardRepository.UserExists(currentUserId))
                 {
-                    return Fail("Current user was not found.");
+                    return Fail(MessageKeys.CurrentUserNotFound);
                 }
 
                 return new LeaderboardOperationResultDto
                 {
                     Success = true,
-                    Message = "Leaderboard retrieved successfully.",
+                    MessageKey = MessageKeys.LeaderboardRetrievedSuccessfully,
+                    Message = MessageLocalizer.Get(MessageKeys.LeaderboardRetrievedSuccessfully),
                     TopPlayers = leaderboardRepository.GetTopScoreLeaderboard(),
                     CurrentPlayerRank = leaderboardRepository.GetPlayerScoreRank(currentUserId)
                 };
             }
             catch (Exception)
             {
-                return Fail("An unexpected error occurred while getting the leaderboard.");
+                return Fail(MessageKeys.UnexpectedError);
             }
         }
 
-        private LeaderboardOperationResultDto Fail(string message)
+        private LeaderboardOperationResultDto Fail(string messageKey)
         {
             return new LeaderboardOperationResultDto
             {
                 Success = false,
-                Message = message
+                MessageKey = messageKey,
+                Message = MessageLocalizer.Get(messageKey)
             };
         }
     }

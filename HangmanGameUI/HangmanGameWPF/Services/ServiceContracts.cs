@@ -25,6 +25,7 @@ namespace HangmanGameWPF.Services
     [DataContract(Namespace = "http://schemas.datacontract.org/2004/07/HangmanGameEntities.Dtos")] public class OperationResultDto
     {
         [DataMember] public bool Success { get; set; }
+        [DataMember] public string MessageKey { get; set; }
         [DataMember] public string Message { get; set; }
         [DataMember] public UserDto User { get; set; }
     }
@@ -115,6 +116,7 @@ namespace HangmanGameWPF.Services
     [DataContract(Namespace = "http://schemas.datacontract.org/2004/07/HangmanGameEntities.Dtos")] public class GameOperationResultDto
     {
         [DataMember] public bool Success { get; set; }
+        [DataMember] public string MessageKey { get; set; }
         [DataMember] public string Message { get; set; }
         [DataMember] public GameDto Game { get; set; }
         [DataMember] public GameStateDto GameState { get; set; }
@@ -204,6 +206,7 @@ namespace HangmanGameWPF.Services
     public class FriendOperationResultDto
     {
         [DataMember] public bool Success { get; set; }
+        [DataMember] public string MessageKey { get; set; }
         [DataMember] public string Message { get; set; }
 
         [DataMember] public FriendRequestDto FriendRequest { get; set; }
@@ -242,6 +245,9 @@ namespace HangmanGameWPF.Services
     {
         [DataMember]
         public bool Success { get; set; }
+
+        [DataMember]
+        public string MessageKey { get; set; }
 
         [DataMember]
         public string Message { get; set; }
@@ -288,6 +294,9 @@ namespace HangmanGameWPF.Services
     {
         [DataMember]
         public bool Success { get; set; }
+
+        [DataMember]
+        public string MessageKey { get; set; }
 
         [DataMember]
         public string Message { get; set; }

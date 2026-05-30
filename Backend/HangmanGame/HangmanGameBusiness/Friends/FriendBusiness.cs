@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using HangmanGameBusiness.Localization;
 using HangmanGameData.Repositories;
 using HangmanGameData.Repositories.Interfaces;
 using HangmanGameEntities.Dtos;
@@ -20,7 +21,7 @@ namespace HangmanGameBusiness.Friends
         {
             if (friendRepository == null)
             {
-                throw new ArgumentNullException(nameof(friendRepository));
+                throw new ArgumentNullException("friendRepository");
             }
 
             this.friendRepository = friendRepository;
@@ -30,55 +31,25 @@ namespace HangmanGameBusiness.Friends
         {
             try
             {
-                if (requestDto == null)
+                if (requestDto == null) return Fail(MessageKeys.FriendRequestDataRequired);
+                if (requestDto.SenderUserId <= 0) return Fail(MessageKeys.SenderUserIdInvalid);
+                if (requestDto.ReceiverUserId <= 0) return Fail(MessageKeys.ReceiverUserIdInvalid);
+                if (requestDto.SenderUserId == requestDto.ReceiverUserId) return Fail(MessageKeys.CannotSendRequestToYourself);
+                if (!friendRepository.UserExists(requestDto.SenderUserId)) return Fail(MessageKeys.SenderUserNotFound);
+                if (!friendRepository.UserExists(requestDto.ReceiverUserId)) return Fail(MessageKeys.ReceiverUserNotFound);
+
+                if (friendRepository.ActiveFriendRelationExists(requestDto.SenderUserId, requestDto.ReceiverUserId))
                 {
-                    return Fail("Friend request data is required.");
+                    return Fail(MessageKeys.FriendRequestAlreadyExists);
                 }
 
-                if (requestDto.SenderUserId <= 0)
-                {
-                    return Fail("Sender user id is not valid.");
-                }
-
-                if (requestDto.ReceiverUserId <= 0)
-                {
-                    return Fail("Receiver user id is not valid.");
-                }
-
-                if (requestDto.SenderUserId == requestDto.ReceiverUserId)
-                {
-                    return Fail("You cannot send a friend request to yourself.");
-                }
-
-                if (!friendRepository.UserExists(requestDto.SenderUserId))
-                {
-                    return Fail("Sender user was not found.");
-                }
-
-                if (!friendRepository.UserExists(requestDto.ReceiverUserId))
-                {
-                    return Fail("Receiver user was not found.");
-                }
-
-                if (friendRepository.ActiveFriendRelationExists(
-                    requestDto.SenderUserId,
-                    requestDto.ReceiverUserId))
-                {
-                    return Fail("A pending request or friendship already exists.");
-                }
-
-                FriendRequestDto createdRequest = friendRepository.SendFriendRequest(requestDto);
-
-                return new FriendOperationResultDto
-                {
-                    Success = true,
-                    Message = "Friend request sent successfully.",
-                    FriendRequest = createdRequest
-                };
+                return Success(
+                    MessageKeys.FriendRequestSentSuccessfully,
+                    friendRequest: friendRepository.SendFriendRequest(requestDto));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return Fail("Error: " + ex.Message);
+                return Fail(MessageKeys.UnexpectedError);
             }
         }
 
@@ -86,26 +57,16 @@ namespace HangmanGameBusiness.Friends
         {
             try
             {
-                if (userId <= 0)
-                {
-                    return Fail("User id is not valid.");
-                }
+                if (userId <= 0) return Fail(MessageKeys.UserIdInvalid);
+                if (!friendRepository.UserExists(userId)) return Fail(MessageKeys.UserNotFound);
 
-                if (!friendRepository.UserExists(userId))
-                {
-                    return Fail("User was not found.");
-                }
-
-                return new FriendOperationResultDto
-                {
-                    Success = true,
-                    Message = "Pending friend requests retrieved successfully.",
-                    FriendRequests = friendRepository.GetPendingFriendRequests(userId)
-                };
+                return Success(
+                    MessageKeys.PendingFriendRequestsRetrievedSuccessfully,
+                    friendRequests: friendRepository.GetPendingFriendRequests(userId));
             }
             catch (Exception)
             {
-                return Fail("An unexpected error occurred while getting pending friend requests.");
+                return Fail(MessageKeys.UnexpectedError);
             }
         }
 
@@ -113,26 +74,16 @@ namespace HangmanGameBusiness.Friends
         {
             try
             {
-                if (userId <= 0)
-                {
-                    return Fail("User id is not valid.");
-                }
+                if (userId <= 0) return Fail(MessageKeys.UserIdInvalid);
+                if (!friendRepository.UserExists(userId)) return Fail(MessageKeys.UserNotFound);
 
-                if (!friendRepository.UserExists(userId))
-                {
-                    return Fail("User was not found.");
-                }
-
-                return new FriendOperationResultDto
-                {
-                    Success = true,
-                    Message = "Sent friend requests retrieved successfully.",
-                    FriendRequests = friendRepository.GetSentFriendRequests(userId)
-                };
+                return Success(
+                    MessageKeys.SentFriendRequestsRetrievedSuccessfully,
+                    friendRequests: friendRepository.GetSentFriendRequests(userId));
             }
             catch (Exception)
             {
-                return Fail("An unexpected error occurred while getting sent friend requests.");
+                return Fail(MessageKeys.UnexpectedError);
             }
         }
 
@@ -140,28 +91,20 @@ namespace HangmanGameBusiness.Friends
         {
             try
             {
-                FriendOperationResultDto validationResult = ValidateResponseRequest(
-                    requestDto,
-                    mustBeReceiver: true);
+                FriendOperationResultDto validationResult = ValidateResponseRequest(requestDto, true);
 
                 if (!validationResult.Success)
                 {
                     return validationResult;
                 }
 
-                FriendRequestDto updatedRequest = friendRepository.AcceptFriendRequest(
-                    requestDto.FriendRequestId);
-
-                return new FriendOperationResultDto
-                {
-                    Success = true,
-                    Message = "Friend request accepted successfully.",
-                    FriendRequest = updatedRequest
-                };
+                return Success(
+                    MessageKeys.FriendRequestAcceptedSuccessfully,
+                    friendRequest: friendRepository.AcceptFriendRequest(requestDto.FriendRequestId));
             }
             catch (Exception)
             {
-                return Fail("An unexpected error occurred while accepting the friend request.");
+                return Fail(MessageKeys.UnexpectedError);
             }
         }
 
@@ -169,28 +112,20 @@ namespace HangmanGameBusiness.Friends
         {
             try
             {
-                FriendOperationResultDto validationResult = ValidateResponseRequest(
-                    requestDto,
-                    mustBeReceiver: true);
+                FriendOperationResultDto validationResult = ValidateResponseRequest(requestDto, true);
 
                 if (!validationResult.Success)
                 {
                     return validationResult;
                 }
 
-                FriendRequestDto updatedRequest = friendRepository.RejectFriendRequest(
-                    requestDto.FriendRequestId);
-
-                return new FriendOperationResultDto
-                {
-                    Success = true,
-                    Message = "Friend request rejected successfully.",
-                    FriendRequest = updatedRequest
-                };
+                return Success(
+                    MessageKeys.FriendRequestRejectedSuccessfully,
+                    friendRequest: friendRepository.RejectFriendRequest(requestDto.FriendRequestId));
             }
             catch (Exception)
             {
-                return Fail("An unexpected error occurred while rejecting the friend request.");
+                return Fail(MessageKeys.UnexpectedError);
             }
         }
 
@@ -198,28 +133,20 @@ namespace HangmanGameBusiness.Friends
         {
             try
             {
-                FriendOperationResultDto validationResult = ValidateResponseRequest(
-                    requestDto,
-                    mustBeReceiver: false);
+                FriendOperationResultDto validationResult = ValidateResponseRequest(requestDto, false);
 
                 if (!validationResult.Success)
                 {
                     return validationResult;
                 }
 
-                FriendRequestDto updatedRequest = friendRepository.CancelFriendRequest(
-                    requestDto.FriendRequestId);
-
-                return new FriendOperationResultDto
-                {
-                    Success = true,
-                    Message = "Friend request cancelled successfully.",
-                    FriendRequest = updatedRequest
-                };
+                return Success(
+                    MessageKeys.FriendRequestCancelledSuccessfully,
+                    friendRequest: friendRepository.CancelFriendRequest(requestDto.FriendRequestId));
             }
             catch (Exception)
             {
-                return Fail("An unexpected error occurred while cancelling the friend request.");
+                return Fail(MessageKeys.UnexpectedError);
             }
         }
 
@@ -227,35 +154,12 @@ namespace HangmanGameBusiness.Friends
         {
             try
             {
-                if (requestDto == null)
-                {
-                    return Fail("Remove friend data is required.");
-                }
-
-                if (requestDto.CurrentUserId <= 0)
-                {
-                    return Fail("Current user id is not valid.");
-                }
-
-                if (requestDto.FriendUserId <= 0)
-                {
-                    return Fail("Friend user id is not valid.");
-                }
-
-                if (requestDto.CurrentUserId == requestDto.FriendUserId)
-                {
-                    return Fail("You cannot remove yourself as a friend.");
-                }
-
-                if (!friendRepository.UserExists(requestDto.CurrentUserId))
-                {
-                    return Fail("Current user was not found.");
-                }
-
-                if (!friendRepository.UserExists(requestDto.FriendUserId))
-                {
-                    return Fail("Friend user was not found.");
-                }
+                if (requestDto == null) return Fail(MessageKeys.RemoveFriendDataRequired);
+                if (requestDto.CurrentUserId <= 0) return Fail(MessageKeys.CurrentUserIdInvalid);
+                if (requestDto.FriendUserId <= 0) return Fail(MessageKeys.FriendUserIdInvalid);
+                if (requestDto.CurrentUserId == requestDto.FriendUserId) return Fail(MessageKeys.CannotRemoveYourselfAsFriend);
+                if (!friendRepository.UserExists(requestDto.CurrentUserId)) return Fail(MessageKeys.CurrentUserNotFound);
+                if (!friendRepository.UserExists(requestDto.FriendUserId)) return Fail(MessageKeys.FriendUserNotFound);
 
                 FriendRequestDto acceptedRelation = friendRepository.GetAcceptedFriendRelation(
                     requestDto.CurrentUserId,
@@ -263,22 +167,16 @@ namespace HangmanGameBusiness.Friends
 
                 if (acceptedRelation == null)
                 {
-                    return Fail("Friendship was not found.");
+                    return Fail(MessageKeys.FriendshipNotFound);
                 }
 
-                FriendRequestDto removedRelation = friendRepository.RemoveFriend(
-                    acceptedRelation.FriendRequestId);
-
-                return new FriendOperationResultDto
-                {
-                    Success = true,
-                    Message = "Friend removed successfully.",
-                    FriendRequest = removedRelation
-                };
+                return Success(
+                    MessageKeys.FriendRemovedSuccessfully,
+                    friendRequest: friendRepository.RemoveFriend(acceptedRelation.FriendRequestId));
             }
             catch (Exception)
             {
-                return Fail("An unexpected error occurred while removing the friend.");
+                return Fail(MessageKeys.UnexpectedError);
             }
         }
 
@@ -286,127 +184,35 @@ namespace HangmanGameBusiness.Friends
         {
             try
             {
-                if (userId <= 0)
-                {
-                    return Fail("User id is not valid.");
-                }
+                if (userId <= 0) return Fail(MessageKeys.UserIdInvalid);
+                if (!friendRepository.UserExists(userId)) return Fail(MessageKeys.UserNotFound);
 
-                if (!friendRepository.UserExists(userId))
-                {
-                    return Fail("User was not found.");
-                }
-
-                return new FriendOperationResultDto
-                {
-                    Success = true,
-                    Message = "Friends retrieved successfully.",
-                    Friends = friendRepository.GetFriends(userId)
-                };
+                return Success(
+                    MessageKeys.FriendsRetrievedSuccessfully,
+                    friends: friendRepository.GetFriends(userId));
             }
             catch (Exception)
             {
-                return Fail("An unexpected error occurred while getting friends.");
+                return Fail(MessageKeys.UnexpectedError);
             }
-        }
-
-        private FriendOperationResultDto ValidateResponseRequest(
-            RespondFriendRequestDto requestDto,
-            bool mustBeReceiver)
-        {
-            if (requestDto == null)
-            {
-                return Fail("Friend request response data is required.");
-            }
-
-            if (requestDto.FriendRequestId <= 0)
-            {
-                return Fail("Friend request id is not valid.");
-            }
-
-            if (requestDto.CurrentUserId <= 0)
-            {
-                return Fail("Current user id is not valid.");
-            }
-
-            FriendRequestDto friendRequest = friendRepository.GetFriendRequestById(
-                requestDto.FriendRequestId);
-
-            if (friendRequest == null)
-            {
-                return Fail("Friend request was not found.");
-            }
-
-            if (friendRequest.Status != PendingStatus)
-            {
-                return Fail("Friend request is not pending.");
-            }
-
-            if (mustBeReceiver && friendRequest.ReceiverUserId != requestDto.CurrentUserId)
-            {
-                return Fail("Only the receiver can respond to this friend request.");
-            }
-
-            if (!mustBeReceiver && friendRequest.SenderUserId != requestDto.CurrentUserId)
-            {
-                return Fail("Only the sender can cancel this friend request.");
-            }
-
-            return new FriendOperationResultDto
-            {
-                Success = true,
-                Message = "Validation successful.",
-                FriendRequest = friendRequest
-            };
-        }
-
-        private FriendOperationResultDto Fail(string message)
-        {
-            return new FriendOperationResultDto
-            {
-                Success = false,
-                Message = message
-            };
         }
 
         public FriendOperationResultDto SendFriendRequestByEmail(SendFriendRequestByEmailDto requestDto)
         {
             try
             {
-                if (requestDto == null)
-                {
-                    return Fail("Friend request data is required.");
-                }
-
-                if (requestDto.SenderUserId <= 0)
-                {
-                    return Fail("Sender user id is not valid.");
-                }
-
-                if (string.IsNullOrWhiteSpace(requestDto.ReceiverEmail))
-                {
-                    return Fail("Receiver email is required.");
-                }
-
-                if (!friendRepository.UserExists(requestDto.SenderUserId))
-                {
-                    return Fail("Sender user was not found.");
-                }
+                if (requestDto == null) return Fail(MessageKeys.FriendRequestDataRequired);
+                if (requestDto.SenderUserId <= 0) return Fail(MessageKeys.SenderUserIdInvalid);
+                if (string.IsNullOrWhiteSpace(requestDto.ReceiverEmail)) return Fail(MessageKeys.ReceiverEmailRequired);
+                if (!friendRepository.UserExists(requestDto.SenderUserId)) return Fail(MessageKeys.SenderUserNotFound);
 
                 int receiverUserId = friendRepository.GetUserIdByEmail(requestDto.ReceiverEmail);
 
-                if (receiverUserId <= 0)
-                {
-                    return Fail("No user was found with that email.");
-                }
-
-                if (requestDto.SenderUserId == receiverUserId)
-                {
-                    return Fail("You cannot send a friend request to yourself.");
-                }
-
+                if (receiverUserId <= 0) return Fail(MessageKeys.NoUserFoundWithEmail);
+                if (requestDto.SenderUserId == receiverUserId) return Fail(MessageKeys.CannotSendRequestToYourself);
                 if (friendRepository.ActiveFriendRelationExists(requestDto.SenderUserId, receiverUserId))
                 {
-                    return Fail("A pending request or friendship already exists.");
+                    return Fail(MessageKeys.FriendRequestAlreadyExists);
                 }
 
                 SendFriendRequestDto sendFriendRequestDto = new SendFriendRequestDto
@@ -415,19 +221,59 @@ namespace HangmanGameBusiness.Friends
                     ReceiverUserId = receiverUserId
                 };
 
-                FriendRequestDto createdRequest = friendRepository.SendFriendRequest(sendFriendRequestDto);
-
-                return new FriendOperationResultDto
-                {
-                    Success = true,
-                    Message = "Friend request sent successfully.",
-                    FriendRequest = createdRequest
-                };
+                return Success(
+                    MessageKeys.FriendRequestSentSuccessfully,
+                    friendRequest: friendRepository.SendFriendRequest(sendFriendRequestDto));
             }
             catch (Exception)
             {
-                return Fail("An unexpected error occurred while sending the friend request.");
+                return Fail(MessageKeys.UnexpectedError);
             }
+        }
+
+        private FriendOperationResultDto ValidateResponseRequest(
+            RespondFriendRequestDto requestDto,
+            bool mustBeReceiver)
+        {
+            if (requestDto == null) return Fail(MessageKeys.FriendRequestResponseDataRequired);
+            if (requestDto.FriendRequestId <= 0) return Fail(MessageKeys.FriendRequestIdInvalid);
+            if (requestDto.CurrentUserId <= 0) return Fail(MessageKeys.CurrentUserIdInvalid);
+
+            FriendRequestDto friendRequest = friendRepository.GetFriendRequestById(requestDto.FriendRequestId);
+
+            if (friendRequest == null) return Fail(MessageKeys.FriendRequestNotFound);
+            if (friendRequest.Status != PendingStatus) return Fail(MessageKeys.FriendRequestNotPending);
+            if (mustBeReceiver && friendRequest.ReceiverUserId != requestDto.CurrentUserId) return Fail(MessageKeys.OnlyReceiverCanRespond);
+            if (!mustBeReceiver && friendRequest.SenderUserId != requestDto.CurrentUserId) return Fail(MessageKeys.OnlySenderCanCancel);
+
+            return Success(MessageKeys.ValidationSuccessful, friendRequest: friendRequest);
+        }
+
+        private FriendOperationResultDto Success(
+            string messageKey,
+            FriendRequestDto friendRequest = null,
+            System.Collections.Generic.List<FriendRequestDto> friendRequests = null,
+            System.Collections.Generic.List<FriendDto> friends = null)
+        {
+            return new FriendOperationResultDto
+            {
+                Success = true,
+                MessageKey = messageKey,
+                Message = MessageLocalizer.Get(messageKey),
+                FriendRequest = friendRequest,
+                FriendRequests = friendRequests,
+                Friends = friends
+            };
+        }
+
+        private FriendOperationResultDto Fail(string messageKey)
+        {
+            return new FriendOperationResultDto
+            {
+                Success = false,
+                MessageKey = messageKey,
+                Message = MessageLocalizer.Get(messageKey)
+            };
         }
     }
 }

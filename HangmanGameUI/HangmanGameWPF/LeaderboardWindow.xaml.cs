@@ -1,6 +1,7 @@
 using System;
 using System.Windows;
 using System.Windows.Input;
+using HangmanGameWPF.Localization;
 using HangmanGameWPF.Services;
 
 namespace HangmanGameWPF
@@ -40,7 +41,7 @@ namespace HangmanGameWPF
 
                 if (result == null)
                 {
-                    SetStatus("No se recibio respuesta del servidor.");
+                    SetStatus(ClientLocalizer.Get("LEADERBOARD_NO_RESPONSE"));
                     return;
                 }
 
@@ -55,20 +56,22 @@ namespace HangmanGameWPF
                 if (result.CurrentPlayerRank != null)
                 {
                     TxtCurrentPlayer.Text =
-                        $"#{result.CurrentPlayerRank.Position}  " +
-                        $"{result.CurrentPlayerRank.FullName}  |  " +
-                        $"Score: {result.CurrentPlayerRank.GlobalScore}";
+                        string.Format(
+                            ClientLocalizer.Get("LEADERBOARD_PLAYER_FORMAT"),
+                            result.CurrentPlayerRank.Position,
+                            result.CurrentPlayerRank.FullName,
+                            result.CurrentPlayerRank.GlobalScore);
                 }
                 else
                 {
-                    TxtCurrentPlayer.Text = "No se encontro tu posicion en el ranking.";
+                    TxtCurrentPlayer.Text = ClientLocalizer.Get("LEADERBOARD_NOT_FOUND");
                 }
 
                 SetStatus(result.Message);
             }
             catch (Exception ex)
             {
-                SetStatus("Error cargando leaderboard: " + ex.Message);
+                SetStatus(string.Format(ClientLocalizer.Get("LEADERBOARD_LOAD_ERROR"), ex.Message));
             }
             finally
             {

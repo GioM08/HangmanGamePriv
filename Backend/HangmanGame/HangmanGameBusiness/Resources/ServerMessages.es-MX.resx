@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="UNEXPECTED_ERROR" xml:space="preserve"><value>Ocurrio un error inesperado.</value></data>
+  <data name="USER_DATA_REQUIRED" xml:space="preserve"><value>Los datos del usuario son obligatorios.</value></data>
+  <data name="FULL_NAME_REQUIRED" xml:space="preserve"><value>El nombre completo es obligatorio.</value></data>
+  <data name="BIRTH_DATE_INVALID" xml:space="preserve"><value>La fecha de nacimiento no es valida.</value></data>
+  <data name="PHONE_NUMBER_REQUIRED" xml:space="preserve"><value>El numero telefonico es obligatorio.</value></data>
+  <data name="EMAIL_REQUIRED" xml:space="preserve"><value>El correo electronico es obligatorio.</value></data>
+  <data name="PASSWORD_REQUIRED" xml:space="preserve"><value>La contrasena es obligatoria.</value></data>
+  <data name="EMAIL_ALREADY_EXISTS" xml:space="preserve"><value>El correo electronico ya esta registrado.</value></data>
+  <data name="USER_REGISTERED_SUCCESSFULLY" xml:space="preserve"><value>Usuario registrado correctamente.</value></data>
+  <data name="LOGIN_DATA_REQUIRED" xml:space="preserve"><value>Los datos de inicio de sesion son obligatorios.</value></data>
+  <data name="USER_NOT_FOUND" xml:space="preserve"><value>Usuario no encontrado.</value></data>
+  <data name="INVALID_PASSWORD" xml:space="preserve"><value>Contrasena incorrecta.</value></data>
+  <data name="LOGIN_SUCCESSFUL" xml:space="preserve"><value>Inicio de sesion exitoso.</value></data>
+  <data name="USER_ID_INVALID" xml:space="preserve"><value>El id de usuario no es valido.</value></data>
+  <data name="USER_PROFILE_DATA_REQUIRED" xml:space="preserve"><value>Los datos del perfil son obligatorios.</value></data>
+  <data name="USER_PROFILE_RETRIEVED_SUCCESSFULLY" xml:space="preserve"><value>Perfil obtenido correctamente.</value></data>
+  <data name="USER_PROFILE_UPDATED_SUCCESSFULLY" xml:space="preserve"><value>Perfil actualizado correctamente.</value></data>
+  <data name="FRIEND_REQUEST_DATA_REQUIRED" xml:space="preserve"><value>Los datos de la solicitud de amistad son obligatorios.</value></data>
+  <data name="FRIEND_REQUEST_RESPONSE_DATA_REQUIRED" xml:space="preserve"><value>Los datos de respuesta de la solicitud son obligatorios.</value></data>
+  <data name="REMOVE_FRIEND_DATA_REQUIRED" xml:space="preserve"><value>Los datos para eliminar amigo son obligatorios.</value></data>
+  <data name="SENDER_USER_ID_INVALID" xml:space="preserve"><value>El id del remitente no es valido.</value></data>
+  <data name="RECEIVER_USER_ID_INVALID" xml:space="preserve"><value>El id del receptor no es valido.</value></data>
+  <data name="CURRENT_USER_ID_INVALID" xml:space="preserve"><value>El id del usuario actual no es valido.</value></data>
+  <data name="FRIEND_USER_ID_INVALID" xml:space="preserve"><value>El id del amigo no es valido.</value></data>
+  <data name="FRIEND_REQUEST_ID_INVALID" xml:space="preserve"><value>El id de la solicitud no es valido.</value></data>
+  <data name="CANNOT_SEND_REQUEST_TO_YOURSELF" xml:space="preserve"><value>No puedes enviarte una solicitud a ti mismo.</value></data>
+  <data name="CANNOT_REMOVE_YOURSELF_AS_FRIEND" xml:space="preserve"><value>No puedes eliminarte a ti mismo como amigo.</value></data>
+  <data name="SENDER_USER_NOT_FOUND" xml:space="preserve"><value>Usuario remitente no encontrado.</value></data>
+  <data name="RECEIVER_USER_NOT_FOUND" xml:space="preserve"><value>Usuario receptor no encontrado.</value></data>
+  <data name="CURRENT_USER_NOT_FOUND" xml:space="preserve"><value>Usuario actual no encontrado.</value></data>
+  <data name="FRIEND_USER_NOT_FOUND" xml:space="preserve"><value>Amigo no encontrado.</value></data>
+  <data name="FRIEND_REQUEST_ALREADY_EXISTS" xml:space="preserve"><value>Ya existe una solicitud pendiente o amistad entre estos usuarios.</value></data>
+  <data name="FRIEND_REQUEST_SENT_SUCCESSFULLY" xml:space="preserve"><value>Solicitud de amistad enviada correctamente.</value></data>
+  <data name="PENDING_FRIEND_REQUESTS_RETRIEVED_SUCCESSFULLY" xml:space="preserve"><value>Solicitudes pendientes obtenidas correctamente.</value></data>
+  <data name="SENT_FRIEND_REQUESTS_RETRIEVED_SUCCESSFULLY" xml:space="preserve"><value>Solicitudes enviadas obtenidas correctamente.</value></data>
+  <data name="FRIEND_REQUEST_ACCEPTED_SUCCESSFULLY" xml:space="preserve"><value>Solicitud de amistad aceptada correctamente.</value></data>
+  <data name="FRIEND_REQUEST_REJECTED_SUCCESSFULLY" xml:space="preserve"><value>Solicitud de amistad rechazada correctamente.</value></data>
+  <data name="FRIEND_REQUEST_CANCELLED_SUCCESSFULLY" xml:space="preserve"><value>Solicitud de amistad cancelada correctamente.</value></data>
+  <data name="FRIEND_REMOVED_SUCCESSFULLY" xml:space="preserve"><value>Amigo eliminado correctamente.</value></data>
+  <data name="FRIENDS_RETRIEVED_SUCCESSFULLY" xml:space="preserve"><value>Amigos obtenidos correctamente.</value></data>
+  <data name="FRIEND_REQUEST_NOT_FOUND" xml:space="preserve"><value>Solicitud de amistad no encontrada.</value></data>
+  <data name="FRIEND_REQUEST_NOT_PENDING" xml:space="preserve"><value>La solicitud de amistad no esta pendiente.</value></data>
+  <data name="ONLY_RECEIVER_CAN_RESPOND" xml:space="preserve"><value>Solo el receptor puede responder esta solicitud.</value></data>
+  <data name="ONLY_SENDER_CAN_CANCEL" xml:space="preserve"><value>Solo el remitente puede cancelar esta solicitud.</value></data>
+  <data name="FRIENDSHIP_NOT_FOUND" xml:space="preserve"><value>Amistad no encontrada.</value></data>
+  <data name="RECEIVER_EMAIL_REQUIRED" xml:space="preserve"><value>El correo del receptor es obligatorio.</value></data>
+  <data name="NO_USER_FOUND_WITH_EMAIL" xml:space="preserve"><value>No se encontro un usuario con ese correo.</value></data>
+  <data name="VALIDATION_SUCCESSFUL" xml:space="preserve"><value>Validacion correcta.</value></data>
+  <data name="LEADERBOARD_RETRIEVED_SUCCESSFULLY" xml:space="preserve"><value>Leaderboard obtenido correctamente.</value></data>
+  <data name="GAME_DATA_REQUIRED" xml:space="preserve"><value>Los datos de la partida son obligatorios.</value></data>
+  <data name="CREATOR_ID_INVALID" xml:space="preserve"><value>El id del creador no es valido.</value></data>
+  <data name="WORD_REQUIRED" xml:space="preserve"><value>Debe seleccionar una palabra.</value></data>
+  <data name="GAME_CREATED_SUCCESSFULLY" xml:space="preserve"><value>Partida creada correctamente.</value></data>
+  <data name="GAME_ID_INVALID" xml:space="preserve"><value>El id de partida no es valido.</value></data>
+  <data name="PLAYER_ID_INVALID" xml:space="preserve"><value>El id de jugador no es valido.</value></data>
+  <data name="GAME_NOT_AVAILABLE" xml:space="preserve"><value>Partida no disponible.</value></data>
+  <data name="JOINED_GAME_SUCCESSFULLY" xml:space="preserve"><value>Te uniste a la partida.</value></data>
+  <data name="GAMES_RETRIEVED_SUCCESSFULLY" xml:space="preserve"><value>Partidas obtenidas correctamente.</value></data>
+  <data name="GAME_NOT_FOUND" xml:space="preserve"><value>Partida no encontrada.</value></data>
+  <data name="GAME_RETRIEVED_SUCCESSFULLY" xml:space="preserve"><value>Partida obtenida correctamente.</value></data>
+  <data name="GAME_STATE_RETRIEVED_SUCCESSFULLY" xml:space="preserve"><value>Estado de partida obtenido correctamente.</value></data>
+  <data name="GUESS_DATA_REQUIRED" xml:space="preserve"><value>Los datos de la jugada son obligatorios.</value></data>
+  <data name="LETTER_REQUIRED" xml:space="preserve"><value>La letra es obligatoria.</value></data>
+  <data name="LETTER_PROCESSED_SUCCESSFULLY" xml:space="preserve"><value>Letra procesada correctamente.</value></data>
+  <data name="LETTER_PROCESSING_FAILED" xml:space="preserve"><value>No se pudo procesar la letra.</value></data>
+  <data name="INVALID_DATA" xml:space="preserve"><value>Datos invalidos.</value></data>
+  <data name="GAME_ABANDONED_SUCCESSFULLY" xml:space="preserve"><value>Partida abandonada. Se aplico penalizacion.</value></data>
+  <data name="GAME_ABANDON_FAILED" xml:space="preserve"><value>No se pudo abandonar la partida.</value></data>
+  <data name="USER_SCORE_RETRIEVED_SUCCESSFULLY" xml:space="preserve"><value>Puntaje obtenido correctamente.</value></data>
+  <data name="CATEGORY_INVALID" xml:space="preserve"><value>Categoria invalida.</value></data>
+  <data name="CATEGORIES_RETRIEVED_SUCCESSFULLY" xml:space="preserve"><value>Categorias obtenidas correctamente.</value></data>
+  <data name="WORDS_RETRIEVED_SUCCESSFULLY" xml:space="preserve"><value>Palabras obtenidas correctamente.</value></data>
+  <data name="VERIFICATION_DATA_REQUIRED" xml:space="preserve"><value>Los datos de verificacion son obligatorios.</value></data>
+  <data name="VERIFICATION_CODE_REQUIRED" xml:space="preserve"><value>El codigo de verificacion es obligatorio.</value></data>
+  <data name="VERIFICATION_CODE_SENT_SUCCESSFULLY" xml:space="preserve"><value>Codigo de verificacion enviado correctamente.</value></data>
+  <data name="EMAIL_ALREADY_VERIFIED" xml:space="preserve"><value>El correo ya esta verificado.</value></data>
+  <data name="EMAIL_VERIFIED_SUCCESSFULLY" xml:space="preserve"><value>Correo electronico verificado correctamente.</value></data>
+  <data name="PASSWORD_RESET_DATA_REQUIRED" xml:space="preserve"><value>Los datos para restablecer contrasena son obligatorios.</value></data>
+  <data name="NEW_PASSWORD_REQUIRED" xml:space="preserve"><value>La nueva contrasena es obligatoria.</value></data>
+  <data name="NEW_PASSWORD_TOO_SHORT" xml:space="preserve"><value>La nueva contrasena debe tener al menos 6 caracteres.</value></data>
+  <data name="PASSWORD_RESET_CODE_SENT" xml:space="preserve"><value>Si el correo existe y esta verificado, se enviara un codigo de recuperacion.</value></data>
+  <data name="PASSWORD_RESET_SUCCESSFULLY" xml:space="preserve"><value>Contrasena restablecida correctamente.</value></data>
+  <data name="VERIFICATION_CODE_INVALID_OR_EXPIRED" xml:space="preserve"><value>El codigo es invalido o ha expirado.</value></data>
+</root>

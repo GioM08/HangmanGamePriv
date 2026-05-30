@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
+using HangmanGameWPF.Localization;
 using HangmanGameWPF.Services;
 
 namespace HangmanGameWPF
@@ -33,7 +34,7 @@ namespace HangmanGameWPF
                 }
                 else
                 {
-                    TxtUsername.Text = SessionManager.FullName?.ToUpper() ?? "JUGADOR";
+                    TxtUsername.Text = SessionManager.FullName?.ToUpper() ?? ClientLocalizer.Get("PLAYER_FALLBACK");
                     TxtEmail.Text    = SessionManager.Email ?? string.Empty;
                     UpdateEmailVerificationStatus(false);
                 }
@@ -41,7 +42,7 @@ namespace HangmanGameWPF
             catch (Exception ex)
             {
                 Debug.WriteLine($"[Profile] Load error: {ex.Message}");
-                TxtUsername.Text = SessionManager.FullName?.ToUpper() ?? "JUGADOR";
+                TxtUsername.Text = SessionManager.FullName?.ToUpper() ?? ClientLocalizer.Get("PLAYER_FALLBACK");
                 TxtEmail.Text    = SessionManager.Email ?? string.Empty;
                 UpdateEmailVerificationStatus(false);
             }
@@ -66,7 +67,7 @@ namespace HangmanGameWPF
                     TxtGamesPlayed.Text  = played.ToString();
                     TxtGamesWon.Text     = $"{won} / {played}  ";
                     TxtWinRate.Text      = $"({pct}%)";
-                    TxtProgressLabel.Text = $"PROGRESO  [ {pct}% ]";
+                    TxtProgressLabel.Text = string.Format(ClientLocalizer.Get("PROGRESS_LABEL"), pct);
                     RectProgress.Width   = (int)(360 * pct / 100.0);
                 }
                 else
@@ -74,7 +75,7 @@ namespace HangmanGameWPF
                     TxtGamesPlayed.Text  = "0";
                     TxtGamesWon.Text     = "0 / 0  ";
                     TxtWinRate.Text      = "(0%)";
-                    TxtProgressLabel.Text = "PROGRESO  [ 0% ]";
+                    TxtProgressLabel.Text = string.Format(ClientLocalizer.Get("PROGRESS_LABEL"), 0);
                     RectProgress.Width   = 0;
                 }
             }
@@ -112,11 +113,13 @@ namespace HangmanGameWPF
 
                 if (result == null)
                 {
-                    MessageBox.Show("Sin respuesta del servidor.", "Verificacion");
+                    MessageBox.Show(
+                        ClientLocalizer.Get("ERROR_SERVER_EMPTY"),
+                        ClientLocalizer.Get("VERIFICATION_TITLE"));
                     return;
                 }
 
-                MessageBox.Show(result.Message, "Verificacion");
+                MessageBox.Show(result.Message, ClientLocalizer.Get("VERIFICATION_TITLE"));
 
                 if (result.Success)
                 {
@@ -134,7 +137,9 @@ namespace HangmanGameWPF
             }
             catch (Exception ex)
             {
-                MessageBox.Show("No se pudo enviar el codigo: " + ex.Message, "Verificacion");
+                MessageBox.Show(
+                    string.Format(ClientLocalizer.Get("ERROR_SEND_CODE_PREFIX"), ex.Message),
+                    ClientLocalizer.Get("VERIFICATION_TITLE"));
             }
             finally
             {
@@ -145,11 +150,13 @@ namespace HangmanGameWPF
         private void UpdateEmailVerificationStatus(bool isEmailVerified)
         {
             TxtEmailVerificationStatus.Text = isEmailVerified
-                ? "VERIFICADO - RECUPERACION HABILITADA"
-                : "PENDIENTE - RECUPERACION BLOQUEADA";
+                ? ClientLocalizer.Get("EMAIL_VERIFIED_STATUS")
+                : ClientLocalizer.Get("EMAIL_PENDING_STATUS");
 
             BtnVerifyEmail.IsEnabled = !isEmailVerified;
-            BtnVerifyEmail.Content = isEmailVerified ? "[ VERIFICADO ]" : "[ VERIFICAR ]";
+            BtnVerifyEmail.Content = isEmailVerified
+                ? ClientLocalizer.Get("VERIFIED_BUTTON")
+                : ClientLocalizer.Get("VERIFY_BUTTON");
         }
     }
 }

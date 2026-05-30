@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Input;
+using HangmanGameWPF.Localization;
 
 namespace HangmanGameWPF
 {
@@ -9,10 +10,10 @@ namespace HangmanGameWPF
         {
             InitializeComponent();
 
-            string name = SessionManager.FullName?.ToUpper() ?? "JUGADOR";
+            string name = SessionManager.FullName?.ToUpper() ?? ClientLocalizer.Get("PLAYER_FALLBACK");
 
-            TxtWelcome.Text = $"> BIENVENIDO, {name}!";
-            TxtTitleBar.Text = $"[ HANGMAN GAME  v1.0 ]  --  JUGADOR: {name}";
+            TxtWelcome.Text = string.Format(ClientLocalizer.Get("MAIN_WELCOME"), name);
+            TxtTitleBar.Text = string.Format(ClientLocalizer.Get("MAIN_TITLE_BAR"), name);
         }
 
         private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

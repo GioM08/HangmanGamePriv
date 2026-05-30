@@ -1,6 +1,7 @@
 using System;
 using System.Windows;
 using System.Windows.Input;
+using HangmanGameWPF.Localization;
 using HangmanGameWPF.Services;
 
 namespace HangmanGameWPF
@@ -14,7 +15,7 @@ namespace HangmanGameWPF
             InitializeComponent();
 
             this.email = email;
-            TxtEmailInfo.Text = string.Format("Codigo enviado a: {0}", email);
+            TxtEmailInfo.Text = string.Format(ClientLocalizer.Get("PASSWORD_RESET_SENT_TO"), email);
             TxtCode.Focus();
         }
 
@@ -35,25 +36,25 @@ namespace HangmanGameWPF
 
             if (string.IsNullOrWhiteSpace(code))
             {
-                TxtStatus.Text = "! ERROR: Ingrese el codigo.";
+                TxtStatus.Text = ClientLocalizer.Get("ERROR_CODE_REQUIRED");
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(newPassword))
             {
-                TxtStatus.Text = "! ERROR: Ingrese la nueva contrasena.";
+                TxtStatus.Text = ClientLocalizer.Get("ERROR_NEW_PASSWORD_REQUIRED");
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(confirmPassword))
             {
-                TxtStatus.Text = "! ERROR: Confirme la nueva contrasena.";
+                TxtStatus.Text = ClientLocalizer.Get("ERROR_CONFIRM_PASSWORD_REQUIRED");
                 return;
             }
 
             if (newPassword != confirmPassword)
             {
-                TxtStatus.Text = "! ERROR: Las contrasenas no coinciden.";
+                TxtStatus.Text = ClientLocalizer.Get("ERROR_PASSWORD_MISMATCH");
                 PbConfirmPassword.Clear();
                 PbConfirmPassword.Focus();
                 return;
@@ -72,17 +73,19 @@ namespace HangmanGameWPF
                     NewPassword = newPassword
                 });
 
-                TxtStatus.Text = result == null ? "Sin respuesta del servidor." : result.Message;
+                TxtStatus.Text = result == null ? ClientLocalizer.Get("ERROR_SERVER_EMPTY") : result.Message;
 
                 if (result != null && result.Success)
                 {
-                    MessageBox.Show("Contrasena actualizada correctamente.", "Recuperacion");
+                    MessageBox.Show(
+                        ClientLocalizer.Get("PASSWORD_UPDATED"),
+                        ClientLocalizer.Get("RECOVERY_TITLE"));
                     Close();
                 }
             }
             catch (Exception ex)
             {
-                TxtStatus.Text = "Error cambiando contrasena: " + ex.Message;
+                TxtStatus.Text = string.Format(ClientLocalizer.Get("ERROR_RESET_PASSWORD"), ex.Message);
             }
             finally
             {

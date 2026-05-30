@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using HangmanGameWPF.Localization;
 using HangmanGameWPF.Services;
 
 namespace HangmanGameWPF
@@ -35,22 +36,22 @@ namespace HangmanGameWPF
             string confirm = PbConfirm.Password;
 
             if (string.IsNullOrWhiteSpace(fullName))
-            { TxtMessage.Text = "! El nombre completo no puede estar vacio."; return; }
+            { TxtMessage.Text = ClientLocalizer.Get("ERROR_FULL_NAME_REQUIRED"); return; }
             if (fullName.Length < 3)
-            { TxtMessage.Text = "! El nombre debe tener al menos 3 caracteres."; return; }
+            { TxtMessage.Text = ClientLocalizer.Get("ERROR_FULL_NAME_LENGTH"); return; }
             if (!birthDate.HasValue || birthDate.Value >= DateTime.Today)
-            { TxtMessage.Text = "! Ingrese una fecha de nacimiento valida."; return; }
+            { TxtMessage.Text = ClientLocalizer.Get("ERROR_BIRTH_DATE_INVALID"); return; }
             if (string.IsNullOrWhiteSpace(phone))
-            { TxtMessage.Text = "! El telefono no puede estar vacio."; return; }
+            { TxtMessage.Text = ClientLocalizer.Get("ERROR_PHONE_REQUIRED"); return; }
             if (string.IsNullOrWhiteSpace(email) || !Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
-            { TxtMessage.Text = "! Ingrese un correo electronico valido."; return; }
+            { TxtMessage.Text = ClientLocalizer.Get("ERROR_EMAIL_INVALID"); return; }
             if (string.IsNullOrEmpty(pass))
-            { TxtMessage.Text = "! Ingrese una contrasena."; return; }
+            { TxtMessage.Text = ClientLocalizer.Get("ERROR_PASSWORD_REQUIRED"); return; }
             if (pass.Length < 8)
-            { TxtMessage.Text = "! La contrasena debe tener al menos 8 caracteres."; return; }
+            { TxtMessage.Text = ClientLocalizer.Get("ERROR_PASSWORD_LENGTH"); return; }
             if (pass != confirm)
             {
-                TxtMessage.Text = "! Las contrasenas no coinciden.";
+                TxtMessage.Text = ClientLocalizer.Get("ERROR_PASSWORD_MISMATCH");
                 PbConfirm.Clear();
                 PbConfirm.Focus();
                 return;
@@ -61,14 +62,20 @@ namespace HangmanGameWPF
             try
             {
                 client = ServiceClientFactory.CreateUserClient();
-                var result = client.RegisterUser(new RegisterUserDto
+
+                OperationResultDto result;
+
+                using (ServiceCallContext.CreateScope(client))
                 {
-                    FullName = fullName,
-                    BirthDate = birthDate.Value,
-                    PhoneNumber = phone,
-                    Email = email,
-                    Password = pass
-                });
+                    result = client.RegisterUser(new RegisterUserDto
+                    {
+                        FullName = fullName,
+                        BirthDate = birthDate.Value,
+                        PhoneNumber = phone,
+                        Email = email,
+                        Password = pass
+                    });
+                }
 
                 if (result != null && result.Success)
                 {
@@ -76,13 +83,13 @@ namespace HangmanGameWPF
                 }
                 else
                 {
-                    TxtMessage.Text = string.Format("! {0}", result == null ? "Sin respuesta del servidor." : result.Message);
+                    TxtMessage.Text = string.Format("! {0}", result == null ? ClientLocalizer.Get("ERROR_SERVER_EMPTY") : result.Message);
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"[Register] Error: {ex.Message}");
-                TxtMessage.Text = "! Error al conectar con el servidor.";
+                TxtMessage.Text = ClientLocalizer.Get("ERROR_CONNECTION");
             }
             finally
             {
@@ -93,7 +100,7 @@ namespace HangmanGameWPF
         private void ShowRegistrationCompleted()
         {
             TxtMessage.Foreground = new SolidColorBrush(Color.FromRgb(0x00, 0xFF, 0x41));
-            TxtMessage.Text = "> Cuenta creada! Ya puede iniciar sesion. Verifique su correo desde PERFIL para habilitar recuperacion.";
+            TxtMessage.Text = ClientLocalizer.Get("REGISTER_SUCCESS");
             TxtFullName.IsEnabled = false;
             DpBirthDate.IsEnabled = false;
             TxtPhone.IsEnabled = false;

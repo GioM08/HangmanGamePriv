@@ -1,4 +1,5 @@
 using System;
+using HangmanGameBusiness.Localization;
 using HangmanGameData.Repositories;
 using HangmanGameEntities.Dtos;
 
@@ -23,18 +24,18 @@ namespace HangmanGameBusiness.Games
             try
             {
                 if (createGameDto == null)
-                    return Fail("Datos de partida requeridos.");
+                    return Fail(MessageKeys.GameDataRequired);
                 if (createGameDto.CreatorId <= 0)
-                    return Fail("ID de creador invalido.");
+                    return Fail(MessageKeys.CreatorIdInvalid);
                 if (createGameDto.WordId <= 0)
-                    return Fail("Debe seleccionar una palabra.");
+                    return Fail(MessageKeys.WordRequired);
 
                 var game = _gameRepository.CreateGame(createGameDto);
-                return new GameOperationResultDto { Success = true, Message = "Partida creada.", Game = game };
+                return Success(MessageKeys.GameCreatedSuccessfully, game: game);
             }
             catch (Exception)
             {
-                return Fail("Error al crear la partida.");
+                return Fail(MessageKeys.UnexpectedError);
             }
         }
 
@@ -42,17 +43,17 @@ namespace HangmanGameBusiness.Games
         {
             try
             {
-                if (gameId <= 0) return Fail("ID de partida invalido.");
-                if (retadorId <= 0) return Fail("ID de jugador invalido.");
+                if (gameId <= 0) return Fail(MessageKeys.GameIdInvalid);
+                if (retadorId <= 0) return Fail(MessageKeys.PlayerIdInvalid);
 
                 var game = _gameRepository.JoinGame(gameId, retadorId);
-                if (game == null) return Fail("Partida no disponible.");
+                if (game == null) return Fail(MessageKeys.GameNotAvailable);
 
-                return new GameOperationResultDto { Success = true, Message = "Te uniste a la partida.", Game = game };
+                return Success(MessageKeys.JoinedGameSuccessfully, game: game);
             }
             catch (Exception)
             {
-                return Fail("Error al unirse a la partida.");
+                return Fail(MessageKeys.UnexpectedError);
             }
         }
 
@@ -61,11 +62,11 @@ namespace HangmanGameBusiness.Games
             try
             {
                 var games = _gameRepository.GetAvailableGames();
-                return new GameOperationResultDto { Success = true, Games = games };
+                return Success(MessageKeys.GamesRetrievedSuccessfully, games: games);
             }
             catch (Exception)
             {
-                return Fail("Error al obtener partidas.");
+                return Fail(MessageKeys.UnexpectedError);
             }
         }
 
@@ -73,14 +74,14 @@ namespace HangmanGameBusiness.Games
         {
             try
             {
-                if (gameId <= 0) return Fail("ID de partida invalido.");
+                if (gameId <= 0) return Fail(MessageKeys.GameIdInvalid);
                 var game = _gameRepository.GetGameById(gameId);
-                if (game == null) return Fail("Partida no encontrada.");
-                return new GameOperationResultDto { Success = true, Game = game };
+                if (game == null) return Fail(MessageKeys.GameNotFound);
+                return Success(MessageKeys.GameRetrievedSuccessfully, game: game);
             }
             catch (Exception)
             {
-                return Fail("Error al obtener la partida.");
+                return Fail(MessageKeys.UnexpectedError);
             }
         }
 
@@ -88,14 +89,14 @@ namespace HangmanGameBusiness.Games
         {
             try
             {
-                if (gameId <= 0) return Fail("ID de partida invalido.");
+                if (gameId <= 0) return Fail(MessageKeys.GameIdInvalid);
                 var state = _gameRepository.GetGameState(gameId);
-                if (state == null) return Fail("Partida no encontrada.");
-                return new GameOperationResultDto { Success = true, GameState = state };
+                if (state == null) return Fail(MessageKeys.GameNotFound);
+                return Success(MessageKeys.GameStateRetrievedSuccessfully, gameState: state);
             }
             catch (Exception)
             {
-                return Fail("Error al obtener estado de la partida.");
+                return Fail(MessageKeys.UnexpectedError);
             }
         }
 
@@ -103,18 +104,18 @@ namespace HangmanGameBusiness.Games
         {
             try
             {
-                if (guessLetterDto == null) return Fail("Datos requeridos.");
-                if (guessLetterDto.GameId <= 0) return Fail("ID de partida invalido.");
-                if (guessLetterDto.UserId <= 0) return Fail("ID de jugador invalido.");
-                if (string.IsNullOrWhiteSpace(guessLetterDto.Letter)) return Fail("Letra requerida.");
+                if (guessLetterDto == null) return Fail(MessageKeys.GuessDataRequired);
+                if (guessLetterDto.GameId <= 0) return Fail(MessageKeys.GameIdInvalid);
+                if (guessLetterDto.UserId <= 0) return Fail(MessageKeys.PlayerIdInvalid);
+                if (string.IsNullOrWhiteSpace(guessLetterDto.Letter)) return Fail(MessageKeys.LetterRequired);
 
                 var state = _gameRepository.GuessLetter(guessLetterDto);
-                if (state == null) return Fail("Error al procesar la letra.");
-                return new GameOperationResultDto { Success = true, GameState = state };
+                if (state == null) return Fail(MessageKeys.LetterProcessingFailed);
+                return Success(MessageKeys.LetterProcessedSuccessfully, gameState: state);
             }
             catch (Exception)
             {
-                return Fail("Error al procesar la jugada.");
+                return Fail(MessageKeys.UnexpectedError);
             }
         }
 
@@ -122,15 +123,15 @@ namespace HangmanGameBusiness.Games
         {
             try
             {
-                if (gameId <= 0 || userId <= 0) return Fail("Datos invalidos.");
+                if (gameId <= 0 || userId <= 0) return Fail(MessageKeys.InvalidData);
                 bool ok = _gameRepository.AbandonGame(gameId, userId);
                 return ok
-                    ? new GameOperationResultDto { Success = true, Message = "Partida abandonada. Se aplico penalizacion." }
-                    : Fail("No se pudo abandonar la partida.");
+                    ? Success(MessageKeys.GameAbandonedSuccessfully)
+                    : Fail(MessageKeys.GameAbandonFailed);
             }
             catch (Exception)
             {
-                return Fail("Error al abandonar la partida.");
+                return Fail(MessageKeys.UnexpectedError);
             }
         }
 
@@ -138,18 +139,40 @@ namespace HangmanGameBusiness.Games
         {
             try
             {
-                if (userId <= 0) return Fail("ID de usuario invalido.");
+                if (userId <= 0) return Fail(MessageKeys.UserIdInvalid);
                 var score = _gameRepository.GetUserScore(userId);
-                if (score == null) return Fail("Usuario no encontrado.");
-                return new GameOperationResultDto { Success = true, UserScore = score };
+                if (score == null) return Fail(MessageKeys.UserNotFound);
+                return Success(MessageKeys.UserScoreRetrievedSuccessfully, userScore: score);
             }
             catch (Exception)
             {
-                return Fail("Error al obtener puntaje.");
+                return Fail(MessageKeys.UnexpectedError);
             }
         }
 
-        private static GameOperationResultDto Fail(string message)
-            => new GameOperationResultDto { Success = false, Message = message };
+        private static GameOperationResultDto Success(
+            string messageKey,
+            GameDto game = null,
+            GameStateDto gameState = null,
+            System.Collections.Generic.List<GameDto> games = null,
+            UserScoreDto userScore = null)
+            => new GameOperationResultDto
+            {
+                Success = true,
+                MessageKey = messageKey,
+                Message = MessageLocalizer.Get(messageKey),
+                Game = game,
+                GameState = gameState,
+                Games = games,
+                UserScore = userScore
+            };
+
+        private static GameOperationResultDto Fail(string messageKey)
+            => new GameOperationResultDto
+            {
+                Success = false,
+                MessageKey = messageKey,
+                Message = MessageLocalizer.Get(messageKey)
+            };
     }
 }
