@@ -54,9 +54,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Repositories\CategoryRepository.cs" />
+    <Compile Include="Repositories\EmailVerificationRepository.cs" />
     <Compile Include="Repositories\FriendRepository.cs" />
     <Compile Include="Repositories\GameRepository.cs" />
     <Compile Include="Repositories\Interfaces\ICategoryRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IEmailVerificationRepository.cs" />
     <Compile Include="Repositories\Interfaces\IFriendRepository.cs" />
     <Compile Include="Repositories\Interfaces\IGameRepository.cs" />
     <Compile Include="Repositories\Interfaces\ILeaderboardRepository.cs" />

@@ -37,3 +37,7 @@ ConnectionStrings.config
 # Windows
 Thumbs.db
 Desktop.ini
+
+#coRREO
+EmailSettings.config
+**/EmailSettings.config

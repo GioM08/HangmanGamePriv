@@ -78,7 +78,8 @@ namespace HangmanGameData.Repositories
                 PhoneNumber = user.PhoneNumber,
                 Email = user.Email,
                 GlobalScore = user.GlobalScore,
-                CreatedAt = user.CreatedAt
+                CreatedAt = user.CreatedAt,
+                IsEmailVerified = user.IsEmailVerified
             };
         }
 

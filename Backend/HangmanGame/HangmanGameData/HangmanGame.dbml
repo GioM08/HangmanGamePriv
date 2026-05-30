@@ -1,26 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="HangmanGameDB" Class="HangmanGameDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=LAPTOP-9IURR4LD;Initial Catalog=HangmanGameDB;Integrated Security=True;Encrypt=True;Trust Server Certificate=True" SettingsObjectName="HangmanGameData.Properties.Settings" SettingsPropertyName="HangmanGameDBConnectionString1" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Users" Member="Users">
-    <Type Name="Users">
-      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="FullName" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
-      <Column Name="BirthDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="PhoneNumber" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="Email" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="PasswordHash" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="GlobalScore" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="UpdatedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="Users_Games" Member="Games" ThisKey="UserId" OtherKey="AbandonedByUserId" Type="Games" />
-      <Association Name="Users_Games1" Member="Games1" ThisKey="UserId" OtherKey="CreatorId" Type="Games" />
-      <Association Name="Users_Games2" Member="Games2" ThisKey="UserId" OtherKey="RetadorId" Type="Games" />
-      <Association Name="Users_Games3" Member="Games3" ThisKey="UserId" OtherKey="WinnerId" Type="Games" />
-      <Association Name="Users_GameMoves" Member="GameMoves" ThisKey="UserId" OtherKey="UserId" Type="GameMoves" />
-      <Association Name="Users_FriendRequests" Member="FriendRequests" ThisKey="UserId" OtherKey="ReceiverUserId" Type="FriendRequests" />
-      <Association Name="Users_FriendRequests1" Member="FriendRequests1" ThisKey="UserId" OtherKey="SenderUserId" Type="FriendRequests" />
-    </Type>
-  </Table>
   <Table Name="dbo.Words" Member="Words">
     <Type Name="Words">
       <Column Name="WordId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -47,11 +26,11 @@
       <Column Name="WinnerId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="AbandonedByUserId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Games_GameMoves" Member="GameMoves" ThisKey="GameId" OtherKey="GameId" Type="GameMoves" />
+      <Association Name="Words_Games" Member="Words" ThisKey="WordId" OtherKey="WordId" Type="Words" IsForeignKey="true" />
       <Association Name="Users_Games" Member="Users" ThisKey="AbandonedByUserId" OtherKey="UserId" Type="Users" IsForeignKey="true" />
       <Association Name="Users_Games1" Member="Users1" ThisKey="CreatorId" OtherKey="UserId" Type="Users" IsForeignKey="true" />
       <Association Name="Users_Games2" Member="Users2" ThisKey="RetadorId" OtherKey="UserId" Type="Users" IsForeignKey="true" />
       <Association Name="Users_Games3" Member="Users3" ThisKey="WinnerId" OtherKey="UserId" Type="Users" IsForeignKey="true" />
-      <Association Name="Words_Games" Member="Words" ThisKey="WordId" OtherKey="WordId" Type="Words" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.GameMoves" Member="GameMoves">
@@ -86,6 +65,43 @@
       <Column Name="UserBId" Type="System.Int32" DbType="Int NOT NULL" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
       <Association Name="Users_FriendRequests" Member="Users" ThisKey="ReceiverUserId" OtherKey="UserId" Type="Users" IsForeignKey="true" />
       <Association Name="Users_FriendRequests1" Member="Users1" ThisKey="SenderUserId" OtherKey="UserId" Type="Users" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="Users">
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="BirthDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordHash" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="GlobalScore" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdatedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsEmailVerified" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="EmailVerifiedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Users_Games" Member="Games" ThisKey="UserId" OtherKey="AbandonedByUserId" Type="Games" />
+      <Association Name="Users_Games1" Member="Games1" ThisKey="UserId" OtherKey="CreatorId" Type="Games" />
+      <Association Name="Users_Games2" Member="Games2" ThisKey="UserId" OtherKey="RetadorId" Type="Games" />
+      <Association Name="Users_Games3" Member="Games3" ThisKey="UserId" OtherKey="WinnerId" Type="Games" />
+      <Association Name="Users_GameMoves" Member="GameMoves" ThisKey="UserId" OtherKey="UserId" Type="GameMoves" />
+      <Association Name="Users_FriendRequests" Member="FriendRequests" ThisKey="UserId" OtherKey="ReceiverUserId" Type="FriendRequests" />
+      <Association Name="Users_FriendRequests1" Member="FriendRequests1" ThisKey="UserId" OtherKey="SenderUserId" Type="FriendRequests" />
+      <Association Name="Users_EmailVerificationCodes" Member="EmailVerificationCodes" ThisKey="UserId" OtherKey="UserId" Type="EmailVerificationCodes" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EmailVerificationCodes" Member="EmailVerificationCodes">
+    <Type Name="EmailVerificationCodes">
+      <Column Name="VerificationCodeId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="CodeHash" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Purpose" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="ExpiresAt" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UsedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Users_EmailVerificationCodes" Member="Users" ThisKey="UserId" OtherKey="UserId" Type="Users" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
