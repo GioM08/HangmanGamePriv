@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using HangmanGameWPF.Localization;
 using HangmanGameWPF.Services;
 
 namespace HangmanGameWPF
@@ -53,11 +54,11 @@ namespace HangmanGameWPF
             DateTime? birthDate = DpBirthDate.SelectedDate;
 
             if (string.IsNullOrWhiteSpace(fullName) || fullName.Length < 3)
-            { TxtMessage.Text = "! El nombre debe tener al menos 3 caracteres."; return; }
+            { TxtMessage.Text = ClientLocalizer.Get("ERROR_FULL_NAME_LENGTH"); return; }
             if (!birthDate.HasValue || birthDate.Value >= DateTime.Today)
-            { TxtMessage.Text = "! Ingrese una fecha de nacimiento valida."; return; }
+            { TxtMessage.Text = ClientLocalizer.Get("ERROR_BIRTH_DATE_INVALID"); return; }
             if (string.IsNullOrWhiteSpace(phone))
-            { TxtMessage.Text = "! El telefono no puede estar vacio."; return; }
+            { TxtMessage.Text = ClientLocalizer.Get("ERROR_PHONE_REQUIRED"); return; }
 
             try
             {
@@ -78,7 +79,7 @@ namespace HangmanGameWPF
                             result.User.Email, result.User.GlobalScore);
 
                     TxtMessage.Foreground = new SolidColorBrush(Color.FromRgb(0x00, 0xFF, 0x41));
-                    TxtMessage.Text = "> Cambios guardados correctamente.";
+                    TxtMessage.Text = ClientLocalizer.Get("PROFILE_SAVE_SUCCESS");
                 }
                 else
                 {
@@ -88,7 +89,7 @@ namespace HangmanGameWPF
             catch (Exception ex)
             {
                 Debug.WriteLine($"[EditProfile] Save error: {ex.Message}");
-                TxtMessage.Text = "! Error al conectar con el servidor.";
+                TxtMessage.Text = ClientLocalizer.Get("ERROR_CONNECTION");
             }
         }
     }
