@@ -1,6 +1,7 @@
 using System;
 using System.Windows;
 using System.Windows.Input;
+using HangmanGameWPF.Localization;
 using HangmanGameWPF.Services;
 
 namespace HangmanGameWPF
@@ -14,7 +15,7 @@ namespace HangmanGameWPF
             InitializeComponent();
 
             this.userId = userId;
-            TxtInfo.Text = string.Format("Se envio un codigo de 6 digitos a: {0}", email);
+            TxtInfo.Text = string.Format(ClientLocalizer.Get("EMAIL_VERIFICATION_SENT_TO"), email);
             TxtCode.Focus();
         }
 
@@ -33,7 +34,7 @@ namespace HangmanGameWPF
 
             if (string.IsNullOrWhiteSpace(code))
             {
-                TxtStatus.Text = "! ERROR: Ingrese el codigo.";
+                TxtStatus.Text = ClientLocalizer.Get("ERROR_CODE_REQUIRED");
                 return;
             }
 
@@ -49,17 +50,19 @@ namespace HangmanGameWPF
                     Code = code
                 });
 
-                TxtStatus.Text = result == null ? "Sin respuesta del servidor." : result.Message;
+                TxtStatus.Text = result == null ? ClientLocalizer.Get("ERROR_SERVER_EMPTY") : result.Message;
 
                 if (result != null && result.Success)
                 {
-                    MessageBox.Show("Correo verificado correctamente.", "Verificacion");
+                    MessageBox.Show(
+                        ClientLocalizer.Get("EMAIL_VERIFIED"),
+                        ClientLocalizer.Get("VERIFICATION_TITLE"));
                     Close();
                 }
             }
             catch (Exception ex)
             {
-                TxtStatus.Text = "Error verificando correo: " + ex.Message;
+                TxtStatus.Text = string.Format(ClientLocalizer.Get("ERROR_VERIFY_EMAIL"), ex.Message);
             }
             finally
             {
@@ -77,11 +80,11 @@ namespace HangmanGameWPF
 
                 EmailOperationResultDto result = client.SendEmailVerificationCode(userId);
 
-                TxtStatus.Text = result == null ? "Sin respuesta del servidor." : result.Message;
+                TxtStatus.Text = result == null ? ClientLocalizer.Get("ERROR_SERVER_EMPTY") : result.Message;
             }
             catch (Exception ex)
             {
-                TxtStatus.Text = "Error reenviando codigo: " + ex.Message;
+                TxtStatus.Text = string.Format(ClientLocalizer.Get("ERROR_RESEND_CODE"), ex.Message);
             }
             finally
             {

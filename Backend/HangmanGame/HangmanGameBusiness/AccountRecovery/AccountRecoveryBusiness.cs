@@ -1,5 +1,6 @@
 using System;
 using HangmanGameBusiness.Email;
+using HangmanGameBusiness.Localization;
 using HangmanGameBusiness.Security;
 using HangmanGameData;
 using HangmanGameData.Repositories;
@@ -47,19 +48,19 @@ namespace HangmanGameBusiness.AccountRecovery
             {
                 if (userId <= 0)
                 {
-                    return Fail("User id is not valid.");
+                    return Fail(MessageKeys.UserIdInvalid);
                 }
 
                 UserDto user = emailVerificationRepository.GetActiveUserById(userId);
 
                 if (user == null)
                 {
-                    return Fail("User was not found.");
+                    return Fail(MessageKeys.UserNotFound);
                 }
 
                 if (emailVerificationRepository.IsEmailVerified(userId))
                 {
-                    return Fail("Email is already verified.");
+                    return Fail(MessageKeys.EmailAlreadyVerified);
                 }
 
                 string code = VerificationCodeGenerator.GenerateSixDigitCode();
@@ -83,11 +84,11 @@ namespace HangmanGameBusiness.AccountRecovery
                     )
                 );
 
-                return Success("Verification code sent successfully.");
+                return Success(MessageKeys.VerificationCodeSentSuccessfully);
             }
             catch (Exception)
             {
-                return Fail("An unexpected error occurred while sending the verification code.");
+                return Fail(MessageKeys.UnexpectedError);
             }
         }
 
@@ -97,24 +98,24 @@ namespace HangmanGameBusiness.AccountRecovery
             {
                 if (verifyEmailDto == null)
                 {
-                    return Fail("Verification data is required.");
+                    return Fail(MessageKeys.VerificationDataRequired);
                 }
 
                 if (verifyEmailDto.UserId <= 0)
                 {
-                    return Fail("User id is not valid.");
+                    return Fail(MessageKeys.UserIdInvalid);
                 }
 
                 if (string.IsNullOrWhiteSpace(verifyEmailDto.Code))
                 {
-                    return Fail("Verification code is required.");
+                    return Fail(MessageKeys.VerificationCodeRequired);
                 }
 
                 UserDto user = emailVerificationRepository.GetActiveUserById(verifyEmailDto.UserId);
 
                 if (user == null)
                 {
-                    return Fail("User was not found.");
+                    return Fail(MessageKeys.UserNotFound);
                 }
 
                 EmailVerificationCodes latestCode =
@@ -126,7 +127,7 @@ namespace HangmanGameBusiness.AccountRecovery
 
                 if (latestCode == null)
                 {
-                    return Fail("Verification code is invalid or expired.");
+                    return Fail(MessageKeys.VerificationCodeInvalidOrExpired);
                 }
 
                 bool codeIsValid = VerificationCodeHasher.VerifyCode(
@@ -136,17 +137,17 @@ namespace HangmanGameBusiness.AccountRecovery
 
                 if (!codeIsValid)
                 {
-                    return Fail("Verification code is invalid or expired.");
+                    return Fail(MessageKeys.VerificationCodeInvalidOrExpired);
                 }
 
                 emailVerificationRepository.MarkCodeAsUsed(latestCode.VerificationCodeId);
                 emailVerificationRepository.MarkEmailAsVerified(user.UserId);
 
-                return Success("Email verified successfully.");
+                return Success(MessageKeys.EmailVerifiedSuccessfully);
             }
             catch (Exception)
             {
-                return Fail("An unexpected error occurred while verifying the email.");
+                return Fail(MessageKeys.UnexpectedError);
             }
         }
 
@@ -156,12 +157,12 @@ namespace HangmanGameBusiness.AccountRecovery
             {
                 if (forgotPasswordDto == null)
                 {
-                    return Fail("Email is required.");
+                    return Fail(MessageKeys.EmailRequired);
                 }
 
                 if (string.IsNullOrWhiteSpace(forgotPasswordDto.Email))
                 {
-                    return Fail("Email is required.");
+                    return Fail(MessageKeys.EmailRequired);
                 }
 
                 UserDto user = emailVerificationRepository.GetActiveUserByEmail(
@@ -192,11 +193,11 @@ namespace HangmanGameBusiness.AccountRecovery
                     );
                 }
 
-                return Success("If the email exists and is verified, a password reset code has been sent.");
+                return Success(MessageKeys.PasswordResetCodeSent);
             }
             catch (Exception)
             {
-                return Fail("An unexpected error occurred while requesting the password reset.");
+                return Fail(MessageKeys.UnexpectedError);
             }
         }
 
@@ -206,27 +207,27 @@ namespace HangmanGameBusiness.AccountRecovery
             {
                 if (resetPasswordDto == null)
                 {
-                    return Fail("Password reset data is required.");
+                    return Fail(MessageKeys.PasswordResetDataRequired);
                 }
 
                 if (string.IsNullOrWhiteSpace(resetPasswordDto.Email))
                 {
-                    return Fail("Email is required.");
+                    return Fail(MessageKeys.EmailRequired);
                 }
 
                 if (string.IsNullOrWhiteSpace(resetPasswordDto.Code))
                 {
-                    return Fail("Verification code is required.");
+                    return Fail(MessageKeys.VerificationCodeRequired);
                 }
 
                 if (string.IsNullOrWhiteSpace(resetPasswordDto.NewPassword))
                 {
-                    return Fail("New password is required.");
+                    return Fail(MessageKeys.NewPasswordRequired);
                 }
 
                 if (resetPasswordDto.NewPassword.Length < 6)
                 {
-                    return Fail("New password must contain at least 6 characters.");
+                    return Fail(MessageKeys.NewPasswordTooShort);
                 }
 
                 UserDto user = emailVerificationRepository.GetActiveUserByEmail(
@@ -235,7 +236,7 @@ namespace HangmanGameBusiness.AccountRecovery
 
                 if (user == null)
                 {
-                    return Fail("Verification code is invalid or expired.");
+                    return Fail(MessageKeys.VerificationCodeInvalidOrExpired);
                 }
 
                 EmailVerificationCodes latestCode =
@@ -247,7 +248,7 @@ namespace HangmanGameBusiness.AccountRecovery
 
                 if (latestCode == null)
                 {
-                    return Fail("Verification code is invalid or expired.");
+                    return Fail(MessageKeys.VerificationCodeInvalidOrExpired);
                 }
 
                 bool codeIsValid = VerificationCodeHasher.VerifyCode(
@@ -257,7 +258,7 @@ namespace HangmanGameBusiness.AccountRecovery
 
                 if (!codeIsValid)
                 {
-                    return Fail("Verification code is invalid or expired.");
+                    return Fail(MessageKeys.VerificationCodeInvalidOrExpired);
                 }
 
                 string newPasswordHash = PasswordHasher.HashPassword(
@@ -273,29 +274,31 @@ namespace HangmanGameBusiness.AccountRecovery
                     latestCode.VerificationCodeId
                 );
 
-                return Success("Password reset successfully.");
+                return Success(MessageKeys.PasswordResetSuccessfully);
             }
             catch (Exception)
             {
-                return Fail("An unexpected error occurred while resetting the password.");
+                return Fail(MessageKeys.UnexpectedError);
             }
         }
 
-        private EmailOperationResultDto Success(string message)
+        private EmailOperationResultDto Success(string messageKey)
         {
             return new EmailOperationResultDto
             {
                 Success = true,
-                Message = message
+                MessageKey = messageKey,
+                Message = MessageLocalizer.Get(messageKey)
             };
         }
 
-        private EmailOperationResultDto Fail(string message)
+        private EmailOperationResultDto Fail(string messageKey)
         {
             return new EmailOperationResultDto
             {
                 Success = false,
-                Message = message
+                MessageKey = messageKey,
+                Message = MessageLocalizer.Get(messageKey)
             };
         }
     }
