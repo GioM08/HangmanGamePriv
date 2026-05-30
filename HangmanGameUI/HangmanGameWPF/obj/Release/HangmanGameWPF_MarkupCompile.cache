@@ -10,11 +10,11 @@ none
 false
 TRACE
 C:\Users\wilma\source\repos\HangmanGamePriv\HangmanGameUI\HangmanGameWPF\App.xaml
-10907672528
+15-1514314770
 
-208161392
-16-1295605092
-CreateGameWindow.xaml;EditProfileWindow.xaml;GameListWindow.xaml;GameWindow.xaml;LoginWindow.xaml;MainWindow.xaml;ProfileWindow.xaml;RegisterWindow.xaml;GameResultWindow.xaml;ScoreWindow.xaml;
+25-968201203
+16-1933516784
+CreateGameWindow.xaml;EditProfileWindow.xaml;FriendsWindow.xaml;ForgotPasswordWindow.xaml;GameListWindow.xaml;GameWindow.xaml;LoginWindow.xaml;LeaderboardWindow.xaml;MainWindow.xaml;ProfileWindow.xaml;RegisterWindow.xaml;ResetPasswordWindow.xaml;GameResultWindow.xaml;ScoreWindow.xaml;VerifyEmailWindow.xaml;
 
-True
+False
 

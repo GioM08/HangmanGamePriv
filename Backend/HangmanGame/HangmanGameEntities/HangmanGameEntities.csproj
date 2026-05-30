@@ -44,6 +44,8 @@
   <ItemGroup>
     <Compile Include="Dtos\CategoryDto.cs" />
     <Compile Include="Dtos\CreateGameDto.cs" />
+    <Compile Include="Dtos\EmailOperationResultDto.cs" />
+    <Compile Include="Dtos\ForgotPasswordDto.cs" />
     <Compile Include="Dtos\FriendDto.cs" />
     <Compile Include="Dtos\FriendOperationResultDto.cs" />
     <Compile Include="Dtos\FriendRequestDto.cs" />
@@ -58,11 +60,13 @@
     <Compile Include="Dtos\RegisterUserDto.cs" />
     <Compile Include="Dtos\RemoveFriendDto.cs" />
     <Compile Include="Dtos\RespondFriendRequestDto.cs" />
+    <Compile Include="Dtos\ResetPasswordDto.cs" />
     <Compile Include="Dtos\SendFriendRequestByEmailDto.cs" />
     <Compile Include="Dtos\SendFriendRequestDto.cs" />
     <Compile Include="Dtos\UpdateUserProfileDto.cs" />
     <Compile Include="Dtos\UserDto.cs" />
     <Compile Include="Dtos\UserScoreDto.cs" />
+    <Compile Include="Dtos\VerifyEmailDto.cs" />
     <Compile Include="Dtos\WordDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

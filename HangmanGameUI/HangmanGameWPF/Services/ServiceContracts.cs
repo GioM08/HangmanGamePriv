@@ -19,6 +19,7 @@ namespace HangmanGameWPF.Services
         [DataMember] public string Email { get; set; }
         [DataMember] public int GlobalScore { get; set; }
         [DataMember] public DateTime CreatedAt { get; set; }
+        [DataMember] public bool IsEmailVerified { get; set; }
     }
 
     [DataContract(Namespace = "http://schemas.datacontract.org/2004/07/HangmanGameEntities.Dtos")] public class OperationResultDto
@@ -252,6 +253,46 @@ namespace HangmanGameWPF.Services
         public LeaderboardPlayerDto CurrentPlayerRank { get; set; }
     }
 
+    [DataContract(Namespace = "http://schemas.datacontract.org/2004/07/HangmanGameEntities.Dtos")]
+    public class VerifyEmailDto
+    {
+        [DataMember]
+        public int UserId { get; set; }
+
+        [DataMember]
+        public string Code { get; set; }
+    }
+
+    [DataContract(Namespace = "http://schemas.datacontract.org/2004/07/HangmanGameEntities.Dtos")]
+    public class ForgotPasswordDto
+    {
+        [DataMember]
+        public string Email { get; set; }
+    }
+
+    [DataContract(Namespace = "http://schemas.datacontract.org/2004/07/HangmanGameEntities.Dtos")]
+    public class ResetPasswordDto
+    {
+        [DataMember]
+        public string Email { get; set; }
+
+        [DataMember]
+        public string Code { get; set; }
+
+        [DataMember]
+        public string NewPassword { get; set; }
+    }
+
+    [DataContract(Namespace = "http://schemas.datacontract.org/2004/07/HangmanGameEntities.Dtos")]
+    public class EmailOperationResultDto
+    {
+        [DataMember]
+        public bool Success { get; set; }
+
+        [DataMember]
+        public string Message { get; set; }
+    }
+
     // ── Service contracts ─────────────────────────────────────────────────────
 
     [ServiceContract]
@@ -318,5 +359,21 @@ namespace HangmanGameWPF.Services
     {
         [OperationContract]
         LeaderboardOperationResultDto GetTopScoreLeaderboard(int currentUserId);
+    }
+
+    [ServiceContract]
+    public interface IAccountRecoveryService
+    {
+        [OperationContract]
+        EmailOperationResultDto SendEmailVerificationCode(int userId);
+
+        [OperationContract]
+        EmailOperationResultDto VerifyEmailCode(VerifyEmailDto verifyEmailDto);
+
+        [OperationContract]
+        EmailOperationResultDto RequestPasswordReset(ForgotPasswordDto forgotPasswordDto);
+
+        [OperationContract]
+        EmailOperationResultDto ResetPassword(ResetPasswordDto resetPasswordDto);
     }
 }

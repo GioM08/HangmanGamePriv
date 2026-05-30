@@ -54,11 +54,12 @@ namespace HangmanGameWPF
                 return;
             }
 
+            IUserService client = null;
+
             try
             {
-                var client = ServiceClientFactory.CreateUserClient();
+                client = ServiceClientFactory.CreateUserClient();
                 var result = client.Login(new LoginDto { Email = email, Password = pass });
-                ServiceClientFactory.CloseChannel(client);
 
                 if (result != null && result.Success && result.User != null)
                 {
@@ -87,9 +88,16 @@ namespace HangmanGameWPF
                     "ERROR EXCEPCION");
                 TxtError.Text = "! ERROR: No se pudo conectar al servidor.";
             }
+            finally
+            {
+                ServiceClientFactory.CloseChannel(client);
+            }
         }
 
         private void BtnRegister_Click(object sender, RoutedEventArgs e)
             => new RegisterWindow { Owner = this }.ShowDialog();
+
+        private void BtnForgotPassword_Click(object sender, RoutedEventArgs e)
+            => new ForgotPasswordWindow { Owner = this }.ShowDialog();
     }
 }

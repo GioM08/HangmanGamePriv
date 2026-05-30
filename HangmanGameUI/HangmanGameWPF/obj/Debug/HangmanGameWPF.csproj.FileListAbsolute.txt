@@ -70,3 +70,9 @@ C:\Users\wilma\source\repos\HangmanGamePriv\HangmanGameUI\HangmanGameWPF\obj\Deb
 C:\Users\wilma\source\repos\HangmanGamePriv\HangmanGameUI\HangmanGameWPF\obj\Debug\HangmanGameWPF.pdb
 C:\Users\wilma\source\repos\HangmanGamePriv\HangmanGameUI\HangmanGameWPF\obj\Debug\LeaderboardWindow.baml
 C:\Users\wilma\source\repos\HangmanGamePriv\HangmanGameUI\HangmanGameWPF\obj\Debug\LeaderboardWindow.g.cs
+C:\Users\wilma\source\repos\HangmanGamePriv\HangmanGameUI\HangmanGameWPF\obj\Debug\ForgotPasswordWindow.baml
+C:\Users\wilma\source\repos\HangmanGamePriv\HangmanGameUI\HangmanGameWPF\obj\Debug\ResetPasswordWindow.baml
+C:\Users\wilma\source\repos\HangmanGamePriv\HangmanGameUI\HangmanGameWPF\obj\Debug\VerifyEmailWindow.baml
+C:\Users\wilma\source\repos\HangmanGamePriv\HangmanGameUI\HangmanGameWPF\obj\Debug\ForgotPasswordWindow.g.cs
+C:\Users\wilma\source\repos\HangmanGamePriv\HangmanGameUI\HangmanGameWPF\obj\Debug\ResetPasswordWindow.g.cs
+C:\Users\wilma\source\repos\HangmanGamePriv\HangmanGameUI\HangmanGameWPF\obj\Debug\VerifyEmailWindow.g.cs

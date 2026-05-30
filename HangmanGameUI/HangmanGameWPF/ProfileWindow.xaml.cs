@@ -27,6 +27,7 @@ namespace HangmanGameWPF
                 {
                     TxtUsername.Text = result.User.FullName.ToUpper();
                     TxtEmail.Text    = result.User.Email;
+                    UpdateEmailVerificationStatus(result.User.IsEmailVerified);
                     SessionManager.SetUser(result.User.UserId, result.User.FullName,
                         result.User.Email, result.User.GlobalScore);
                 }
@@ -34,6 +35,7 @@ namespace HangmanGameWPF
                 {
                     TxtUsername.Text = SessionManager.FullName?.ToUpper() ?? "JUGADOR";
                     TxtEmail.Text    = SessionManager.Email ?? string.Empty;
+                    UpdateEmailVerificationStatus(false);
                 }
             }
             catch (Exception ex)
@@ -41,6 +43,7 @@ namespace HangmanGameWPF
                 Debug.WriteLine($"[Profile] Load error: {ex.Message}");
                 TxtUsername.Text = SessionManager.FullName?.ToUpper() ?? "JUGADOR";
                 TxtEmail.Text    = SessionManager.Email ?? string.Empty;
+                UpdateEmailVerificationStatus(false);
             }
         }
 
@@ -94,6 +97,59 @@ namespace HangmanGameWPF
             new EditProfileWindow { Owner = this }.ShowDialog();
             LoadProfile();
             LoadStats();
+        }
+
+        private void BtnVerifyEmail_Click(object sender, RoutedEventArgs e)
+        {
+            IAccountRecoveryService client = null;
+
+            try
+            {
+                client = ServiceClientFactory.CreateAccountRecoveryClient();
+
+                EmailOperationResultDto result =
+                    client.SendEmailVerificationCode(SessionManager.UserId);
+
+                if (result == null)
+                {
+                    MessageBox.Show("Sin respuesta del servidor.", "Verificacion");
+                    return;
+                }
+
+                MessageBox.Show(result.Message, "Verificacion");
+
+                if (result.Success)
+                {
+                    VerifyEmailWindow verifyWindow = new VerifyEmailWindow(
+                        SessionManager.UserId,
+                        SessionManager.Email
+                    )
+                    {
+                        Owner = this
+                    };
+
+                    verifyWindow.ShowDialog();
+                    LoadProfile();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se pudo enviar el codigo: " + ex.Message, "Verificacion");
+            }
+            finally
+            {
+                ServiceClientFactory.CloseChannel(client);
+            }
+        }
+
+        private void UpdateEmailVerificationStatus(bool isEmailVerified)
+        {
+            TxtEmailVerificationStatus.Text = isEmailVerified
+                ? "VERIFICADO - RECUPERACION HABILITADA"
+                : "PENDIENTE - RECUPERACION BLOQUEADA";
+
+            BtnVerifyEmail.IsEnabled = !isEmailVerified;
+            BtnVerifyEmail.Content = isEmailVerified ? "[ VERIFICADO ]" : "[ VERIFICAR ]";
         }
     }
 }

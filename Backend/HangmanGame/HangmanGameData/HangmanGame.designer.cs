@@ -30,9 +30,6 @@ namespace HangmanGameData
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnCreated();
-    partial void InsertUsers(Users instance);
-    partial void UpdateUsers(Users instance);
-    partial void DeleteUsers(Users instance);
     partial void InsertWords(Words instance);
     partial void UpdateWords(Words instance);
     partial void DeleteWords(Words instance);
@@ -48,6 +45,12 @@ namespace HangmanGameData
     partial void InsertFriendRequests(FriendRequests instance);
     partial void UpdateFriendRequests(FriendRequests instance);
     partial void DeleteFriendRequests(FriendRequests instance);
+    partial void InsertUsers(Users instance);
+    partial void UpdateUsers(Users instance);
+    partial void DeleteUsers(Users instance);
+    partial void InsertEmailVerificationCodes(EmailVerificationCodes instance);
+    partial void UpdateEmailVerificationCodes(EmailVerificationCodes instance);
+    partial void DeleteEmailVerificationCodes(EmailVerificationCodes instance);
     #endregion
 		
 		public HangmanGameDataContext() : 
@@ -78,14 +81,6 @@ namespace HangmanGameData
 				base(connection, mappingSource)
 		{
 			OnCreated();
-		}
-		
-		public System.Data.Linq.Table<Users> Users
-		{
-			get
-			{
-				return this.GetTable<Users>();
-			}
 		}
 		
 		public System.Data.Linq.Table<Words> Words
@@ -127,479 +122,21 @@ namespace HangmanGameData
 				return this.GetTable<FriendRequests>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
-	public partial class Users : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _UserId;
-		
-		private string _FullName;
-		
-		private System.DateTime _BirthDate;
-		
-		private string _PhoneNumber;
-		
-		private string _Email;
-		
-		private string _PasswordHash;
-		
-		private int _GlobalScore;
-		
-		private System.DateTime _CreatedAt;
-		
-		private System.Nullable<System.DateTime> _UpdatedAt;
-		
-		private bool _IsActive;
-		
-		private EntitySet<Games> _Games;
-		
-		private EntitySet<Games> _Games1;
-		
-		private EntitySet<Games> _Games2;
-		
-		private EntitySet<Games> _Games3;
-		
-		private EntitySet<GameMoves> _GameMoves;
-		
-		private EntitySet<FriendRequests> _FriendRequests;
-		
-		private EntitySet<FriendRequests> _FriendRequests1;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnUserIdChanging(int value);
-    partial void OnUserIdChanged();
-    partial void OnFullNameChanging(string value);
-    partial void OnFullNameChanged();
-    partial void OnBirthDateChanging(System.DateTime value);
-    partial void OnBirthDateChanged();
-    partial void OnPhoneNumberChanging(string value);
-    partial void OnPhoneNumberChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    partial void OnPasswordHashChanging(string value);
-    partial void OnPasswordHashChanged();
-    partial void OnGlobalScoreChanging(int value);
-    partial void OnGlobalScoreChanged();
-    partial void OnCreatedAtChanging(System.DateTime value);
-    partial void OnCreatedAtChanged();
-    partial void OnUpdatedAtChanging(System.Nullable<System.DateTime> value);
-    partial void OnUpdatedAtChanged();
-    partial void OnIsActiveChanging(bool value);
-    partial void OnIsActiveChanged();
-    #endregion
-		
-		public Users()
-		{
-			this._Games = new EntitySet<Games>(new Action<Games>(this.attach_Games), new Action<Games>(this.detach_Games));
-			this._Games1 = new EntitySet<Games>(new Action<Games>(this.attach_Games1), new Action<Games>(this.detach_Games1));
-			this._Games2 = new EntitySet<Games>(new Action<Games>(this.attach_Games2), new Action<Games>(this.detach_Games2));
-			this._Games3 = new EntitySet<Games>(new Action<Games>(this.attach_Games3), new Action<Games>(this.detach_Games3));
-			this._GameMoves = new EntitySet<GameMoves>(new Action<GameMoves>(this.attach_GameMoves), new Action<GameMoves>(this.detach_GameMoves));
-			this._FriendRequests = new EntitySet<FriendRequests>(new Action<FriendRequests>(this.attach_FriendRequests), new Action<FriendRequests>(this.detach_FriendRequests));
-			this._FriendRequests1 = new EntitySet<FriendRequests>(new Action<FriendRequests>(this.attach_FriendRequests1), new Action<FriendRequests>(this.detach_FriendRequests1));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int UserId
+		public System.Data.Linq.Table<Users> Users
 		{
 			get
 			{
-				return this._UserId;
-			}
-			set
-			{
-				if ((this._UserId != value))
-				{
-					this.OnUserIdChanging(value);
-					this.SendPropertyChanging();
-					this._UserId = value;
-					this.SendPropertyChanged("UserId");
-					this.OnUserIdChanged();
-				}
+				return this.GetTable<Users>();
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FullName", DbType="NVarChar(150) NOT NULL", CanBeNull=false)]
-		public string FullName
+		public System.Data.Linq.Table<EmailVerificationCodes> EmailVerificationCodes
 		{
 			get
 			{
-				return this._FullName;
+				return this.GetTable<EmailVerificationCodes>();
 			}
-			set
-			{
-				if ((this._FullName != value))
-				{
-					this.OnFullNameChanging(value);
-					this.SendPropertyChanging();
-					this._FullName = value;
-					this.SendPropertyChanged("FullName");
-					this.OnFullNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BirthDate", DbType="Date NOT NULL")]
-		public System.DateTime BirthDate
-		{
-			get
-			{
-				return this._BirthDate;
-			}
-			set
-			{
-				if ((this._BirthDate != value))
-				{
-					this.OnBirthDateChanging(value);
-					this.SendPropertyChanging();
-					this._BirthDate = value;
-					this.SendPropertyChanged("BirthDate");
-					this.OnBirthDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
-		public string PhoneNumber
-		{
-			get
-			{
-				return this._PhoneNumber;
-			}
-			set
-			{
-				if ((this._PhoneNumber != value))
-				{
-					this.OnPhoneNumberChanging(value);
-					this.SendPropertyChanging();
-					this._PhoneNumber = value;
-					this.SendPropertyChanged("PhoneNumber");
-					this.OnPhoneNumberChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordHash", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string PasswordHash
-		{
-			get
-			{
-				return this._PasswordHash;
-			}
-			set
-			{
-				if ((this._PasswordHash != value))
-				{
-					this.OnPasswordHashChanging(value);
-					this.SendPropertyChanging();
-					this._PasswordHash = value;
-					this.SendPropertyChanged("PasswordHash");
-					this.OnPasswordHashChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GlobalScore", DbType="Int NOT NULL")]
-		public int GlobalScore
-		{
-			get
-			{
-				return this._GlobalScore;
-			}
-			set
-			{
-				if ((this._GlobalScore != value))
-				{
-					this.OnGlobalScoreChanging(value);
-					this.SendPropertyChanging();
-					this._GlobalScore = value;
-					this.SendPropertyChanged("GlobalScore");
-					this.OnGlobalScoreChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedAt", DbType="DateTime NOT NULL")]
-		public System.DateTime CreatedAt
-		{
-			get
-			{
-				return this._CreatedAt;
-			}
-			set
-			{
-				if ((this._CreatedAt != value))
-				{
-					this.OnCreatedAtChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedAt = value;
-					this.SendPropertyChanged("CreatedAt");
-					this.OnCreatedAtChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdatedAt", DbType="DateTime")]
-		public System.Nullable<System.DateTime> UpdatedAt
-		{
-			get
-			{
-				return this._UpdatedAt;
-			}
-			set
-			{
-				if ((this._UpdatedAt != value))
-				{
-					this.OnUpdatedAtChanging(value);
-					this.SendPropertyChanging();
-					this._UpdatedAt = value;
-					this.SendPropertyChanged("UpdatedAt");
-					this.OnUpdatedAtChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsActive", DbType="Bit NOT NULL")]
-		public bool IsActive
-		{
-			get
-			{
-				return this._IsActive;
-			}
-			set
-			{
-				if ((this._IsActive != value))
-				{
-					this.OnIsActiveChanging(value);
-					this.SendPropertyChanging();
-					this._IsActive = value;
-					this.SendPropertyChanged("IsActive");
-					this.OnIsActiveChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Games", Storage="_Games", ThisKey="UserId", OtherKey="AbandonedByUserId")]
-		public EntitySet<Games> Games
-		{
-			get
-			{
-				return this._Games;
-			}
-			set
-			{
-				this._Games.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Games1", Storage="_Games1", ThisKey="UserId", OtherKey="CreatorId")]
-		public EntitySet<Games> Games1
-		{
-			get
-			{
-				return this._Games1;
-			}
-			set
-			{
-				this._Games1.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Games2", Storage="_Games2", ThisKey="UserId", OtherKey="RetadorId")]
-		public EntitySet<Games> Games2
-		{
-			get
-			{
-				return this._Games2;
-			}
-			set
-			{
-				this._Games2.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Games3", Storage="_Games3", ThisKey="UserId", OtherKey="WinnerId")]
-		public EntitySet<Games> Games3
-		{
-			get
-			{
-				return this._Games3;
-			}
-			set
-			{
-				this._Games3.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_GameMoves", Storage="_GameMoves", ThisKey="UserId", OtherKey="UserId")]
-		public EntitySet<GameMoves> GameMoves
-		{
-			get
-			{
-				return this._GameMoves;
-			}
-			set
-			{
-				this._GameMoves.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_FriendRequests", Storage="_FriendRequests", ThisKey="UserId", OtherKey="ReceiverUserId")]
-		public EntitySet<FriendRequests> FriendRequests
-		{
-			get
-			{
-				return this._FriendRequests;
-			}
-			set
-			{
-				this._FriendRequests.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_FriendRequests1", Storage="_FriendRequests1", ThisKey="UserId", OtherKey="SenderUserId")]
-		public EntitySet<FriendRequests> FriendRequests1
-		{
-			get
-			{
-				return this._FriendRequests1;
-			}
-			set
-			{
-				this._FriendRequests1.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Games(Games entity)
-		{
-			this.SendPropertyChanging();
-			entity.Users = this;
-		}
-		
-		private void detach_Games(Games entity)
-		{
-			this.SendPropertyChanging();
-			entity.Users = null;
-		}
-		
-		private void attach_Games1(Games entity)
-		{
-			this.SendPropertyChanging();
-			entity.Users1 = this;
-		}
-		
-		private void detach_Games1(Games entity)
-		{
-			this.SendPropertyChanging();
-			entity.Users1 = null;
-		}
-		
-		private void attach_Games2(Games entity)
-		{
-			this.SendPropertyChanging();
-			entity.Users2 = this;
-		}
-		
-		private void detach_Games2(Games entity)
-		{
-			this.SendPropertyChanging();
-			entity.Users2 = null;
-		}
-		
-		private void attach_Games3(Games entity)
-		{
-			this.SendPropertyChanging();
-			entity.Users3 = this;
-		}
-		
-		private void detach_Games3(Games entity)
-		{
-			this.SendPropertyChanging();
-			entity.Users3 = null;
-		}
-		
-		private void attach_GameMoves(GameMoves entity)
-		{
-			this.SendPropertyChanging();
-			entity.Users = this;
-		}
-		
-		private void detach_GameMoves(GameMoves entity)
-		{
-			this.SendPropertyChanging();
-			entity.Users = null;
-		}
-		
-		private void attach_FriendRequests(FriendRequests entity)
-		{
-			this.SendPropertyChanging();
-			entity.Users = this;
-		}
-		
-		private void detach_FriendRequests(FriendRequests entity)
-		{
-			this.SendPropertyChanging();
-			entity.Users = null;
-		}
-		
-		private void attach_FriendRequests1(FriendRequests entity)
-		{
-			this.SendPropertyChanging();
-			entity.Users1 = this;
-		}
-		
-		private void detach_FriendRequests1(FriendRequests entity)
-		{
-			this.SendPropertyChanging();
-			entity.Users1 = null;
 		}
 	}
 	
@@ -884,6 +421,8 @@ namespace HangmanGameData
 		
 		private EntitySet<GameMoves> _GameMoves;
 		
+		private EntityRef<Words> _Words;
+		
 		private EntityRef<Users> _Users;
 		
 		private EntityRef<Users> _Users1;
@@ -891,8 +430,6 @@ namespace HangmanGameData
 		private EntityRef<Users> _Users2;
 		
 		private EntityRef<Users> _Users3;
-		
-		private EntityRef<Words> _Words;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -925,11 +462,11 @@ namespace HangmanGameData
 		public Games()
 		{
 			this._GameMoves = new EntitySet<GameMoves>(new Action<GameMoves>(this.attach_GameMoves), new Action<GameMoves>(this.detach_GameMoves));
+			this._Words = default(EntityRef<Words>);
 			this._Users = default(EntityRef<Users>);
 			this._Users1 = default(EntityRef<Users>);
 			this._Users2 = default(EntityRef<Users>);
 			this._Users3 = default(EntityRef<Users>);
-			this._Words = default(EntityRef<Words>);
 			OnCreated();
 		}
 		
@@ -1186,6 +723,40 @@ namespace HangmanGameData
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Words_Games", Storage="_Words", ThisKey="WordId", OtherKey="WordId", IsForeignKey=true)]
+		public Words Words
+		{
+			get
+			{
+				return this._Words.Entity;
+			}
+			set
+			{
+				Words previousValue = this._Words.Entity;
+				if (((previousValue != value) 
+							|| (this._Words.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Words.Entity = null;
+						previousValue.Games.Remove(this);
+					}
+					this._Words.Entity = value;
+					if ((value != null))
+					{
+						value.Games.Add(this);
+						this._WordId = value.WordId;
+					}
+					else
+					{
+						this._WordId = default(int);
+					}
+					this.SendPropertyChanged("Words");
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Games", Storage="_Users", ThisKey="AbandonedByUserId", OtherKey="UserId", IsForeignKey=true)]
 		public Users Users
 		{
@@ -1318,40 +889,6 @@ namespace HangmanGameData
 						this._WinnerId = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Users3");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Words_Games", Storage="_Words", ThisKey="WordId", OtherKey="WordId", IsForeignKey=true)]
-		public Words Words
-		{
-			get
-			{
-				return this._Words.Entity;
-			}
-			set
-			{
-				Words previousValue = this._Words.Entity;
-				if (((previousValue != value) 
-							|| (this._Words.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Words.Entity = null;
-						previousValue.Games.Remove(this);
-					}
-					this._Words.Entity = value;
-					if ((value != null))
-					{
-						value.Games.Add(this);
-						this._WordId = value.WordId;
-					}
-					else
-					{
-						this._WordId = default(int);
-					}
-					this.SendPropertyChanged("Words");
 				}
 			}
 		}
@@ -2078,6 +1615,827 @@ namespace HangmanGameData
 						this._SenderUserId = default(int);
 					}
 					this.SendPropertyChanged("Users1");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
+	public partial class Users : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _UserId;
+		
+		private string _FullName;
+		
+		private System.DateTime _BirthDate;
+		
+		private string _PhoneNumber;
+		
+		private string _Email;
+		
+		private string _PasswordHash;
+		
+		private int _GlobalScore;
+		
+		private System.DateTime _CreatedAt;
+		
+		private System.Nullable<System.DateTime> _UpdatedAt;
+		
+		private bool _IsActive;
+		
+		private bool _IsEmailVerified;
+		
+		private System.Nullable<System.DateTime> _EmailVerifiedAt;
+		
+		private EntitySet<Games> _Games;
+		
+		private EntitySet<Games> _Games1;
+		
+		private EntitySet<Games> _Games2;
+		
+		private EntitySet<Games> _Games3;
+		
+		private EntitySet<GameMoves> _GameMoves;
+		
+		private EntitySet<FriendRequests> _FriendRequests;
+		
+		private EntitySet<FriendRequests> _FriendRequests1;
+		
+		private EntitySet<EmailVerificationCodes> _EmailVerificationCodes;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnUserIdChanging(int value);
+    partial void OnUserIdChanged();
+    partial void OnFullNameChanging(string value);
+    partial void OnFullNameChanged();
+    partial void OnBirthDateChanging(System.DateTime value);
+    partial void OnBirthDateChanged();
+    partial void OnPhoneNumberChanging(string value);
+    partial void OnPhoneNumberChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnPasswordHashChanging(string value);
+    partial void OnPasswordHashChanged();
+    partial void OnGlobalScoreChanging(int value);
+    partial void OnGlobalScoreChanged();
+    partial void OnCreatedAtChanging(System.DateTime value);
+    partial void OnCreatedAtChanged();
+    partial void OnUpdatedAtChanging(System.Nullable<System.DateTime> value);
+    partial void OnUpdatedAtChanged();
+    partial void OnIsActiveChanging(bool value);
+    partial void OnIsActiveChanged();
+    partial void OnIsEmailVerifiedChanging(bool value);
+    partial void OnIsEmailVerifiedChanged();
+    partial void OnEmailVerifiedAtChanging(System.Nullable<System.DateTime> value);
+    partial void OnEmailVerifiedAtChanged();
+    #endregion
+		
+		public Users()
+		{
+			this._Games = new EntitySet<Games>(new Action<Games>(this.attach_Games), new Action<Games>(this.detach_Games));
+			this._Games1 = new EntitySet<Games>(new Action<Games>(this.attach_Games1), new Action<Games>(this.detach_Games1));
+			this._Games2 = new EntitySet<Games>(new Action<Games>(this.attach_Games2), new Action<Games>(this.detach_Games2));
+			this._Games3 = new EntitySet<Games>(new Action<Games>(this.attach_Games3), new Action<Games>(this.detach_Games3));
+			this._GameMoves = new EntitySet<GameMoves>(new Action<GameMoves>(this.attach_GameMoves), new Action<GameMoves>(this.detach_GameMoves));
+			this._FriendRequests = new EntitySet<FriendRequests>(new Action<FriendRequests>(this.attach_FriendRequests), new Action<FriendRequests>(this.detach_FriendRequests));
+			this._FriendRequests1 = new EntitySet<FriendRequests>(new Action<FriendRequests>(this.attach_FriendRequests1), new Action<FriendRequests>(this.detach_FriendRequests1));
+			this._EmailVerificationCodes = new EntitySet<EmailVerificationCodes>(new Action<EmailVerificationCodes>(this.attach_EmailVerificationCodes), new Action<EmailVerificationCodes>(this.detach_EmailVerificationCodes));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FullName", DbType="NVarChar(150) NOT NULL", CanBeNull=false)]
+		public string FullName
+		{
+			get
+			{
+				return this._FullName;
+			}
+			set
+			{
+				if ((this._FullName != value))
+				{
+					this.OnFullNameChanging(value);
+					this.SendPropertyChanging();
+					this._FullName = value;
+					this.SendPropertyChanged("FullName");
+					this.OnFullNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BirthDate", DbType="Date NOT NULL")]
+		public System.DateTime BirthDate
+		{
+			get
+			{
+				return this._BirthDate;
+			}
+			set
+			{
+				if ((this._BirthDate != value))
+				{
+					this.OnBirthDateChanging(value);
+					this.SendPropertyChanging();
+					this._BirthDate = value;
+					this.SendPropertyChanged("BirthDate");
+					this.OnBirthDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string PhoneNumber
+		{
+			get
+			{
+				return this._PhoneNumber;
+			}
+			set
+			{
+				if ((this._PhoneNumber != value))
+				{
+					this.OnPhoneNumberChanging(value);
+					this.SendPropertyChanging();
+					this._PhoneNumber = value;
+					this.SendPropertyChanged("PhoneNumber");
+					this.OnPhoneNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordHash", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string PasswordHash
+		{
+			get
+			{
+				return this._PasswordHash;
+			}
+			set
+			{
+				if ((this._PasswordHash != value))
+				{
+					this.OnPasswordHashChanging(value);
+					this.SendPropertyChanging();
+					this._PasswordHash = value;
+					this.SendPropertyChanged("PasswordHash");
+					this.OnPasswordHashChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GlobalScore", DbType="Int NOT NULL")]
+		public int GlobalScore
+		{
+			get
+			{
+				return this._GlobalScore;
+			}
+			set
+			{
+				if ((this._GlobalScore != value))
+				{
+					this.OnGlobalScoreChanging(value);
+					this.SendPropertyChanging();
+					this._GlobalScore = value;
+					this.SendPropertyChanged("GlobalScore");
+					this.OnGlobalScoreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedAt", DbType="DateTime NOT NULL")]
+		public System.DateTime CreatedAt
+		{
+			get
+			{
+				return this._CreatedAt;
+			}
+			set
+			{
+				if ((this._CreatedAt != value))
+				{
+					this.OnCreatedAtChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedAt = value;
+					this.SendPropertyChanged("CreatedAt");
+					this.OnCreatedAtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdatedAt", DbType="DateTime")]
+		public System.Nullable<System.DateTime> UpdatedAt
+		{
+			get
+			{
+				return this._UpdatedAt;
+			}
+			set
+			{
+				if ((this._UpdatedAt != value))
+				{
+					this.OnUpdatedAtChanging(value);
+					this.SendPropertyChanging();
+					this._UpdatedAt = value;
+					this.SendPropertyChanged("UpdatedAt");
+					this.OnUpdatedAtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsActive", DbType="Bit NOT NULL")]
+		public bool IsActive
+		{
+			get
+			{
+				return this._IsActive;
+			}
+			set
+			{
+				if ((this._IsActive != value))
+				{
+					this.OnIsActiveChanging(value);
+					this.SendPropertyChanging();
+					this._IsActive = value;
+					this.SendPropertyChanged("IsActive");
+					this.OnIsActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsEmailVerified", DbType="Bit NOT NULL")]
+		public bool IsEmailVerified
+		{
+			get
+			{
+				return this._IsEmailVerified;
+			}
+			set
+			{
+				if ((this._IsEmailVerified != value))
+				{
+					this.OnIsEmailVerifiedChanging(value);
+					this.SendPropertyChanging();
+					this._IsEmailVerified = value;
+					this.SendPropertyChanged("IsEmailVerified");
+					this.OnIsEmailVerifiedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmailVerifiedAt", DbType="DateTime")]
+		public System.Nullable<System.DateTime> EmailVerifiedAt
+		{
+			get
+			{
+				return this._EmailVerifiedAt;
+			}
+			set
+			{
+				if ((this._EmailVerifiedAt != value))
+				{
+					this.OnEmailVerifiedAtChanging(value);
+					this.SendPropertyChanging();
+					this._EmailVerifiedAt = value;
+					this.SendPropertyChanged("EmailVerifiedAt");
+					this.OnEmailVerifiedAtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Games", Storage="_Games", ThisKey="UserId", OtherKey="AbandonedByUserId")]
+		public EntitySet<Games> Games
+		{
+			get
+			{
+				return this._Games;
+			}
+			set
+			{
+				this._Games.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Games1", Storage="_Games1", ThisKey="UserId", OtherKey="CreatorId")]
+		public EntitySet<Games> Games1
+		{
+			get
+			{
+				return this._Games1;
+			}
+			set
+			{
+				this._Games1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Games2", Storage="_Games2", ThisKey="UserId", OtherKey="RetadorId")]
+		public EntitySet<Games> Games2
+		{
+			get
+			{
+				return this._Games2;
+			}
+			set
+			{
+				this._Games2.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_Games3", Storage="_Games3", ThisKey="UserId", OtherKey="WinnerId")]
+		public EntitySet<Games> Games3
+		{
+			get
+			{
+				return this._Games3;
+			}
+			set
+			{
+				this._Games3.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_GameMoves", Storage="_GameMoves", ThisKey="UserId", OtherKey="UserId")]
+		public EntitySet<GameMoves> GameMoves
+		{
+			get
+			{
+				return this._GameMoves;
+			}
+			set
+			{
+				this._GameMoves.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_FriendRequests", Storage="_FriendRequests", ThisKey="UserId", OtherKey="ReceiverUserId")]
+		public EntitySet<FriendRequests> FriendRequests
+		{
+			get
+			{
+				return this._FriendRequests;
+			}
+			set
+			{
+				this._FriendRequests.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_FriendRequests1", Storage="_FriendRequests1", ThisKey="UserId", OtherKey="SenderUserId")]
+		public EntitySet<FriendRequests> FriendRequests1
+		{
+			get
+			{
+				return this._FriendRequests1;
+			}
+			set
+			{
+				this._FriendRequests1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_EmailVerificationCodes", Storage="_EmailVerificationCodes", ThisKey="UserId", OtherKey="UserId")]
+		public EntitySet<EmailVerificationCodes> EmailVerificationCodes
+		{
+			get
+			{
+				return this._EmailVerificationCodes;
+			}
+			set
+			{
+				this._EmailVerificationCodes.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Games(Games entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users = this;
+		}
+		
+		private void detach_Games(Games entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users = null;
+		}
+		
+		private void attach_Games1(Games entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users1 = this;
+		}
+		
+		private void detach_Games1(Games entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users1 = null;
+		}
+		
+		private void attach_Games2(Games entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users2 = this;
+		}
+		
+		private void detach_Games2(Games entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users2 = null;
+		}
+		
+		private void attach_Games3(Games entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users3 = this;
+		}
+		
+		private void detach_Games3(Games entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users3 = null;
+		}
+		
+		private void attach_GameMoves(GameMoves entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users = this;
+		}
+		
+		private void detach_GameMoves(GameMoves entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users = null;
+		}
+		
+		private void attach_FriendRequests(FriendRequests entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users = this;
+		}
+		
+		private void detach_FriendRequests(FriendRequests entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users = null;
+		}
+		
+		private void attach_FriendRequests1(FriendRequests entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users1 = this;
+		}
+		
+		private void detach_FriendRequests1(FriendRequests entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users1 = null;
+		}
+		
+		private void attach_EmailVerificationCodes(EmailVerificationCodes entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users = this;
+		}
+		
+		private void detach_EmailVerificationCodes(EmailVerificationCodes entity)
+		{
+			this.SendPropertyChanging();
+			entity.Users = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.EmailVerificationCodes")]
+	public partial class EmailVerificationCodes : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _VerificationCodeId;
+		
+		private int _UserId;
+		
+		private string _Email;
+		
+		private string _CodeHash;
+		
+		private string _Purpose;
+		
+		private System.DateTime _ExpiresAt;
+		
+		private System.Nullable<System.DateTime> _UsedAt;
+		
+		private System.DateTime _CreatedAt;
+		
+		private EntityRef<Users> _Users;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnVerificationCodeIdChanging(int value);
+    partial void OnVerificationCodeIdChanged();
+    partial void OnUserIdChanging(int value);
+    partial void OnUserIdChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnCodeHashChanging(string value);
+    partial void OnCodeHashChanged();
+    partial void OnPurposeChanging(string value);
+    partial void OnPurposeChanged();
+    partial void OnExpiresAtChanging(System.DateTime value);
+    partial void OnExpiresAtChanged();
+    partial void OnUsedAtChanging(System.Nullable<System.DateTime> value);
+    partial void OnUsedAtChanged();
+    partial void OnCreatedAtChanging(System.DateTime value);
+    partial void OnCreatedAtChanged();
+    #endregion
+		
+		public EmailVerificationCodes()
+		{
+			this._Users = default(EntityRef<Users>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VerificationCodeId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int VerificationCodeId
+		{
+			get
+			{
+				return this._VerificationCodeId;
+			}
+			set
+			{
+				if ((this._VerificationCodeId != value))
+				{
+					this.OnVerificationCodeIdChanging(value);
+					this.SendPropertyChanging();
+					this._VerificationCodeId = value;
+					this.SendPropertyChanged("VerificationCodeId");
+					this.OnVerificationCodeIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="Int NOT NULL")]
+		public int UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					if (this._Users.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodeHash", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string CodeHash
+		{
+			get
+			{
+				return this._CodeHash;
+			}
+			set
+			{
+				if ((this._CodeHash != value))
+				{
+					this.OnCodeHashChanging(value);
+					this.SendPropertyChanging();
+					this._CodeHash = value;
+					this.SendPropertyChanged("CodeHash");
+					this.OnCodeHashChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Purpose", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
+		public string Purpose
+		{
+			get
+			{
+				return this._Purpose;
+			}
+			set
+			{
+				if ((this._Purpose != value))
+				{
+					this.OnPurposeChanging(value);
+					this.SendPropertyChanging();
+					this._Purpose = value;
+					this.SendPropertyChanged("Purpose");
+					this.OnPurposeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExpiresAt", DbType="DateTime NOT NULL")]
+		public System.DateTime ExpiresAt
+		{
+			get
+			{
+				return this._ExpiresAt;
+			}
+			set
+			{
+				if ((this._ExpiresAt != value))
+				{
+					this.OnExpiresAtChanging(value);
+					this.SendPropertyChanging();
+					this._ExpiresAt = value;
+					this.SendPropertyChanged("ExpiresAt");
+					this.OnExpiresAtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsedAt", DbType="DateTime")]
+		public System.Nullable<System.DateTime> UsedAt
+		{
+			get
+			{
+				return this._UsedAt;
+			}
+			set
+			{
+				if ((this._UsedAt != value))
+				{
+					this.OnUsedAtChanging(value);
+					this.SendPropertyChanging();
+					this._UsedAt = value;
+					this.SendPropertyChanged("UsedAt");
+					this.OnUsedAtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedAt", DbType="DateTime NOT NULL")]
+		public System.DateTime CreatedAt
+		{
+			get
+			{
+				return this._CreatedAt;
+			}
+			set
+			{
+				if ((this._CreatedAt != value))
+				{
+					this.OnCreatedAtChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedAt = value;
+					this.SendPropertyChanged("CreatedAt");
+					this.OnCreatedAtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_EmailVerificationCodes", Storage="_Users", ThisKey="UserId", OtherKey="UserId", IsForeignKey=true)]
+		public Users Users
+		{
+			get
+			{
+				return this._Users.Entity;
+			}
+			set
+			{
+				Users previousValue = this._Users.Entity;
+				if (((previousValue != value) 
+							|| (this._Users.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Users.Entity = null;
+						previousValue.EmailVerificationCodes.Remove(this);
+					}
+					this._Users.Entity = value;
+					if ((value != null))
+					{
+						value.EmailVerificationCodes.Add(this);
+						this._UserId = value.UserId;
+					}
+					else
+					{
+						this._UserId = default(int);
+					}
+					this.SendPropertyChanged("Users");
 				}
 			}
 		}

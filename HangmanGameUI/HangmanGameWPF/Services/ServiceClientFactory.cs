@@ -28,6 +28,12 @@ namespace HangmanGameWPF.Services
                 .CreateChannel();
         }
 
+        public static IAccountRecoveryService CreateAccountRecoveryClient()
+        {
+            return new ChannelFactory<IAccountRecoveryService>("BasicHttpBinding_IAccountRecoveryService")
+                .CreateChannel();
+        }
+
         public static IGameService CreateGameClient(IGameCallback callbackInstance)
         {
             var context = new InstanceContext(callbackInstance);

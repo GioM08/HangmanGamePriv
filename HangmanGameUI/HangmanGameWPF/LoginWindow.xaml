@@ -94,6 +94,11 @@
                                 Height="40" Margin="0,0,0,14"
                                 Click="BtnLogin_Click"/>
 
+                        <Button Content="[ OLVIDE MI CONTRASENA ]"
+                                Style="{StaticResource LinkButton}"
+                                Margin="0,0,0,14"
+                                Click="BtnForgotPassword_Click"/>
+
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <TextBlock Text="Sin cuenta?  " FontFamily="Courier New"
                                        FontSize="12" Foreground="#007A1F"

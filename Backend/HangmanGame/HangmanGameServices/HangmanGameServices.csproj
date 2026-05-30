@@ -62,11 +62,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Services\AccountRecoveryService.svc" />
     <Content Include="Services\CategoryService.svc" />
     <Content Include="Services\FriendService.svc" />
     <Content Include="Services\GameService.svc" />
     <Content Include="Services\LeaderboardService.svc" />
     <Content Include="Services\UserService.svc" />
+    <Content Include="SQL\CreateAccountRecoveryTables.sql" />
     <Content Include="SQL\CreateFriendTables.sql" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -75,6 +77,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AccountRecoveryService.svc.cs">
+      <DependentUpon>AccountRecoveryService.svc</DependentUpon>
+    </Compile>
     <Compile Include="Services\CategoryService.svc.cs">
       <DependentUpon>CategoryService.svc</DependentUpon>
     </Compile>
@@ -85,6 +90,7 @@
     <Compile Include="Services\GameService.svc.cs">
       <DependentUpon>GameService.svc</DependentUpon>
     </Compile>
+    <Compile Include="Services\IAccountRecoveryService.cs" />
     <Compile Include="Services\ICategoryService.cs" />
     <Compile Include="Services\IFriendService.cs" />
     <Compile Include="Services\IGameCallback.cs" />
@@ -102,6 +108,10 @@
   <ItemGroup>
     <Content Include="ConnectionStrings.example.config" />
     <Content Include="ConnectionStrings.config" />
+    <Content Include="EmailSettings.example.config" />
+    <Content Include="EmailSettings.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="SQL\CreateGameTables.sql" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
