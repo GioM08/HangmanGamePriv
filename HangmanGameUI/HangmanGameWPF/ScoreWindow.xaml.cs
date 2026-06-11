@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using HangmanGameWPF.Localization;
@@ -33,24 +34,24 @@ namespace HangmanGameWPF
                     TxtLost.Text = score.GamesLost.ToString();
                     TxtPoints.Text = score.TotalPoints.ToString();
 
-                    var entries = new List<ScoreEntry>();
+                    var entries = new List<(DateTime Date, ScoreEntry Entry)>();
 
                     if (score.WonGames != null)
                         foreach (var g in score.WonGames)
-                            entries.Add(new ScoreEntry(g.Word, g.OpponentName, ClientLocalizer.Get("SCORE_WON"),
-                                g.PointsEarned, g.GameDate.ToString("dd/MM/yy")));
+                            entries.Add((g.GameDate, new ScoreEntry(g.Word, g.OpponentName, ClientLocalizer.Get("SCORE_WON"),
+                                g.PointsEarned, g.GameDate.ToString("dd/MM/yy"))));
 
                     if (score.LostGames != null)
                         foreach (var g in score.LostGames)
-                            entries.Add(new ScoreEntry(g.Word, g.OpponentName, ClientLocalizer.Get("SCORE_LOST"),
-                                g.PointsEarned, g.GameDate.ToString("dd/MM/yy")));
+                            entries.Add((g.GameDate, new ScoreEntry(g.Word, g.OpponentName, ClientLocalizer.Get("SCORE_LOST"),
+                                g.PointsEarned, g.GameDate.ToString("dd/MM/yy"))));
 
                     if (score.Penalties != null)
                         foreach (var p in score.Penalties)
-                            entries.Add(new ScoreEntry(p.Word, p.Reason, ClientLocalizer.Get("SCORE_PENALIZED"),
-                                -p.PointsDeducted, p.PenaltyDate.ToString("dd/MM/yy")));
+                            entries.Add((p.PenaltyDate, new ScoreEntry(p.Word, p.Reason, ClientLocalizer.Get("SCORE_PENALIZED"),
+                                -p.PointsDeducted, p.PenaltyDate.ToString("dd/MM/yy"))));
 
-                    ScoreGrid.ItemsSource = entries;
+                    ScoreGrid.ItemsSource = entries.OrderByDescending(e => e.Date).Select(e => e.Entry).ToList();
                 }
             }
             catch (Exception ex)
