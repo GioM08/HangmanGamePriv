@@ -48,7 +48,7 @@
                           Background="#0C0C0C" Foreground="#00FF41"
                           BorderBrush="#007A1F" BorderThickness="1"
                           GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#1A2A1A"
-                          AutoGenerateColumns="False"
+                          AutoGenerateColumns="False" IsReadOnly="True"
                           CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False"
                           SelectionMode="Single" SelectionUnit="FullRow"
                           RowBackground="#0C0C0C" AlternatingRowBackground="#0A150A"
@@ -95,6 +95,7 @@
                         <DataGridTextColumn Header="{loc:Loc GRID_CREATOR}" Binding="{Binding Nombre}" Width="*"/>
                         <DataGridTextColumn Header="{loc:Loc GRID_EMAIL}" Binding="{Binding Correo}" Width="*"/>
                         <DataGridTextColumn Header="{loc:Loc GRID_CATEGORY}" Binding="{Binding Categoria}" Width="120"/>
+                        <DataGridTextColumn Header="{loc:Loc GRID_LANGUAGE}" Binding="{Binding Idioma}" Width="90"/>
                         <DataGridTextColumn Header="{loc:Loc GRID_DESCRIPTION}" Binding="{Binding Descripcion}" Width="*"/>
                         <DataGridTextColumn Header="{loc:Loc GRID_LETTERS}" Binding="{Binding Letras}" Width="70"/>
                         <DataGridTextColumn Header="{loc:Loc GRID_DATE}" Binding="{Binding Fecha}" Width="100"/>

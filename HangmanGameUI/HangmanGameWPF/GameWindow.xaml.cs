@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -11,11 +12,13 @@ using HangmanGameWPF.Services;
 
 namespace HangmanGameWPF
 {
+    [CallbackBehavior(ConcurrencyMode = ConcurrencyMode.Reentrant, UseSynchronizationContext = true)]
     public partial class GameWindow : Window, IGameCallback
     {
         private readonly int _gameId;
         private readonly bool _isCreator;
         private readonly GameDto _gameInfo;
+        private readonly bool _isEnglishGame;
         private IGameService _gameChannel;
         private readonly ChatClient _chatClient;
         private GameStateDto _lastGameState;
@@ -45,6 +48,7 @@ namespace HangmanGameWPF
             _gameId    = game.GameId;
             _isCreator = isCreator;
             _gameInfo  = game;
+            _isEnglishGame = string.Equals(game.LanguageCode, "EN", StringComparison.OrdinalIgnoreCase);
             _chatClient = new ChatClient();
 
             SelectCurrentLanguage();
@@ -54,6 +58,12 @@ namespace HangmanGameWPF
                 : ClientLocalizer.Get("GAME_ROLE_CHALLENGER");
             TxtCategory.Text    = game.Category ?? string.Empty;
             TxtDescription.Text = game.Description ?? string.Empty;
+
+            if (_isEnglishGame)
+            {
+                BtnEnie.IsEnabled        = false;
+                BtnEnie.IsHitTestVisible = false;
+            }
 
             Loaded  += OnLoaded;
             Closing += OnWindowClosing;
@@ -133,11 +143,62 @@ namespace HangmanGameWPF
             _chatClient.Connect(_gameId, SessionManager.UserId, SessionManager.FullName ?? ClientLocalizer.Get("PLAYER_FALLBACK"));
         }
 
+        private bool _abandonPending;
+
         private void OnWindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (!_gameEnded)
+            {
+                var r = MessageBox.Show(
+                    ClientLocalizer.Get("GAME_WINDOW_CLOSE_CONFIRM"),
+                    ClientLocalizer.Get("ATTENTION_TITLE"),
+                    MessageBoxButton.YesNo);
+
+                if (r != MessageBoxResult.Yes)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+
+                _gameEnded = true;
+                _abandonPending = true;
+            }
+
             _chatClient?.Disconnect();
-            if (_gameChannel != null)
-                ServiceClientFactory.CloseChannel(_gameChannel);
+            CloseGameChannelAsync();
+        }
+
+        private void CloseGameChannelAsync()
+        {
+            if (_gameChannel == null) return;
+
+            var channel = _gameChannel;
+            int gameId = _gameId;
+            int userId = SessionManager.UserId;
+            bool abandon = _abandonPending;
+            _gameChannel = null;
+
+            System.Threading.ThreadPool.QueueUserWorkItem(_ =>
+            {
+                try
+                {
+                    if (abandon)
+                    {
+                        using (ServiceCallContext.CreateScope(channel))
+                        {
+                            channel.AbandonGame(gameId, userId);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"[GameWindow] Abandon error: {ex.Message}");
+                }
+                finally
+                {
+                    ServiceClientFactory.CloseChannel(channel);
+                }
+            });
         }
 
         // ── IGameCallback implementation ────────────────────────────────────
@@ -216,6 +277,16 @@ namespace HangmanGameWPF
             foreach (var btn in GetKeyButtons())
             {
                 string letter = btn.Tag?.ToString() ?? string.Empty;
+
+                // La Ñ no existe en el alfabeto inglés: se deshabilita en partidas en inglés
+                if (letter == "Ñ" && _isEnglishGame)
+                {
+                    btn.Style            = normalStyle;
+                    btn.IsEnabled        = false;
+                    btn.IsHitTestVisible = false;
+                    continue;
+                }
+
                 bool isUsed    = used.Contains(letter);
                 bool isCorrect = isUsed && revealed.Contains(letter);
 
@@ -275,7 +346,7 @@ namespace HangmanGameWPF
         {
             return new[] {
                 BtnQ,BtnW,BtnE,BtnR,BtnT,BtnY,BtnU,BtnI,BtnO,BtnP,
-                BtnA,BtnS,BtnD,BtnF,BtnG,BtnH,BtnJ,BtnK,BtnL,
+                BtnA,BtnS,BtnD,BtnF,BtnG,BtnH,BtnJ,BtnK,BtnL,BtnEnie,
                 BtnZ,BtnX,BtnC,BtnV,BtnB,BtnN,BtnM
             };
         }
@@ -382,14 +453,6 @@ namespace HangmanGameWPF
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
-            if (!_gameEnded)
-            {
-                var r = MessageBox.Show(
-                    ClientLocalizer.Get("GAME_WINDOW_CLOSE_CONFIRM"),
-                    ClientLocalizer.Get("ATTENTION_TITLE"),
-                    MessageBoxButton.YesNo);
-                if (r != MessageBoxResult.Yes) return;
-            }
             Close();
         }
 
@@ -405,22 +468,9 @@ namespace HangmanGameWPF
 
             if (result != MessageBoxResult.Yes) return;
 
-            try
-            {
-                if (_gameChannel != null)
-                {
-                    using (ServiceCallContext.CreateScope(_gameChannel))
-                    {
-                        _gameChannel.AbandonGame(_gameId, SessionManager.UserId);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"[GameWindow] Abandon error: {ex.Message}");
-            }
-
             _gameEnded = true;
+            _abandonPending = true;
+
             new GameListWindow().Show();
             Close();
         }
