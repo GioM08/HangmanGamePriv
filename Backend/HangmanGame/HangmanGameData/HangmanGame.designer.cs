@@ -53,8 +53,8 @@ namespace HangmanGameData
     partial void DeleteEmailVerificationCodes(EmailVerificationCodes instance);
     #endregion
 		
-		public HangmanGameDataContext() : 
-				base(global::HangmanGameData.Properties.Settings.Default.HangmanGameDBConnectionString1, mappingSource)
+		public HangmanGameDataContext() :
+				base(global::HangmanGameData.Properties.Settings.Default.HangmanGameDBConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
