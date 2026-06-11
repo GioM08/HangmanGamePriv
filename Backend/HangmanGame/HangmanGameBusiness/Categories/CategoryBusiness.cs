@@ -23,8 +23,7 @@ namespace HangmanGameBusiness.Categories
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(languageCode))
-                    languageCode = "ES";
+                languageCode = NormalizeLanguageCode(languageCode);
 
                 var categories = _categoryRepository.GetAllCategories(languageCode);
                 return new GameOperationResultDto
@@ -48,8 +47,7 @@ namespace HangmanGameBusiness.Categories
                 if (categoryId <= 0)
                     return Fail(MessageKeys.CategoryInvalid);
 
-                if (string.IsNullOrWhiteSpace(languageCode))
-                    languageCode = "ES";
+                languageCode = NormalizeLanguageCode(languageCode);
 
                 var words = _categoryRepository.GetWordsByCategory(categoryId, languageCode);
                 return new GameOperationResultDto
@@ -64,6 +62,19 @@ namespace HangmanGameBusiness.Categories
             {
                 return Fail(MessageKeys.UnexpectedError);
             }
+        }
+
+        private static string NormalizeLanguageCode(string languageCode)
+        {
+            if (string.IsNullOrWhiteSpace(languageCode))
+                return "ES";
+
+            string code = languageCode.Trim();
+            int dashIndex = code.IndexOf('-');
+            if (dashIndex > 0)
+                code = code.Substring(0, dashIndex);
+
+            return code.ToUpperInvariant();
         }
 
         private static GameOperationResultDto Fail(string messageKey)

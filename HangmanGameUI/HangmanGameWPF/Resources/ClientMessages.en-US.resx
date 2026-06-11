@@ -329,7 +329,7 @@ You will lose 3 points.</value>
     <value>FULL NAME:</value>
   </data>
   <data name="VERIFY_EMAIL_TITLE" xml:space="preserve">
-    <value>&amp;gt; VERIFY EMAIL</value>
+    <value>&gt; VERIFY EMAIL</value>
   </data>
   <data name="REMOVE_BUTTON" xml:space="preserve">
     <value>[ REMOVE ]</value>
@@ -350,7 +350,7 @@ You will lose 3 points.</value>
     <value>Global player ranking ordered by score</value>
   </data>
   <data name="PROFILE_TITLE" xml:space="preserve">
-    <value>&amp;gt; PROFILE</value>
+    <value>&gt; PROFILE</value>
   </data>
   <data name="MAIN_MENU_SCORE_DESC" xml:space="preserve">
     <value>Game history</value>
@@ -368,16 +368,16 @@ You will lose 3 points.</value>
     <value>REGISTERED PLAYER</value>
   </data>
   <data name="FRIENDS_TITLE" xml:space="preserve">
-    <value>&amp;gt; FRIENDS MODULE</value>
+    <value>&gt; FRIENDS MODULE</value>
   </data>
   <data name="BACK_TO_MENU_BUTTON" xml:space="preserve">
-    <value>[ &amp;lt;&amp;lt; BACK TO MENU ]</value>
+    <value>[ &lt;&lt; BACK TO MENU ]</value>
   </data>
   <data name="NEW_GAME_BUTTON" xml:space="preserve">
     <value>[ + NEW GAME ]</value>
   </data>
   <data name="REGISTER_TITLE" xml:space="preserve">
-    <value>&amp;gt; CREATE ACCOUNT</value>
+    <value>&gt; CREATE ACCOUNT</value>
   </data>
   <data name="RESET_TITLE_BAR" xml:space="preserve">
     <value>[ RESET PASSWORD ]</value>
@@ -416,7 +416,7 @@ You will lose 3 points.</value>
     <value>EMAIL  (not editable):</value>
   </data>
   <data name="BACK_BUTTON" xml:space="preserve">
-    <value>[ &amp;lt;&amp;lt; BACK ]</value>
+    <value>[ &lt;&lt; BACK ]</value>
   </data>
   <data name="FRIENDS_TITLE_BAR" xml:space="preserve">
     <value>[ FRIENDS TERMINAL ]  --  SOCIAL MODULE</value>
@@ -431,7 +431,7 @@ You will lose 3 points.</value>
     <value>[ CHANGE PASSWORD ]</value>
   </data>
   <data name="SCORE_TITLE" xml:space="preserve">
-    <value>&amp;gt; VIEW SCORE  /  GAME HISTORY</value>
+    <value>&gt; VIEW SCORE  /  GAME HISTORY</value>
   </data>
   <data name="GAMELIST_TITLE_BAR" xml:space="preserve">
     <value>[ HANGMAN TERMINAL  v1.0 ]  --  GAME LIST</value>
@@ -503,7 +503,7 @@ You will lose 3 points.</value>
     <value>[ HANGMAN TERMINAL  v1.0 ]  --  NEW GAME</value>
   </data>
   <data name="LEADERBOARD_HEADER" xml:space="preserve">
-    <value>&amp;gt; TOP 10 GLOBAL SCORE</value>
+    <value>&gt; TOP 10 GLOBAL SCORE</value>
   </data>
   <data name="REJECT_BUTTON" xml:space="preserve">
     <value>[ REJECT ]</value>
@@ -526,8 +526,17 @@ You will lose 3 points.</value>
   <data name="GRID_CATEGORY" xml:space="preserve">
     <value>  CATEGORY</value>
   </data>
+  <data name="GRID_LANGUAGE" xml:space="preserve">
+    <value>  LANGUAGE</value>
+  </data>
+  <data name="LANG_NAME_ES" xml:space="preserve">
+    <value>Spanish</value>
+  </data>
+  <data name="LANG_NAME_EN" xml:space="preserve">
+    <value>English</value>
+  </data>
   <data name="CREATE_GAME_TITLE" xml:space="preserve">
-    <value>&amp;gt; GENERATE NEW GAME</value>
+    <value>&gt; GENERATE NEW GAME</value>
   </data>
   <data name="RESEND_CODE_BUTTON" xml:space="preserve">
     <value>[ RESEND CODE ]</value>
@@ -563,7 +572,7 @@ You will lose 3 points.</value>
     <value>games</value>
   </data>
   <data name="GAMELIST_TITLE" xml:space="preserve">
-    <value>&amp;gt; AVAILABLE GAMES</value>
+    <value>&gt; AVAILABLE GAMES</value>
   </data>
   <data name="FOOTER_GAME_OVER" xml:space="preserve">
     <value>(C) 2024 HANGMAN CORP  |  GAME OVER</value>
@@ -605,10 +614,10 @@ You will lose 3 points.</value>
     <value>[ RECEIVED REQUESTS ]</value>
   </data>
   <data name="RESET_TITLE" xml:space="preserve">
-    <value>&amp;gt; NEW PASSWORD</value>
+    <value>&gt; NEW PASSWORD</value>
   </data>
   <data name="FORGOT_TITLE" xml:space="preserve">
-    <value>&amp;gt; RECOVER PASSWORD</value>
+    <value>&gt; RECOVER PASSWORD</value>
   </data>
   <data name="MAIN_MENU_GAME_LIST_DESC" xml:space="preserve">
     <value>View and join games</value>
@@ -644,7 +653,7 @@ You will lose 3 points.</value>
     <value>[ SAVE CHANGES ]</value>
   </data>
   <data name="EDIT_PROFILE_TITLE" xml:space="preserve">
-    <value>&amp;gt; EDIT INFORMATION</value>
+    <value>&gt; EDIT INFORMATION</value>
   </data>
   <data name="ACCEPT_BUTTON" xml:space="preserve">
     <value>[ ACCEPT ]</value>

@@ -160,6 +160,7 @@
                                 <Button x:Name="BtnJ" Content="J" Style="{StaticResource KeyboardKey}" Tag="J" Click="KeyButton_Click"/>
                                 <Button x:Name="BtnK" Content="K" Style="{StaticResource KeyboardKey}" Tag="K" Click="KeyButton_Click"/>
                                 <Button x:Name="BtnL" Content="L" Style="{StaticResource KeyboardKey}" Tag="L" Click="KeyButton_Click"/>
+                                <Button x:Name="BtnEnie" Content="Ñ" Style="{StaticResource KeyboardKey}" Tag="Ñ" Click="KeyButton_Click"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Button x:Name="BtnZ" Content="Z" Style="{StaticResource KeyboardKey}" Tag="Z" Click="KeyButton_Click"/>

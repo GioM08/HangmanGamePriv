@@ -14,6 +14,7 @@ namespace HangmanGameEntities.Dtos
         [DataMember] public string RetadorName { get; set; }
         [DataMember] public int WordLength { get; set; }
         [DataMember] public string Category { get; set; }
+        [DataMember] public string LanguageCode { get; set; }
         [DataMember] public string Description { get; set; }
         [DataMember] public int Status { get; set; }
         [DataMember] public DateTime CreatedAt { get; set; }

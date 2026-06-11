@@ -152,7 +152,7 @@ Perderas 3 puntos.</value>
     <value>NOMBRE COMPLETO:</value>
   </data>
   <data name="VERIFY_EMAIL_TITLE" xml:space="preserve">
-    <value>&amp;gt; VERIFICAR CORREO</value>
+    <value>&gt; VERIFICAR CORREO</value>
   </data>
   <data name="REMOVE_BUTTON" xml:space="preserve">
     <value>[ ELIMINAR ]</value>
@@ -173,7 +173,7 @@ Perderas 3 puntos.</value>
     <value>Ranking global de jugadores ordenado por puntaje</value>
   </data>
   <data name="PROFILE_TITLE" xml:space="preserve">
-    <value>&amp;gt; PERFIL</value>
+    <value>&gt; PERFIL</value>
   </data>
   <data name="MAIN_MENU_SCORE_DESC" xml:space="preserve">
     <value>Historial de partidas</value>
@@ -191,16 +191,16 @@ Perderas 3 puntos.</value>
     <value>JUGADOR REGISTRADO</value>
   </data>
   <data name="FRIENDS_TITLE" xml:space="preserve">
-    <value>&amp;gt; MODULO DE AMIGOS</value>
+    <value>&gt; MODULO DE AMIGOS</value>
   </data>
   <data name="BACK_TO_MENU_BUTTON" xml:space="preserve">
-    <value>[ &amp;lt;&amp;lt; VOLVER AL MENU ]</value>
+    <value>[ &lt;&lt; VOLVER AL MENU ]</value>
   </data>
   <data name="NEW_GAME_BUTTON" xml:space="preserve">
     <value>[ + NUEVA PARTIDA ]</value>
   </data>
   <data name="REGISTER_TITLE" xml:space="preserve">
-    <value>&amp;gt; CREAR CUENTA</value>
+    <value>&gt; CREAR CUENTA</value>
   </data>
   <data name="RESET_TITLE_BAR" xml:space="preserve">
     <value>[ RESET PASSWORD ]</value>
@@ -239,7 +239,7 @@ Perderas 3 puntos.</value>
     <value>CORREO ELECTRONICO  (no editable):</value>
   </data>
   <data name="BACK_BUTTON" xml:space="preserve">
-    <value>[ &amp;lt;&amp;lt; VOLVER ]</value>
+    <value>[ &lt;&lt; VOLVER ]</value>
   </data>
   <data name="FRIENDS_TITLE_BAR" xml:space="preserve">
     <value>[ FRIENDS TERMINAL ]  --  SOCIAL MODULE</value>
@@ -254,7 +254,7 @@ Perderas 3 puntos.</value>
     <value>[ CAMBIAR CONTRASENA ]</value>
   </data>
   <data name="SCORE_TITLE" xml:space="preserve">
-    <value>&amp;gt; VER PUNTAJE  /  HISTORIAL DE PARTIDAS</value>
+    <value>&gt; VER PUNTAJE  /  HISTORIAL DE PARTIDAS</value>
   </data>
   <data name="GAMELIST_TITLE_BAR" xml:space="preserve">
     <value>[ HANGMAN TERMINAL  v1.0 ]  --  LISTA DE PARTIDAS</value>
@@ -326,7 +326,7 @@ Perderas 3 puntos.</value>
     <value>[ HANGMAN TERMINAL  v1.0 ]  --  NUEVA PARTIDA</value>
   </data>
   <data name="LEADERBOARD_HEADER" xml:space="preserve">
-    <value>&amp;gt; TOP 10 GLOBAL SCORE</value>
+    <value>&gt; TOP 10 GLOBAL SCORE</value>
   </data>
   <data name="REJECT_BUTTON" xml:space="preserve">
     <value>[ RECHAZAR ]</value>
@@ -350,7 +350,7 @@ Perderas 3 puntos.</value>
     <value>  CATEGORIA</value>
   </data>
   <data name="CREATE_GAME_TITLE" xml:space="preserve">
-    <value>&amp;gt; GENERAR NUEVA PARTIDA</value>
+    <value>&gt; GENERAR NUEVA PARTIDA</value>
   </data>
   <data name="RESEND_CODE_BUTTON" xml:space="preserve">
     <value>[ REENVIAR CODIGO ]</value>
@@ -386,7 +386,7 @@ Perderas 3 puntos.</value>
     <value>partidas</value>
   </data>
   <data name="GAMELIST_TITLE" xml:space="preserve">
-    <value>&amp;gt; PARTIDAS DISPONIBLES</value>
+    <value>&gt; PARTIDAS DISPONIBLES</value>
   </data>
   <data name="FOOTER_GAME_OVER" xml:space="preserve">
     <value>(C) 2024 HANGMAN CORP  |  FIN DE PARTIDA</value>
@@ -428,10 +428,10 @@ Perderas 3 puntos.</value>
     <value>[ SOLICITUDES RECIBIDAS ]</value>
   </data>
   <data name="RESET_TITLE" xml:space="preserve">
-    <value>&amp;gt; NUEVA CONTRASENA</value>
+    <value>&gt; NUEVA CONTRASENA</value>
   </data>
   <data name="FORGOT_TITLE" xml:space="preserve">
-    <value>&amp;gt; RECUPERAR CONTRASENA</value>
+    <value>&gt; RECUPERAR CONTRASENA</value>
   </data>
   <data name="MAIN_MENU_GAME_LIST_DESC" xml:space="preserve">
     <value>Ver y unirse a partidas</value>
@@ -467,7 +467,7 @@ Perderas 3 puntos.</value>
     <value>[ GUARDAR CAMBIOS ]</value>
   </data>
   <data name="EDIT_PROFILE_TITLE" xml:space="preserve">
-    <value>&amp;gt; EDITAR INFORMACION</value>
+    <value>&gt; EDITAR INFORMACION</value>
   </data>
   <data name="ACCEPT_BUTTON" xml:space="preserve">
     <value>[ ACEPTAR ]</value>

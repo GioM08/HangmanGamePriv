@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="HangmanGameDB" Class="HangmanGameDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=LAPTOP-9IURR4LD;Initial Catalog=HangmanGameDB;Integrated Security=True;Encrypt=True;Trust Server Certificate=True" SettingsObjectName="HangmanGameData.Properties.Settings" SettingsPropertyName="HangmanGameDBConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=YOUR_SERVER_NAME;Initial Catalog=HangmanGameDB;User ID=YOUR_SQL_USER;Password=YOUR_PASSWORD;TrustServerCertificate=True" SettingsObjectName="HangmanGameData.Properties.Settings" SettingsPropertyName="HangmanGameDBConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Words" Member="Words">
     <Type Name="Words">
       <Column Name="WordId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />

@@ -9,7 +9,6 @@ namespace HangmanGameData.Repositories
     {
         private const int MaxIncorrectAttempts = 6;
         private const int PointsWinner = 10;
-        private const int PointsCreatorWins = 5;
         private const int PointsPenalty = -3;
 
         public GameDto CreateGame(CreateGameDto createGameDto)
@@ -168,7 +167,7 @@ namespace HangmanGameData.Repositories
                 if (winnerId > 0)
                 {
                     game.WinnerId = winnerId;
-                    ApplyScoreChange(db, winnerId, PointsCreatorWins);
+                    ApplyScoreChange(db, winnerId, PointsWinner);
                 }
                 ApplyScoreChange(db, userId, PointsPenalty);
 
@@ -266,6 +265,7 @@ namespace HangmanGameData.Repositories
                 RetadorName = retador?.FullName,
                 WordLength = word?.Text?.Length ?? 0,
                 Category = category?.Name ?? string.Empty,
+                LanguageCode = word?.LanguageCode ?? string.Empty,
                 Description = game.Description,
                 Status = game.Status,
                 CreatedAt = game.CreatedAt
@@ -291,10 +291,12 @@ namespace HangmanGameData.Repositories
 
             bool wordGuessed = !revealed.Contains("_");
             bool hangmanComplete = incorrectCount >= MaxIncorrectAttempts;
-            bool isOver = wordGuessed || hangmanComplete;
+            bool abandoned = game.Status == 3;
+            bool isOver = wordGuessed || hangmanComplete || abandoned;
 
             int? winnerId = null;
-            if (wordGuessed) winnerId = game.RetadorId;
+            if (abandoned) winnerId = game.WinnerId;
+            else if (wordGuessed) winnerId = game.RetadorId;
             else if (hangmanComplete) winnerId = game.CreatorId;
 
             return new GameStateDto
@@ -308,11 +310,13 @@ namespace HangmanGameData.Repositories
                 Status = game.Status,
                 LastLetter = lastLetter,
                 LastGuessCorrect = lastCorrect ?? false,
-                Message = message ?? (isOver
-                    ? (wordGuessed ? "Palabra adivinada!" : "Ahorcado completo. Perdiste.")
-                    : (lastLetter != null
-                        ? (lastCorrect == true ? $"¡La letra '{lastLetter}' esta en la palabra!" : $"La letra '{lastLetter}' no esta en la palabra.")
-                        : string.Empty))
+                Message = message ?? (abandoned
+                    ? "El otro jugador abandono la partida."
+                    : isOver
+                        ? (wordGuessed ? "Palabra adivinada!" : "Ahorcado completo. Perdiste.")
+                        : (lastLetter != null
+                            ? (lastCorrect == true ? $"¡La letra '{lastLetter}' esta en la palabra!" : $"La letra '{lastLetter}' no esta en la palabra.")
+                            : string.Empty))
             };
         }
 
@@ -321,7 +325,6 @@ namespace HangmanGameData.Repositories
             var user = db.Users.FirstOrDefault(u => u.UserId == userId);
             if (user == null) return;
             user.GlobalScore += delta;
-            if (user.GlobalScore < 0) user.GlobalScore = 0;
         }
     }
 }

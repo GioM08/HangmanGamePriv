@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\wilma\source\repos\HangmanGamePriv\HangmanGameUI\HangmanGameWPF\obj\Debug\
+C:\Users\Giovi\Desktop\Tareas\Tecnologias-Construccion\Proyecto\HangmanGameUI\HangmanGameWPF\obj\Debug\
 HangmanGameWPF
 none
 false
 DEBUG;TRACE
-C:\Users\wilma\source\repos\HangmanGamePriv\HangmanGameUI\HangmanGameWPF\App.xaml
-15-1287375485
+C:\Users\Giovi\Desktop\Tareas\Tecnologias-Construccion\Proyecto\HangmanGameUI\HangmanGameWPF\App.xaml
+15-1514314770
 
-30-1744295642
-16-1295605092
+30234001386
+16-1933516784
 CreateGameWindow.xaml;EditProfileWindow.xaml;FriendsWindow.xaml;ForgotPasswordWindow.xaml;GameListWindow.xaml;GameWindow.xaml;LoginWindow.xaml;LeaderboardWindow.xaml;MainWindow.xaml;ProfileWindow.xaml;RegisterWindow.xaml;ResetPasswordWindow.xaml;GameResultWindow.xaml;ScoreWindow.xaml;VerifyEmailWindow.xaml;
 
-True
+False
 

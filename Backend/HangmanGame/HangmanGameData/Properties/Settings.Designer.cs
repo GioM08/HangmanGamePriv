@@ -26,22 +26,11 @@ namespace HangmanGameData.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=LAPTOP-9IURR4LD;Initial Catalog=HangmanGameDB;User ID=hangman_app_use" +
-            "r;Password=Hangman12345!;TrustServerCertificate=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=YOUR_SERVER_NAME;Initial Catalog=HangmanGameDB;User ID=YOUR_SQL_USE" +
+            "R;Password=YOUR_PASSWORD;TrustServerCertificate=True")]
         public string HangmanGameDBConnectionString {
             get {
                 return ((string)(this["HangmanGameDBConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=LAPTOP-9IURR4LD;Initial Catalog=HangmanGameDB;Integrated Security=Tru" +
-            "e;Encrypt=True;TrustServerCertificate=True")]
-        public string HangmanGameDBConnectionString1 {
-            get {
-                return ((string)(this["HangmanGameDBConnectionString1"]));
             }
         }
     }

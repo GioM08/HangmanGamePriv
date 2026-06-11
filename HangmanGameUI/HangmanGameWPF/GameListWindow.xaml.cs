@@ -45,6 +45,7 @@ namespace HangmanGameWPF
                                 g.CreatorName,
                                 g.CreatorEmail,
                                 g.Category,
+                                LanguageDisplay(g.LanguageCode),
                                 g.Description ?? string.Empty,
                                 g.WordLength,
                                 g.CreatedAt.ToString("dd/MM/yyyy")));
@@ -57,6 +58,16 @@ namespace HangmanGameWPF
             {
                 Debug.WriteLine($"[GameList] Error: {ex.Message}");
                 GameGrid.ItemsSource = new List<GameEntry>();
+            }
+        }
+
+        private static string LanguageDisplay(string languageCode)
+        {
+            switch ((languageCode ?? string.Empty).ToUpperInvariant())
+            {
+                case "ES": return ClientLocalizer.Get("LANG_NAME_ES");
+                case "EN": return ClientLocalizer.Get("LANG_NAME_EN");
+                default: return languageCode ?? string.Empty;
             }
         }
 
@@ -128,13 +139,14 @@ namespace HangmanGameWPF
         public string Nombre { get; }
         public string Correo { get; }
         public string Categoria { get; }
+        public string Idioma { get; }
         public string Descripcion { get; }
         public string Letras { get; }
         public string Fecha { get; }
 
-        public GameEntry(int id, string nombre, string correo, string cat, string desc, int len, string fecha)
+        public GameEntry(int id, string nombre, string correo, string cat, string idioma, string desc, int len, string fecha)
         {
-            GameId = id; Nombre = nombre; Correo = correo; Categoria = cat;
+            GameId = id; Nombre = nombre; Correo = correo; Categoria = cat; Idioma = idioma;
             Descripcion = desc; Letras = len.ToString(); Fecha = fecha;
         }
     }
