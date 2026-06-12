@@ -28,7 +28,7 @@ CREATE TABLE Games (
     CreatorId          INT      NOT NULL REFERENCES Users(UserId),
     RetadorId          INT      NULL     REFERENCES Users(UserId),
     WordId             INT      NOT NULL REFERENCES Words(WordId),
-    Status             INT      NOT NULL DEFAULT 0,  -- 0=Waiting 1=InProgress 2=Finished 3=Abandoned
+    Status             INT      NOT NULL DEFAULT 0,  -- 0=Waiting 1=InProgress 2=Finished 3=Abandoned 4=Cancelled
     Description        NVARCHAR(500) NULL,
     CreatedAt          DATETIME NOT NULL DEFAULT GETDATE(),
     StartedAt          DATETIME NULL,
@@ -36,6 +36,10 @@ CREATE TABLE Games (
     WinnerId           INT      NULL     REFERENCES Users(UserId),
     AbandonedByUserId  INT      NULL     REFERENCES Users(UserId)
 );
+
+IF OBJECT_ID('dbo.CK_Games_Status', 'C') IS NULL
+ALTER TABLE Games
+ADD CONSTRAINT CK_Games_Status CHECK (Status IN (0, 1, 2, 3, 4));
 
 IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'GameMoves')
 CREATE TABLE GameMoves (

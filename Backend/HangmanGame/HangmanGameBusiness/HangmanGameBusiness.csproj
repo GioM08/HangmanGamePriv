@@ -57,7 +57,13 @@
     <Compile Include="Leaderboards\ILeaderboardBusiness.cs" />
     <Compile Include="Leaderboards\LeaderboardBusiness.cs" />
     <Compile Include="Localization\LanguageContext.cs" />
-    <Compile Include="Localization\MessageKeys.cs" />
+    <Compile Include="Localization\AccountRecovery\MessageKeys.AccountRecovery.cs" />
+    <Compile Include="Localization\Categories\MessageKeys.Categories.cs" />
+    <Compile Include="Localization\Common\MessageKeys.Common.cs" />
+    <Compile Include="Localization\Friends\MessageKeys.Friends.cs" />
+    <Compile Include="Localization\Games\MessageKeys.Games.cs" />
+    <Compile Include="Localization\Leaderboards\MessageKeys.Leaderboards.cs" />
+    <Compile Include="Localization\Users\MessageKeys.Users.cs" />
     <Compile Include="Localization\MessageLocalizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\PasswordHasher.cs" />
