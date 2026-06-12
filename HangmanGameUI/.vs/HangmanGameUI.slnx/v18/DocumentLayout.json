@@ -1,20 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\wilma\\source\\repos\\HangmanGamePriv\\HangmanGameUI\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{5C9867D0-A3A6-48E6-9B28-1A95DAFB0391}|HangmanGameWPF\\HangmanGameWPF.csproj|c:\\users\\wilma\\source\\repos\\hangmangamepriv\\hangmangameui\\hangmangamewpf\\forgotpasswordwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C9867D0-A3A6-48E6-9B28-1A95DAFB0391}|HangmanGameWPF\\HangmanGameWPF.csproj|solutionrelative:hangmangamewpf\\forgotpasswordwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5C9867D0-A3A6-48E6-9B28-1A95DAFB0391}|HangmanGameWPF\\HangmanGameWPF.csproj|c:\\users\\wilma\\source\\repos\\hangmangamepriv\\hangmangameui\\hangmangamewpf\\editprofilewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C9867D0-A3A6-48E6-9B28-1A95DAFB0391}|HangmanGameWPF\\HangmanGameWPF.csproj|solutionrelative:hangmangamewpf\\editprofilewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5C9867D0-A3A6-48E6-9B28-1A95DAFB0391}|HangmanGameWPF\\HangmanGameWPF.csproj|c:\\users\\wilma\\source\\repos\\hangmangamepriv\\hangmangameui\\hangmangamewpf\\creategamewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C9867D0-A3A6-48E6-9B28-1A95DAFB0391}|HangmanGameWPF\\HangmanGameWPF.csproj|solutionrelative:hangmangamewpf\\creategamewindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -22,46 +9,39 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": -1,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ForgotPasswordWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\wilma\\source\\repos\\HangmanGamePriv\\HangmanGameUI\\HangmanGameWPF\\ForgotPasswordWindow.xaml.cs",
-              "RelativeDocumentMoniker": "HangmanGameWPF\\ForgotPasswordWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\wilma\\source\\repos\\HangmanGamePriv\\HangmanGameUI\\HangmanGameWPF\\ForgotPasswordWindow.xaml.cs",
-              "RelativeToolTip": "HangmanGameWPF\\ForgotPasswordWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-30T20:35:18.894Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "EditProfileWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\wilma\\source\\repos\\HangmanGamePriv\\HangmanGameUI\\HangmanGameWPF\\EditProfileWindow.xaml.cs",
-              "RelativeDocumentMoniker": "HangmanGameWPF\\EditProfileWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\wilma\\source\\repos\\HangmanGamePriv\\HangmanGameUI\\HangmanGameWPF\\EditProfileWindow.xaml.cs*",
-              "RelativeToolTip": "HangmanGameWPF\\EditProfileWindow.xaml.cs*",
-              "ViewState": "AgIAAGAAAAAAAAAAAAAAADkAAABJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-30T20:35:09.886Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CreateGameWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\wilma\\source\\repos\\HangmanGamePriv\\HangmanGameUI\\HangmanGameWPF\\CreateGameWindow.xaml.cs",
-              "RelativeDocumentMoniker": "HangmanGameWPF\\CreateGameWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\wilma\\source\\repos\\HangmanGamePriv\\HangmanGameUI\\HangmanGameWPF\\CreateGameWindow.xaml.cs",
-              "RelativeToolTip": "HangmanGameWPF\\CreateGameWindow.xaml.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAowCoAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-30T20:35:05.333Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             }
           ]
         }

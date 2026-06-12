@@ -1,4 +1,5 @@
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using HangmanGameWPF.Localization;
 
@@ -10,10 +11,54 @@ namespace HangmanGameWPF
         {
             InitializeComponent();
 
+            SelectCurrentLanguage();
+            ClientLanguageContext.LanguageChanged += ClientLanguageContext_LanguageChanged;
+
+            UpdateLocalizedHeader();
+        }
+
+        private void SelectCurrentLanguage()
+        {
+            foreach (ComboBoxItem item in CmbLanguage.Items)
+            {
+                if ((item.Tag as string) == ClientLanguageContext.CurrentLanguage)
+                {
+                    CmbLanguage.SelectedItem = item;
+                    return;
+                }
+            }
+        }
+
+        private void CmbLanguage_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxItem selectedItem = CmbLanguage.SelectedItem as ComboBoxItem;
+
+            if (selectedItem == null)
+            {
+                return;
+            }
+
+            ClientLanguageContext.SetLanguage(selectedItem.Tag as string);
+        }
+
+        private void ClientLanguageContext_LanguageChanged(object sender, System.EventArgs e)
+        {
+            SelectCurrentLanguage();
+            UpdateLocalizedHeader();
+        }
+
+        private void UpdateLocalizedHeader()
+        {
             string name = SessionManager.FullName?.ToUpper() ?? ClientLocalizer.Get("PLAYER_FALLBACK");
 
             TxtWelcome.Text = string.Format(ClientLocalizer.Get("MAIN_WELCOME"), name);
             TxtTitleBar.Text = string.Format(ClientLocalizer.Get("MAIN_TITLE_BAR"), name);
+        }
+
+        protected override void OnClosed(System.EventArgs e)
+        {
+            ClientLanguageContext.LanguageChanged -= ClientLanguageContext_LanguageChanged;
+            base.OnClosed(e);
         }
 
         private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

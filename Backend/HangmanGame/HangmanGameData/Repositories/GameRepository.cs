@@ -7,6 +7,11 @@ namespace HangmanGameData.Repositories
 {
     public class GameRepository : IGameRepository
     {
+        private const int GameStatusWaiting = 0;
+        private const int GameStatusInProgress = 1;
+        private const int GameStatusFinished = 2;
+        private const int GameStatusAbandoned = 3;
+        private const int GameStatusCancelled = 4;
         private const int MaxIncorrectAttempts = 6;
         private const int PointsWinner = 10;
         private const int PointsPenalty = -3;
@@ -19,7 +24,7 @@ namespace HangmanGameData.Repositories
                 {
                     CreatorId = createGameDto.CreatorId,
                     WordId = createGameDto.WordId,
-                    Status = 0,
+                    Status = GameStatusWaiting,
                     Description = createGameDto.Description,
                     CreatedAt = DateTime.Now
                 };
@@ -35,11 +40,11 @@ namespace HangmanGameData.Repositories
         {
             using (var db = new HangmanGameDataContext())
             {
-                var game = db.Games.FirstOrDefault(g => g.GameId == gameId && g.Status == 0);
+                var game = db.Games.FirstOrDefault(g => g.GameId == gameId && g.Status == GameStatusWaiting);
                 if (game == null) return null;
 
                 game.RetadorId = retadorId;
-                game.Status = 1;
+                game.Status = GameStatusInProgress;
                 game.StartedAt = DateTime.Now;
                 db.SubmitChanges();
 
@@ -60,7 +65,7 @@ namespace HangmanGameData.Repositories
         {
             using (var db = new HangmanGameDataContext())
             {
-                var games = db.Games.Where(g => g.Status == 0).ToList();
+                var games = db.Games.Where(g => g.Status == GameStatusWaiting).ToList();
                 return games.Select(g => BuildGameDto(db, g)).ToList();
             }
         }
@@ -79,7 +84,7 @@ namespace HangmanGameData.Repositories
         {
             using (var db = new HangmanGameDataContext())
             {
-                var game = db.Games.FirstOrDefault(g => g.GameId == guessLetterDto.GameId && g.Status == 1);
+                var game = db.Games.FirstOrDefault(g => g.GameId == guessLetterDto.GameId && g.Status == GameStatusInProgress);
                 if (game == null)
                     return new GameStateDto { Message = "Partida no encontrada o no activa.", IsOver = true };
 
@@ -134,7 +139,7 @@ namespace HangmanGameData.Repositories
 
                 if (state.IsOver)
                 {
-                    game.Status = 2;
+                    game.Status = GameStatusFinished;
                     game.FinishedAt = DateTime.Now;
 
                     if (state.WinnerId.HasValue)
@@ -156,24 +161,51 @@ namespace HangmanGameData.Repositories
         {
             using (var db = new HangmanGameDataContext())
             {
-                var game = db.Games.FirstOrDefault(g => g.GameId == gameId && g.Status == 1);
+                var game = db.Games.FirstOrDefault(g =>
+                    g.GameId == gameId &&
+                    (g.Status == GameStatusWaiting || g.Status == GameStatusInProgress));
+
                 if (game == null) return false;
 
-                game.Status = 3;
-                game.FinishedAt = DateTime.Now;
-                game.AbandonedByUserId = userId;
-
-                int winnerId = userId == game.CreatorId ? (game.RetadorId ?? 0) : game.CreatorId;
-                if (winnerId > 0)
+                if (game.Status == GameStatusWaiting)
                 {
-                    game.WinnerId = winnerId;
-                    ApplyScoreChange(db, winnerId, PointsWinner);
+                    return CancelWaitingGame(db, game, userId);
                 }
-                ApplyScoreChange(db, userId, PointsPenalty);
 
-                db.SubmitChanges();
-                return true;
+                return AbandonActiveGame(db, game, userId);
             }
+        }
+
+        private static bool CancelWaitingGame(HangmanGameDataContext db, Games game, int userId)
+        {
+            if (game.CreatorId != userId) return false;
+
+            game.Status = GameStatusCancelled;
+            game.FinishedAt = DateTime.Now;
+            game.AbandonedByUserId = userId;
+
+            db.SubmitChanges();
+            return true;
+        }
+
+        private static bool AbandonActiveGame(HangmanGameDataContext db, Games game, int userId)
+        {
+            if (game.CreatorId != userId && game.RetadorId != userId) return false;
+
+            game.Status = GameStatusAbandoned;
+            game.FinishedAt = DateTime.Now;
+            game.AbandonedByUserId = userId;
+
+            int winnerId = userId == game.CreatorId ? (game.RetadorId ?? 0) : game.CreatorId;
+            if (winnerId > 0)
+            {
+                game.WinnerId = winnerId;
+                ApplyScoreChange(db, winnerId, PointsWinner);
+            }
+            ApplyScoreChange(db, userId, PointsPenalty);
+
+            db.SubmitChanges();
+            return true;
         }
 
         public UserScoreDto GetUserScore(int userId)
@@ -184,7 +216,7 @@ namespace HangmanGameData.Repositories
                 if (user == null) return null;
 
                 var finishedGames = db.Games
-                    .Where(g => g.Status == 2 || g.Status == 3)
+                    .Where(g => g.Status == GameStatusFinished || g.Status == GameStatusAbandoned)
                     .Where(g => g.CreatorId == userId || g.RetadorId == userId)
                     .ToList();
 
@@ -201,7 +233,7 @@ namespace HangmanGameData.Repositories
                     var opponent = opponentId > 0 ? db.Users.FirstOrDefault(u => u.UserId == opponentId) : null;
                     string opponentName = opponent?.FullName ?? "Desconocido";
 
-                    if (game.Status == 3 && game.AbandonedByUserId == userId)
+                    if (game.Status == GameStatusAbandoned && game.AbandonedByUserId == userId)
                     {
                         penalties.Add(new PenaltyDto
                         {
@@ -248,6 +280,7 @@ namespace HangmanGameData.Repositories
             }
         }
 
+
         private GameDto BuildGameDto(HangmanGameDataContext db, Games game)
         {
             var creator = db.Users.FirstOrDefault(u => u.UserId == game.CreatorId);
@@ -266,7 +299,7 @@ namespace HangmanGameData.Repositories
                 WordLength = word?.Text?.Length ?? 0,
                 Category = category?.Name ?? string.Empty,
                 LanguageCode = word?.LanguageCode ?? string.Empty,
-                Description = game.Description,
+                Description = GetGameDescription(game, word),
                 Status = game.Status,
                 CreatedAt = game.CreatedAt
             };
@@ -291,8 +324,9 @@ namespace HangmanGameData.Repositories
 
             bool wordGuessed = !revealed.Contains("_");
             bool hangmanComplete = incorrectCount >= MaxIncorrectAttempts;
-            bool abandoned = game.Status == 3;
-            bool isOver = wordGuessed || hangmanComplete || abandoned;
+            bool abandoned = game.Status == GameStatusAbandoned;
+            bool cancelled = game.Status == GameStatusCancelled;
+            bool isOver = wordGuessed || hangmanComplete || abandoned || cancelled;
 
             int? winnerId = null;
             if (abandoned) winnerId = game.WinnerId;
@@ -310,7 +344,9 @@ namespace HangmanGameData.Repositories
                 Status = game.Status,
                 LastLetter = lastLetter,
                 LastGuessCorrect = lastCorrect ?? false,
-                Message = message ?? (abandoned
+                Message = message ?? (cancelled
+                    ? "La partida fue cancelada."
+                    : abandoned
                     ? "El otro jugador abandono la partida."
                     : isOver
                         ? (wordGuessed ? "Palabra adivinada!" : "Ahorcado completo. Perdiste.")
@@ -325,6 +361,13 @@ namespace HangmanGameData.Repositories
             var user = db.Users.FirstOrDefault(u => u.UserId == userId);
             if (user == null) return;
             user.GlobalScore += delta;
+        }
+
+        private static string GetGameDescription(Games game, Words word)
+        {
+            return string.IsNullOrWhiteSpace(game.Description)
+                ? word?.Hint ?? string.Empty
+                : game.Description;
         }
     }
 }
